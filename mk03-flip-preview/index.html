@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>MK3 hook — flip-scene prototype</title>
+<style>
+  :root{
+    --ink:#10223a; --blue:#1565d8; --gold:#f5b400; --green:#23913a;
+    --wall:#eef1f5; --flip:.55s; --font:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    --display:"Arial Black","Segoe UI Black","Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#dfe5ec;color:var(--ink);font-family:var(--font)}
+  [dir=rtl] body, [dir=rtl] .card, [dir=rtl] h1{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",sans-serif}
+
+  .bar{display:flex;gap:.5rem;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:.6rem 1rem;font-size:.9rem}
+  .bar button{font:inherit;border:1px solid #9fb0c4;background:#fff;border-radius:999px;padding:.35rem .9rem;cursor:pointer}
+  .bar button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ---------- the screen ---------- */
+  .screen{position:relative;max-width:1100px;margin:0 auto;border-radius:18px;overflow:hidden;overflow:clip;background:var(--wall);
+          box-shadow:0 20px 50px rgba(16,34,58,.18)}
+  header{position:relative;z-index:5;padding:clamp(14px,3vw,28px) clamp(16px,4vw,40px) 0}
+  .kicker{font-weight:800;color:var(--blue);font-size:clamp(.8rem,1.6vw,1rem)}
+  h1{font-family:var(--display);font-weight:900;margin:.15em 0 .1em;font-size:clamp(1.35rem,3.6vw,2.4rem);line-height:1.1}
+  h1 .hl{color:#e2560e}
+  .task{margin:.2em 0 0;font-size:clamp(.95rem,1.8vw,1.1rem)}
+
+  /* background scene: a wall, then a floor with three zones and white court lines, seen in perspective */
+  .stage{position:relative;overflow:clip;padding:clamp(18px,4vw,40px) clamp(10px,3vw,40px) clamp(22px,4vw,44px)}
+  .floor{position:absolute;left:-12%;right:-12%;top:14%;bottom:-2%;transform:perspective(800px) rotateX(28deg);transform-origin:50% 100%;
+         display:grid;grid-template-columns:1fr 1fr 1fr;z-index:0}
+  .zone{position:relative;overflow:hidden}
+  .z1{background:#3f86d6}
+  .z2{background:#e9773a}
+  .z3{background:linear-gradient(90deg,#4aa13c 0 12.5%,#55ad46 12.5% 25%,#4aa13c 25% 37.5%,#55ad46 37.5% 50%,#4aa13c 50% 62.5%,#55ad46 62.5% 75%,#4aa13c 75% 87.5%,#55ad46 87.5%)}
+  .zone::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:120%;border:6px solid rgba(255,255,255,.95);border-radius:50%}
+  .z1::after,.z3::after{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:6px solid rgba(255,255,255,.95)}
+  .wallshade{position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 0%,#fff 0,transparent 70%);z-index:0;pointer-events:none}
+
+  .cards{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,2.4vw,34px);max-width:900px;margin:0 auto}
+
+  /* ---------- one flip card = 4 layers ---------- */
+  .card{position:relative;display:grid;border:0;padding:0;background:none;cursor:pointer;font:inherit;color:inherit;text-align:center;
+        perspective:1100px;-webkit-tap-highlight-color:transparent}
+  .card:focus-visible{outline:4px solid #ffb703;outline-offset:6px;border-radius:18px}
+  /* layer 2: the panel that turns (front + back stacked in one grid cell, so the card is as tall as its longest text) */
+  .panel{grid-area:1/1;display:grid;transform-style:preserve-3d;transition:transform var(--flip) cubic-bezier(.3,.7,.3,1.15);min-height:clamp(210px,34vw,360px)}
+  .face{grid-area:1/1;border-radius:clamp(10px,1.6vw,16px);backface-visibility:hidden;-webkit-backface-visibility:hidden;
+        display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(8px,1.6vw,18px);padding-top:clamp(86px,15.5vw,178px)}
+  .front{background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.12) 60%,rgba(0,20,50,.22));border:1.5px solid rgba(255,255,255,.75);
+         -webkit-backdrop-filter:blur(7px) saturate(1.2);backdrop-filter:blur(7px) saturate(1.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+  .front .who{color:#fff;font-weight:900;font-size:clamp(.78rem,1.8vw,1.15rem);line-height:1.15;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+  .front .tapme{margin-top:.4em;font-size:clamp(.7rem,1.3vw,.85rem);color:#fff;opacity:.95;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+  .back{transform:rotateY(180deg);color:#fff;box-shadow:0 14px 30px rgba(16,34,58,.28)}
+  .c1 .back{background:var(--blue)} .c2 .back{background:var(--gold);color:#1d1600} .c3 .back{background:var(--green)}
+  .back .quote{font-family:var(--display);font-weight:900;font-size:clamp(.85rem,2.1vw,1.45rem);line-height:1.15}
+  [dir=rtl] .back .quote{font-family:inherit;font-weight:800}
+  .back .who{margin-top:.5em;font-size:clamp(.68rem,1.3vw,.85rem);opacity:.92}
+  .seen{position:absolute;top:8px;inset-inline-start:8px;z-index:4;display:none;align-items:center;gap:.25em;background:#fff;color:var(--ink);
+        border-radius:999px;padding:.15em .55em;font-size:clamp(.62rem,1.2vw,.8rem);font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+  .card.open .seen{display:flex}
+
+  /* layer 3: the object — it never turns */
+  /* a card's picture = what its label says: the person + their item (e.g. a fan + a drum), as one group */
+  .obj{position:absolute;z-index:3;left:50%;top:clamp(6px,1.4vw,16px);width:clamp(84px,17vw,190px);aspect-ratio:1.25;transform:translateX(-50%);
+       pointer-events:none;transition:transform var(--flip)}
+  .obj img{position:absolute;filter:drop-shadow(0 8px 8px rgba(0,0,0,.28))}
+  .obj .main{width:72%;left:0;bottom:0}
+  .obj .item{width:52%;right:0;bottom:0}
+  .obj .item.later{transform:scale(0);transition:transform .3s .3s cubic-bezier(.3,1.6,.5,1)}
+  .card.open .obj .item.later{transform:none}
+  .card.open .obj{transform:translateX(-50%) scale(1.05)}
+  /* layer 4: overlay shown only on the turned side (here a speech bubble — in the GIF, the basketball net) */
+  .overlay{position:absolute;z-index:4;top:clamp(4px,1vw,12px);inset-inline-end:clamp(4px,1.6vw,22px);width:clamp(30px,5vw,56px);aspect-ratio:1.25;
+           background:#fff;border-radius:50% 50% 50% 50%/55% 55% 45% 45%;display:grid;place-items:center;font-weight:900;color:var(--ink);
+           font-size:clamp(.8rem,1.6vw,1.2rem);box-shadow:0 4px 10px rgba(0,0,0,.25);transform:scale(0);transition:transform .25s .35s cubic-bezier(.3,1.6,.5,1)}
+  .overlay::after{content:"";position:absolute;bottom:-6px;inset-inline-start:22%;border:7px solid transparent;border-top-color:#fff;border-bottom:0}
+  .card.open .overlay{transform:scale(1)}
+
+  .card.open .panel{transform:rotateY(180deg)}
+  [dir=rtl] .card.open .panel{transform:rotateY(-180deg)}
+  /* three different ways back, like the GIF: turn sideways, tip backwards, twist */
+  .panel.close-y{animation:closeY var(--flip) ease-in-out}
+  .panel.close-x{animation:closeX calc(var(--flip)*1.2) ease-in-out}
+  .panel.close-d{animation:closeD calc(var(--flip)*1.2) ease-in-out}
+  @keyframes closeY{from{transform:rotateY(180deg)}to{transform:rotateY(360deg)}}
+  @keyframes closeX{0%{transform:rotateY(180deg)}50%{transform:rotateY(180deg) rotateX(88deg)}50.1%{transform:rotateX(-88deg)}100%{transform:none}}
+  @keyframes closeD{0%{transform:rotateY(180deg)}50%{transform:rotateY(180deg) rotate3d(1,-1,0,88deg)}50.1%{transform:rotate3d(1,1,0,-88deg)}100%{transform:none}}
+
+  .done{position:relative;z-index:5;margin:clamp(14px,3vw,26px) auto 0;max-width:640px;text-align:center;background:#fff;border-radius:14px;
+        padding:.8rem 1rem;font-weight:700;box-shadow:0 8px 24px rgba(16,34,58,.18);opacity:0;transform:translateY(10px);transition:.35s;visibility:hidden}
+  .done.show{opacity:1;transform:none;visibility:visible}
+  .done button{margin-top:.6rem;font:inherit;font-weight:700;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:.5rem 1.2rem;cursor:pointer}
+  .note{max-width:1100px;margin:.8rem auto 2rem;padding:0 1rem;font-size:.82rem;color:#4b5d73;line-height:1.45}
+
+  @media (max-width:560px){
+    .stage{padding-top:22px}
+    .face{padding-top:clamp(82px,25vw,108px)}
+    .obj{width:clamp(72px,23vw,112px)}
+    .seen .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+    .seen{padding:.1em .4em}
+  }
+  @media (prefers-reduced-motion:reduce){
+    :root{--flip:.01s}
+    .panel.close-x,.panel.close-y,.panel.close-d{animation:none}
+  }
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="bar">
+  <strong>MK3 · screen 0.2 · flip-scene prototype</strong>
+  <span role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
+  </span>
+</div>
+
+<main class="screen">
+  <header>
+    <div class="kicker" data-t="kicker"></div>
+    <h1 data-t="heading"></h1>
+    <p class="task" data-t="task"></p>
+  </header>
+
+  <div class="stage">
+    <div class="wallshade"></div>
+    <div class="floor" aria-hidden="true"><div class="zone z1"></div><div class="zone z2"></div><div class="zone z3"></div></div>
+
+    <div class="cards">
+      <button type="button" class="card c1" data-close="y" aria-pressed="false">
+        <span class="panel">
+          <span class="face front"><span class="who" data-t="who1"></span><span class="tapme" data-t="tap"></span></span>
+          <span class="face back"><span class="quote" data-t="q1"></span><span class="who" data-t="who1"></span></span>
+        </span>
+        <span class="obj"><img class="main" src="img/woman-with-headscarf.png" alt=""><img class="item" src="img/stroller.svg" alt=""></span>
+        <span class="overlay" aria-hidden="true">?</span>
+        <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
+      </button>
+      <button type="button" class="card c2" data-close="x" aria-pressed="false">
+        <span class="panel">
+          <span class="face front"><span class="who" data-t="who2"></span><span class="tapme" data-t="tap"></span></span>
+          <span class="face back"><span class="quote" data-t="q2"></span><span class="who" data-t="who2"></span></span>
+        </span>
+        <span class="obj"><img class="main" src="img/man.png" alt=""><img class="item later" src="img/mobile-phone.png" alt=""></span>
+        <span class="overlay" aria-hidden="true">?</span>
+        <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
+      </button>
+      <button type="button" class="card c3" data-close="d" aria-pressed="false">
+        <span class="panel">
+          <span class="face front"><span class="who" data-t="who3"></span><span class="tapme" data-t="tap"></span></span>
+          <span class="face back"><span class="quote" data-t="q3"></span><span class="who" data-t="who3"></span></span>
+        </span>
+        <span class="obj"><img class="main" src="img/person-raising-hand.png" alt=""><img class="item" src="img/drum.png" alt=""></span>
+        <span class="overlay" aria-hidden="true">?</span>
+        <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
+      </button>
+    </div>
+
+    <div class="done" role="status" aria-live="polite">
+      <div data-t="complete"></div>
+      <button type="button" id="again" data-t="again"></button>
+    </div>
+  </div>
+</main>
+
+<p class="note" dir="ltr" lang="en">Prototype only, not part of the course build. English text is from MK3 script screen 0.2 (sids mk03-S024–S033).
+The Arabic is a Claude draft for the demo, not approved. Each picture matches its card: a mother and a stroller, a young man (his phone appears with his question), a fan and a drum.
+People, phone and drum: Microsoft Fluent Emoji 3D (MIT licence). The stroller is drawn for this library in the same style (no stroller emoji exists).</p>
+
+<script>
+const T = {
+  en:{kicker:"Gate Hero challenge",heading:"Ten fans. Ten questions.",task:"Tap each fan to hear their question.",
+      who1:"A mother with a stroller",who2:"A young man",who3:"A fan with a drum",
+      q1:"“Where is the stroller storage?”",q2:"“Where do I collect my lost phone?”",q3:"“Can I bring my drum?”",
+      tap:"Tap to turn",seen:"Seen",complete:"Can you answer them yet? By the end of this module, you can.",again:"Turn them back"},
+  ar:{kicker:"تحدّي بطل البوابة",heading:"عشرة مشجعين. عشرة أسئلة.",task:"اضغطوا على كل مشجع عشان تسمعون سؤاله.",
+      who1:"أم معها عربية أطفال",who2:"شاب",who3:"مشجع معه طبلة",
+      q1:"«وين مكان حفظ عربيات الأطفال؟»",q2:"«من وين أستلم جوالي الضايع؟»",q3:"«أقدر أدخّل الطبلة؟»",
+      tap:"اضغط للقلب",seen:"تمت المشاهدة",complete:"تعرفون الجواب؟ في نهاية هالوحدة بتعرفونه.",again:"رجّع البطاقات"}
+};
+let lang = "en";
+const cards = [...document.querySelectorAll(".card")], done = document.querySelector(".done");
+
+function paint(){
+  document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-t]").forEach(el => el.textContent = T[lang][el.dataset.t]);
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  cards.forEach(c => c.setAttribute("aria-label", T[lang][c.classList.contains("c1")?"who1":c.classList.contains("c2")?"who2":"who3"] +
+      (c.classList.contains("open") ? ": " + c.querySelector(".quote").textContent : "")));
+}
+function check(){ done.classList.toggle("show", cards.every(c => c.dataset.seen)); }
+
+function close(card){
+  if(!card.classList.contains("open")) return;
+  const p = card.querySelector(".panel"), k = "close-" + card.dataset.close;
+  card.classList.remove("open"); card.setAttribute("aria-pressed","false");
+  p.style.transition = "none"; p.classList.add(k);
+  p.addEventListener("animationend", () => { p.classList.remove(k); p.offsetWidth; p.style.transition = ""; }, {once:true});
+  paint();
+}
+cards.forEach(c => c.addEventListener("click", () => {
+  if(c.classList.contains("open")) { close(c); return; }
+  c.classList.add("open"); c.dataset.seen = 1; c.setAttribute("aria-pressed","true"); paint(); check();
+}));
+document.getElementById("again").addEventListener("click", () => {
+  cards.forEach((c,i) => setTimeout(() => close(c), i*380));
+  cards.forEach(c => delete c.dataset.seen); check();
+});
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { lang = b.dataset.lang; paint(); }));
+paint();
+</script>
+</body>
+</html>
