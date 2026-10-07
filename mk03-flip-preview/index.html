@@ -91,7 +91,7 @@
 
   .card.open .panel{transform:rotateY(180deg)}
   [dir=rtl] .card.open .panel{transform:rotateY(-180deg)}
-  /* three different ways back, like the GIF: turn sideways, tip backwards, twist */
+  /* every card turns the same way: left-right on its upright middle line, open and close */
   .panel.close-y{animation:closeY var(--flip) ease-in-out}
   .panel.close-x{animation:closeX calc(var(--flip)*1.2) ease-in-out}
   .panel.close-d{animation:closeD calc(var(--flip)*1.2) ease-in-out}
@@ -149,7 +149,7 @@
         <span class="overlay" aria-hidden="true">?</span>
         <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
       </button>
-      <button type="button" class="card c2" data-close="x" aria-pressed="false">
+      <button type="button" class="card c2" data-close="y" aria-pressed="false">
         <span class="panel">
           <span class="face front"><span class="who" data-t="who2"></span><span class="tapme" data-t="tap"></span></span>
           <span class="face back"><span class="quote" data-t="q2"></span><span class="who" data-t="who2"></span></span>
@@ -158,7 +158,7 @@
         <span class="overlay" aria-hidden="true">?</span>
         <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
       </button>
-      <button type="button" class="card c3" data-close="d" aria-pressed="false">
+      <button type="button" class="card c3" data-close="y" aria-pressed="false">
         <span class="panel">
           <span class="face front"><span class="who" data-t="who3"></span><span class="tapme" data-t="tap"></span></span>
           <span class="face back"><span class="quote" data-t="q3"></span><span class="who" data-t="who3"></span></span>
