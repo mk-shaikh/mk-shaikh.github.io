@@ -67,11 +67,20 @@
   /* a card's picture = what its label says: the person + their item (e.g. a fan + a drum), as one group */
   .obj{position:absolute;z-index:3;left:50%;top:clamp(6px,1.4vw,16px);width:clamp(84px,17vw,190px);aspect-ratio:1.25;transform:translateX(-50%);
        pointer-events:none;transition:transform var(--flip)}
-  .obj img{position:absolute;filter:drop-shadow(0 8px 8px rgba(0,0,0,.28))}
-  .obj .main{width:72%;left:0;bottom:0}
-  .obj .item{width:52%;right:0;bottom:0}
-  .obj .item.later{transform:scale(0);transition:transform .3s .3s cubic-bezier(.3,1.6,.5,1)}
-  .card.open .obj .item.later{transform:none}
+  .obj img{position:absolute;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+  /* one picture, not two icons: the person stands behind, the item overlaps in front of them, both on one shadow */
+  .obj::after{content:"";position:absolute;left:12%;right:8%;bottom:-3%;height:12%;border-radius:50%;
+              background:radial-gradient(closest-side,rgba(0,0,0,.32),transparent);z-index:-1}
+  .obj .main{z-index:1}
+  .obj .item{z-index:2}
+  /* push: the item stands on the ground in front (stroller) */
+  .obj.push .main{width:66%;left:4%;bottom:14%}
+  .obj.push .item{width:62%;right:2%;bottom:0}
+  /* hold: the item sits at chest height, held in front (drum, phone) */
+  .obj.hold .main{width:78%;left:11%;bottom:4%}
+  .obj.hold .item{width:46%;right:12%;bottom:0;transform:rotate(-8deg)}
+  .obj .item.later{transform:scale(0) rotate(-8deg);transition:transform .3s .3s cubic-bezier(.3,1.6,.5,1)}
+  .card.open .obj .item.later{transform:scale(1) rotate(-8deg)}
   .card.open .obj{transform:translateX(-50%) scale(1.05)}
   /* layer 4: overlay shown only on the turned side (here a speech bubble — in the GIF, the basketball net) */
   .overlay{position:absolute;z-index:4;top:clamp(4px,1vw,12px);inset-inline-end:clamp(4px,1.6vw,22px);width:clamp(30px,5vw,56px);aspect-ratio:1.25;
@@ -136,7 +145,7 @@
           <span class="face front"><span class="who" data-t="who1"></span><span class="tapme" data-t="tap"></span></span>
           <span class="face back"><span class="quote" data-t="q1"></span><span class="who" data-t="who1"></span></span>
         </span>
-        <span class="obj"><img class="main" src="img/woman-with-headscarf.png" alt=""><img class="item" src="img/stroller.svg" alt=""></span>
+        <span class="obj push"><img class="main" src="img/woman-with-headscarf.png" alt=""><img class="item" src="img/stroller.svg" alt=""></span>
         <span class="overlay" aria-hidden="true">?</span>
         <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
       </button>
@@ -145,7 +154,7 @@
           <span class="face front"><span class="who" data-t="who2"></span><span class="tapme" data-t="tap"></span></span>
           <span class="face back"><span class="quote" data-t="q2"></span><span class="who" data-t="who2"></span></span>
         </span>
-        <span class="obj"><img class="main" src="img/man.png" alt=""><img class="item later" src="img/mobile-phone.png" alt=""></span>
+        <span class="obj hold"><img class="main" src="img/man.png" alt=""><img class="item later" src="img/mobile-phone.png" alt=""></span>
         <span class="overlay" aria-hidden="true">?</span>
         <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
       </button>
@@ -154,7 +163,7 @@
           <span class="face front"><span class="who" data-t="who3"></span><span class="tapme" data-t="tap"></span></span>
           <span class="face back"><span class="quote" data-t="q3"></span><span class="who" data-t="who3"></span></span>
         </span>
-        <span class="obj"><img class="main" src="img/person-raising-hand.png" alt=""><img class="item" src="img/drum.png" alt=""></span>
+        <span class="obj hold"><img class="main" src="img/person-raising-hand.png" alt=""><img class="item" src="img/drum.png" alt=""></span>
         <span class="overlay" aria-hidden="true">?</span>
         <span class="seen">✓ <span class="lbl" data-t="seen"></span></span>
       </button>
