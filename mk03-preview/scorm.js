@@ -19,6 +19,20 @@
     return null;
   }
   var api=findAPI(window);
+  /* no LMS (a web preview, GitHub Pages): keep the same SCORM data in this browser so a refresh resumes.
+     Not in QA mode (?qa=1); ?fresh=1 starts over. */
+  if(!api&&!/[?&]qa=1/.test(location.search)){
+    try{
+      var KEY='ck-scorm-'+location.pathname,store={};
+      if(/[?&]fresh=1/.test(location.search))localStorage.removeItem(KEY);
+      try{store=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){store={};}
+      var keep=function(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}};
+      api={LMSInitialize:function(){return "true";},LMSFinish:function(){keep();return "true";},
+           LMSGetValue:function(k){if(k==='cmi.interactions._count'){var c=0;while(('cmi.interactions.'+c+'.id') in store)c++;return String(c);}return (k in store)?store[k]:"";},
+           LMSSetValue:function(k,v){store[k]=String(v);return "true";},LMSCommit:function(){keep();return "true";},
+           LMSGetLastError:function(){return "0";},LMSGetErrorString:function(){return "";},LMSGetDiagnostic:function(){return "";},_local:true};
+    }catch(e){api=null;}
+  }
   var connected=false;
   window.SCORM={
     present: !!api,
