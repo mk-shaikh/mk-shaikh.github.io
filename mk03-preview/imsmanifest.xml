@@ -22,17 +22,20 @@
   <resources>
     <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
-      <file href="brand/JAM-logo-blue.png"/>
-      <file href="fonts/noto-arabic-400.ttf"/>
-      <file href="fonts/noto-arabic-500.ttf"/>
-      <file href="fonts/noto-arabic-700.ttf"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="icons/custom-stroller.svg"/>
+      <file href="icons/custom-wristband.svg"/>
       <file href="icons/fluent-3d-busts-in-silhouette.png"/>
       <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-drum.png"/>
       <file href="icons/fluent-3d-eye.png"/>
       <file href="icons/fluent-3d-handshake.png"/>
       <file href="icons/fluent-3d-information.png"/>
-      <file href="icons/fluent-3d-label.png"/>
       <file href="icons/fluent-3d-luggage.png"/>
+      <file href="icons/fluent-3d-magnifying-glass-tilted-left.png"/>
       <file href="icons/fluent-3d-mobile-phone.png"/>
       <file href="icons/fluent-3d-open-hands.png"/>
       <file href="icons/fluent-3d-red-question-mark.png"/>
@@ -40,12 +43,14 @@
       <file href="icons/fluent-3d-round-pushpin.png"/>
       <file href="icons/fluent-3d-safety-vest.png"/>
       <file href="icons/fluent-3d-slightly-smiling-face.png"/>
-      <file href="icons/fluent-3d-soccer-ball.png"/>
       <file href="icons/fluent-3d-speech-balloon.png"/>
       <file href="icons/fluent-3d-timer-clock.png"/>
       <file href="icons/fluent-3d-trophy.png"/>
       <file href="icons/fluent-3d-waving-hand.png"/>
-      <file href="icons/fluent-3d-woman-with-headscarf.png"/>
+      <file href="images/mk03-cast-alharbi.jpg"/>
+      <file href="images/mk03-cast-dina.jpg"/>
+      <file href="images/mk03-cast-lina.jpg"/>
+      <file href="images/mk03-cast-omar.jpg"/>
       <file href="scorm.js"/>
     </resource>
   </resources>
