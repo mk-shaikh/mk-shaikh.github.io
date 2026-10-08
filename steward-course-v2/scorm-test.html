@@ -1,0 +1,87 @@
+<!doctype html><html><head><meta charset="utf-8"><title>SCORM 1.2 test harness</title>
+<style>body{font-family:Consolas,monospace;background:#111;color:#ddd;margin:0;padding:14px}
+h1{font-size:16px;color:#7fd0ff}#log div{padding:2px 0}.pass{color:#4dc9b9}.fail{color:#ff6d5a}
+iframe{width:100%;height:420px;border:1px solid #333;background:#fff;margin-top:10px}</style></head><body>
+<h1>SCORM 1.2 harness — launch / suspend / resume / score</h1>
+<div id="log"></div>
+<div id="slot"></div>
+<script>
+// ---------- fake LMS ----------
+var cmi={ "cmi.core.lesson_status":"not attempted","cmi.core.lesson_location":"",
+  "cmi.suspend_data":"","cmi.core.entry":"ab-initio","cmi.core.exit":"",
+  "cmi.core.score.raw":"","cmi.core.score.min":"","cmi.core.score.max":"" };
+var calls=[];
+window.API={
+  LMSInitialize:function(){calls.push("Initialize");return "true";},
+  LMSFinish:function(){calls.push("Finish");return "true";},
+  LMSGetValue:function(k){return (k in cmi)?cmi[k]:"";},
+  LMSSetValue:function(k,v){calls.push("Set "+k+"="+String(v).slice(0,40));cmi[k]=String(v);return "true";},
+  LMSCommit:function(){calls.push("Commit");return "true";},
+  LMSGetLastError:function(){return "0";},
+  LMSGetErrorString:function(){return "";},
+  LMSGetDiagnostic:function(){return "";}
+};
+// ---------- helpers ----------
+var results=[];window.__RESULTS=results;window.__DONE=false;
+function log(ok,msg){results.push((ok?"PASS":"FAIL")+" — "+msg);
+  var d=document.createElement("div");d.className=ok?"pass":"fail";d.textContent=(ok?"✔ ":"✘ ")+msg;
+  document.getElementById("log").appendChild(d);}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+var ifr=null;
+function launch(){return new Promise(function(res){
+  ifr=document.createElement("iframe");
+  ifr.src="index.html?qa=1";
+  ifr.onload=function(){setTimeout(res,1500);};
+  document.getElementById("slot").appendChild(ifr);
+});}
+function kill(){ if(ifr){try{ifr.contentWindow.SCORM.finish(true);}catch(e){} ifr.remove();ifr=null;} }
+// ---------- test sequence ----------
+(async function(){
+  try{
+    // 1. first launch
+    await launch();
+    log(calls.indexOf("Initialize")>=0,"LMSInitialize called on launch");
+    log(cmi["cmi.core.lesson_status"]==="incomplete","lesson_status set to incomplete on first launch");
+    var W=ifr.contentWindow;
+    log(typeof W.JAM!=="undefined","QA hook armed inside SCO (?qa=1 survived)");
+    // 2. progress: complete section 1 (screen 1.8 marks done[1])
+    W.JAM.go("1.8"); await sleep(700);
+    log(cmi["cmi.core.lesson_location"]==="1.8","bookmark saved (lesson_location=1.8)");
+    var sd={}; try{sd=JSON.parse(cmi["cmi.suspend_data"]);}catch(e){}
+    log((sd.d||[]).indexOf("1")>=0,"suspend_data records section 1 complete");
+    // 3. exit with suspend
+    var before=calls.length; kill(); await sleep(400);
+    log(calls.indexOf("Finish",before)>=0,"LMSFinish called on exit");
+    log(cmi["cmi.core.exit"]==="suspend","cmi.core.exit=suspend on exit");
+    // 4. relaunch → resume
+    cmi["cmi.core.entry"]="resume"; calls.length=0;
+    await launch(); await sleep(600);
+    var W2=ifr.contentWindow;
+    var h2=W2.document.querySelector(".screen h2");
+    log(!!h2 && /1 of 6/.test(h2.textContent),"resumed at bookmark (screen shows '1 of 6 done'), got: "+(h2?h2.textContent:"none"));
+    // 5. free navigation while we're here
+    var node4=W2.document.querySelectorAll(".stepper .node")[3];
+    log(!!node4 && !node4.disabled,"upcoming section 4 is clickable (free navigation)");
+    node4.click(); await sleep(600);
+    var h24=W2.document.querySelector(".screen h2");
+    log(!!h24 && /Spot it before it grows/.test(h24.textContent),"clicking 4 jumps to section 4, got: "+(h24?h24.textContent:"none"));
+    // now that section 1 is no longer current, its restored ✓ should show
+    var node1=W2.document.querySelector(".stepper .node");
+    log(!!node1 && node1.textContent==="✓","restored progress (section 1 shows ✓ once not current)");
+    // 6. score reporting (empty sim → 0/100 failed)
+    W2.JAM.go("8.1"); await sleep(900);
+    log(cmi["cmi.core.score.raw"]==="0","score.raw reported (0 for empty run)");
+    log(cmi["cmi.core.score.min"]==="0"&&cmi["cmi.core.score.max"]==="100","score min/max reported");
+    log(cmi["cmi.core.lesson_status"]==="failed","lesson_status=failed below mastery");
+    // 7. suspend data survives a full state save
+    var sd2={}; try{sd2=JSON.parse(cmi["cmi.suspend_data"]);}catch(e){}
+    log(sd2.fp===0&&sd2.fpass===false,"final score persisted in suspend_data");
+    log(cmi["cmi.suspend_data"].length<4096,"suspend_data under SCORM 1.2 4096-char limit ("+cmi["cmi.suspend_data"].length+" chars)");
+  }catch(e){ log(false,"harness exception: "+e.message); }
+  window.__DONE=true;
+  var d=document.createElement("div");d.style.marginTop="10px";
+  var fails=results.filter(function(r){return r.indexOf("FAIL")===0;}).length;
+  d.textContent="—— "+results.length+" checks, "+fails+" failures ——";
+  document.getElementById("log").appendChild(d);
+})();
+</script></body></html>

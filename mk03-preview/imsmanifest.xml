@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.demomk03bilingual" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>MK3 DEMO — Arabic is a Claude draft, NOT approved</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>MK3 DEMO — Arabic is a Claude draft, NOT approved</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/JAM-logo-blue.png"/>
+      <file href="fonts/noto-arabic-400.ttf"/>
+      <file href="fonts/noto-arabic-500.ttf"/>
+      <file href="fonts/noto-arabic-700.ttf"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-eye.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-label.png"/>
+      <file href="icons/fluent-3d-luggage.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-slightly-smiling-face.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-timer-clock.png"/>
+      <file href="icons/fluent-3d-trophy.png"/>
+      <file href="icons/fluent-3d-waving-hand.png"/>
+      <file href="icons/fluent-3d-woman-with-headscarf.png"/>
+      <file href="scorm.js"/>
+    </resource>
+  </resources>
+</manifest>

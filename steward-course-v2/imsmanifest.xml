@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.jam.steward.coc" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-JAM">
+    <organization identifier="ORG-JAM">
+      <title>JAM Event Steward — Code of Conduct in Action</title>
+      <item identifier="ITEM-COC" identifierref="RES-COC" isvisible="true">
+        <title>Code of Conduct in Action</title>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-COC" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="scorm.js"/>
+      <file href="video/welcome.mp4"/>
+      <file href="video/kit-up.mp4"/>
+      <file href="video/radio-demo.mp4"/>
+      <file href="video/gate3-queue.mp4"/>
+      <file href="video/spectator.mp4"/>
+      <file href="video/kiosk-slip.mp4"/>
+      <file href="video/corridor.mp4"/>
+      <file href="video/shift-start.mp4"/>
+      <file href="video/certified.mp4"/>
+      <file href="captions/welcome.vtt"/>
+      <file href="captions/kit-up.vtt"/>
+      <file href="captions/radio-demo.vtt"/>
+      <file href="captions/gate3-queue.vtt"/>
+      <file href="captions/spectator.vtt"/>
+      <file href="captions/kiosk-slip.vtt"/>
+      <file href="captions/corridor.vtt"/>
+      <file href="captions/shift-start.vtt"/>
+      <file href="captions/certified.vtt"/>
+      <file href="video/scan-zone.mp4"/>
+      <file href="video/write-report.mp4"/>
+      <file href="captions/write-report.vtt"/>
+      <file href="video/phone-away.mp4"/>
+      <file href="captions/phone-away.vtt"/>
+      <file href="captions/scan-zone.vtt"/>
+      <file href="images/apology.jpg"/>
+      <file href="images/unwell.jpg"/>
+      <file href="images/carpark.jpg"/>
+      <file href="images/fallen.jpg"/>
+      <file href="images/haz/haz-crush.jpg"/>
+      <file href="images/haz/haz-child.jpg"/>
+      <file href="images/haz/haz-bag.jpg"/>
+      <file href="images/haz/haz-cables.jpg"/>
+      <file href="images/haz/haz-exit.jpg"/>
+      <file href="images/haz/safe-queue.jpg"/>
+      <file href="images/haz/safe-stored.jpg"/>
+      <file href="images/haz/safe-steward.jpg"/>
+      <file href="images/haz/scene-plaza.jpg"/>
+      <file href="images/haz/queue-1.jpg"/>
+      <file href="images/haz/queue-2.jpg"/>
+      <file href="images/haz/queue-3.jpg"/>
+    </resource>
+  </resources>
+</manifest>

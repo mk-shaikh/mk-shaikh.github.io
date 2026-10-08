@@ -1,3 +1,536 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
-<title>Course demos</title><style>body{font-family:"Segoe UI",system-ui,sans-serif;max-width:640px;margin:3rem auto;padding:0 1rem;color:#10223a}a{color:#1565d8}</style></head>
-<body><h1>Course demos</h1><ul><li><a href="mk03-flip-preview/">MK3 – flip-card scene (English / Arabic)</a></li></ul></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Muzamil Haq — Learning Experience Designer</title>
+<meta name="description" content="Portfolio of Muhammad Muzamil Haq — Senior Instructional Designer & Digital Learning Strategist based in Dubai, UAE. eLearning, AI-driven learning production, LMS ecosystems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFFDFE;
+    --paper-tint: #FBF7FA;
+    --ink: #2B2133;
+    --ink-soft: #5D5266;
+    --ink-faint: #8B7F94;
+    --violet: #7A3FF2;
+    --pink: #D6408F;
+    --rule: #EDE6EF;
+    --rule-strong: #DCD2E0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: #F3D9EA; color: var(--ink); }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+  }
+
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- header ---------- */
+  header {
+    padding: 2rem 0 0;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+  nav { display: flex; gap: 1.75rem; }
+  nav a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover { color: var(--violet); border-color: var(--violet); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: clamp(4rem, 10vw, 7rem) 0 clamp(3.5rem, 8vw, 5.5rem); }
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(100deg, var(--violet), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero .role {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+  .hero p.intro {
+    max-width: 38em;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+  }
+  .hero-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    background: linear-gradient(100deg, var(--violet), var(--pink));
+    color: #fff;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .link-quiet {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .link-quiet:hover { color: var(--violet); border-color: var(--violet); }
+
+  /* ---------- stats ---------- */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    padding: 2rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .lbl {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 0.25rem;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(3.5rem, 8vw, 5.5rem) 0 0; }
+  .section-head { margin-bottom: 2.25rem; }
+  .section-head .eyebrow { margin-bottom: 0.6rem; }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .section-head p {
+    color: var(--ink-soft);
+    max-width: 40em;
+    margin-top: 0.75rem;
+  }
+
+  .group { margin-bottom: 3rem; }
+  .group:last-child { margin-bottom: 0; }
+  .group h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 0.4rem;
+  }
+  .group .group-note {
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    max-width: 44em;
+  }
+
+  ul.worklist { list-style: none; }
+  ul.worklist li { border-bottom: 1px solid var(--rule); }
+  ul.worklist li:first-child { border-top: 1px solid var(--rule); }
+  ul.worklist a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.95rem 0.25rem;
+    text-decoration: none;
+    transition: background 0.2s, padding-left 0.2s;
+  }
+  ul.worklist a:hover { background: var(--paper-tint); padding-left: 0.75rem; }
+  ul.worklist .t {
+    font-weight: 500;
+    flex: 1;
+  }
+  ul.worklist .tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  ul.worklist .arrow {
+    color: var(--pink);
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  ul.worklist a:hover .arrow { transform: translateX(4px); }
+  ul.worklist a:hover .t { color: var(--violet); }
+
+  ul.worklist li.featured {
+    background: linear-gradient(100deg, rgba(122, 63, 242, 0.10), rgba(214, 64, 143, 0.10));
+    box-shadow: inset 3px 0 0 var(--violet);
+  }
+  ul.worklist li.featured .t { font-weight: 600; }
+  ul.worklist li.featured .tag {
+    background: linear-gradient(100deg, var(--violet), var(--pink));
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+  }
+  ul.worklist li.featured a { padding-left: 0.75rem; padding-right: 0.5rem; }
+  ul.worklist li.featured a:hover { padding-left: 1.25rem; }
+
+  /* ---------- experience ---------- */
+  .job {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .job:last-of-type { border-bottom: 1px solid var(--rule); }
+  .job .when {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2rem;
+  }
+  .job h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 0.15rem;
+  }
+  .job .org { color: var(--pink); font-weight: 500; font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .job p { color: var(--ink-soft); font-size: 0.98rem; max-width: 42em; }
+  @media (max-width: 620px) {
+    .job { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+  /* ---------- skills ---------- */
+  .skillrow {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .skillrow:last-of-type { border-bottom: 1px solid var(--rule); }
+  .skillrow h3 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 0.25rem;
+  }
+  .skillrow p { color: var(--ink-soft); font-size: 0.98rem; }
+  @media (max-width: 620px) {
+    .skillrow { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+
+  /* ---------- contact ---------- */
+  .contact { padding-bottom: 2rem; }
+  .contact-inner {
+    padding: clamp(3rem, 7vw, 4.5rem) 0;
+    text-align: left;
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5.5vw, 3.2rem);
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    text-wrap: balance;
+    margin-bottom: 1.25rem;
+  }
+  .contact h2 em {
+    font-style: italic;
+    background: linear-gradient(100deg, var(--violet), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .contact p { color: var(--ink-soft); max-width: 36em; margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.5rem 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="topbar">
+    <a class="wordmark" href="#top">Muzamil Haq</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero" style="padding-top: clamp(4rem, 10vw, 7rem);">
+  <p class="eyebrow">Dubai, UAE · Available immediately</p>
+  <h1>Muhammad <span class="grad">Muzamil Haq</span></h1>
+  <p class="role">Senior Instructional Designer &amp; Digital Learning Strategist</p>
+  <p class="intro">
+    I design learning that people actually finish — and remember. Over ten years I've built
+    200+ programs across insurance, technology, education, and consulting: interactive eLearning,
+    branching scenarios, AI-produced video, and LMS ecosystems serving 12,000+ employees worldwide.
+  </p>
+  <div class="hero-links">
+    <a class="btn" href="#work">View my work</a>
+    <a class="link-quiet" href="mailto:mkshaikh118@gmail.com">mkshaikh118@gmail.com</a>
+    <a class="link-quiet" href="https://www.linkedin.com/in/muhammad-muzamil-haq/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</section>
+
+<div class="stats" aria-label="Career highlights">
+  <div class="stat"><div class="num">10+</div><div class="lbl">Years in L&amp;D</div></div>
+  <div class="stat"><div class="num">200+</div><div class="lbl">Programs delivered</div></div>
+  <div class="stat"><div class="num">12,000+</div><div class="lbl">Learners supported</div></div>
+  <div class="stat"><div class="num">95%</div><div class="lbl">Learner satisfaction</div></div>
+</div>
+
+<section id="work">
+  <div class="section-head">
+    <p class="eyebrow">Selected work</p>
+    <h2>Things I've designed &amp; built</h2>
+    <p>Live courses, AI experiments, animation, and the design documentation behind them. Everything below is real, shipped work — click through and try it.</p>
+  </div>
+
+  <div class="group">
+    <h3>Interactive eLearning</h3>
+    <p class="group-note">Built in Articulate Storyline &amp; Rise — scenario-based decisions, gamified assessments, and software training. Hosted live; open on desktop for best experience.</p>
+    <ul class="worklist">
+      <li><a href="https://mk-shaikh.github.io/Keep-you-team-safe-scenario-quiz/" target="_blank" rel="noopener"><span class="t">Keep Your Team Safe — Scenario Quiz</span><span class="tag">Branching scenario</span><span class="arrow">→</span></a></li>
+      <li><a href="https://mk-shaikh.github.io/Id-detective/" target="_blank" rel="noopener"><span class="t">ID Detective</span><span class="tag">Gamified learning</span><span class="arrow">→</span></a></li>
+      <li><a href="https://mk-shaikh.github.io/Customer-satisfaction/" target="_blank" rel="noopener"><span class="t">Customer Satisfaction</span><span class="tag">Soft skills</span><span class="arrow">→</span></a></li>
+      <li><a href="https://mk-shaikh.github.io/Understanding-Research-Terminology/" target="_blank" rel="noopener"><span class="t">Understanding Research Terminology</span><span class="tag">Academic</span><span class="arrow">→</span></a></li>
+      <li><a href="https://mk-shaikh.github.io/manage-your-fleet_/" target="_blank" rel="noopener"><span class="t">Manage Your Fleet</span><span class="tag">Software training</span><span class="arrow">→</span></a></li>
+      <li><a href="https://mk-shaikh.github.io/Inspecciones-en-Fleetio-Go/" target="_blank" rel="noopener"><span class="t">Inspecciones en Fleetio Go</span><span class="tag">Spanish localization</span><span class="arrow">→</span></a></li>
+      <li><a href="https://360.articulate.com/review/content/141fb6a2-f5fb-4318-95f4-ae4c627d8cdd/review" target="_blank" rel="noopener"><span class="t">Custom JavaScript Interactivity</span><span class="tag">Storyline + JS</span><span class="arrow">→</span></a></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h3>AI in Learning</h3>
+    <p class="group-note">Where I'm pushing next — AI agents that answer learner questions from course content, and studio-quality video produced without a camera crew.</p>
+    <ul class="worklist">
+      <li><a href="https://studio.d-id.com/agents/share?id=v2_agt_zoL88wBt&amp;utm_source=copy&amp;key=WjI5dloyeGxMVzloZFhSb01ud3hNVFUxTURVME1UUXpORGsxTkRJMU5qVTROVGs2WkcxTE5GVjViSGRrVFhwdFgzaDBiMDVSU0RCTA==" target="_blank" rel="noopener"><span class="t">AI Course Assistant — answers learner questions from course content</span><span class="tag">D-ID Agent</span><span class="arrow">→</span></a></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h3>Animation</h3>
+    <p class="group-note">2D scenario animations built in Vyond for story-driven learning.</p>
+    <ul class="worklist">
+      <li><a href="https://drive.google.com/file/d/1Z2dBf7XrtVC-FTgCcHmvs8pfbmK_n1QD/view?usp=sharing" target="_blank" rel="noopener"><span class="t">Vyond Animation — Sample 1</span><span class="tag">2D animation</span><span class="arrow">→</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1XOqVSoWjMY83eNYtfDrLkeurl6NOTD03/view?usp=sharing" target="_blank" rel="noopener"><span class="t">Vyond Animation — Sample 2</span><span class="tag">2D animation</span><span class="arrow">→</span></a></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h3>Design &amp; Documentation</h3>
+    <p class="group-note">The thinking behind the screens — design documents, storyboards, and facilitator guides that keep projects aligned from kickoff to delivery.</p>
+    <ul class="worklist">
+      <li class="featured"><a href="Emergency-Evacuation-Procedures-Storyboard.docx" download><span class="t">Emergency Evacuation Procedures — full course storyboard</span><span class="tag">Storyboard · Word</span><span class="arrow">↓</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1ugxppGwzXZ1m5_OFbDnYWOTZZ6vknT0s/view?usp=sharing" target="_blank" rel="noopener"><span class="t">Course Design Document — Sample 1</span><span class="tag">Design doc</span><span class="arrow">→</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1tVkbybS528r7Wa7S-kvVUja9Go1wYzzf/view?usp=sharing" target="_blank" rel="noopener"><span class="t">Course Design Document — Sample 2</span><span class="tag">Design doc</span><span class="arrow">→</span></a></li>
+      <li><a href="https://drive.google.com/file/d/10esuHY4OGgR-P8kS1BHd8qWlq9tCB9Ua/view?usp=sharing" target="_blank" rel="noopener"><span class="t">Facilitator Guide</span><span class="tag">ILT / VILT</span><span class="arrow">→</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-head">
+    <p class="eyebrow">Experience</p>
+    <h2>Where I've done it</h2>
+  </div>
+
+  <div class="job">
+    <div class="when">Apr 2023 — Present</div>
+    <div>
+      <h3>Senior Learning Specialist &amp; Instructional Designer</h3>
+      <div class="org">Perseus CSI · Remote</div>
+      <p>Lead a team of 8 designing enterprise learning at global scale — 40+ blended programs, an LMS serving 12,000+ employees at 99% uptime, and AI-driven video workflows that cut production and localization costs across 10+ programs.</p>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when">Jul 2022 — Apr 2023</div>
+    <div>
+      <h3>Senior Instructional Designer</h3>
+      <div class="org">Jubilee Life Insurance · Pakistan</div>
+      <p>Built 30+ interactive eLearning modules in a regulated insurance environment — cutting onboarding time by 29% and lifting engagement by 40% through blended programs in Storyline and Rise.</p>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when">Feb 2020 — Apr 2023</div>
+    <div>
+      <h3>Instructional Design Consultant</h3>
+      <div class="org">Housman Institute · US, Remote</div>
+      <p>Developed 40+ modules with Storyline 360 and Vyond, animated scenario videos, and VILT/ILT facilitator materials — reducing training time by 25% while raising engagement by 35%.</p>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when">Mar 2017 — Oct 2020</div>
+    <div>
+      <h3>Instructional Designer</h3>
+      <div class="org">Black Ox · US, Remote</div>
+      <p>Delivered 15+ instructional programs using microlearning and ADDIE — improving knowledge retention by 40% across 10+ concurrent projects with Kirkpatrick-based evaluation.</p>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when">Apr 2019 — Jan 2021</div>
+    <div>
+      <h3>Instructional Design Team Lead (Volunteer)</h3>
+      <div class="org">DESIGNxHUMANITY · Remote</div>
+      <p>Designed eLearning and blended programs for social-impact projects and mentored volunteer instructional designers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <p class="eyebrow">Toolkit</p>
+    <h2>How I work</h2>
+  </div>
+
+  <div class="skillrow">
+    <h3>Strategy</h3>
+    <p>Performance consulting · Learning needs analysis · Curriculum mapping · Blended learning architecture · Microlearning strategy · Stakeholder management</p>
+  </div>
+  <div class="skillrow">
+    <h3>Methodologies</h3>
+    <p>ADDIE · SAM · Agile instructional design · Backward design · Bloom's Taxonomy · Kirkpatrick evaluation</p>
+  </div>
+  <div class="skillrow">
+    <h3>Authoring</h3>
+    <p>Articulate Storyline 360 · Rise 360 · Adobe Captivate · Vyond · Camtasia · Adobe Suite · Canva</p>
+  </div>
+  <div class="skillrow">
+    <h3>AI &amp; Video</h3>
+    <p>Synthesia · HeyGen · Colossyan · Pictory · RunwayML · ChatGPT · AI-driven production workflows</p>
+  </div>
+  <div class="skillrow">
+    <h3>LMS &amp; Tech</h3>
+    <p>Docebo · TalentLMS · Moodle · Blackboard · Canvas · Open edX · HRIS integration · Dashboards &amp; reporting · HTML / CSS / JavaScript / Python</p>
+  </div>
+  <div class="skillrow">
+    <h3>Credentials</h3>
+    <p>Instructional Design Foundations &amp; Applications, University of Illinois Urbana-Champaign · MA Economics · LOMA 280 / 290 / 301 · Train the Trainer · AML-CFT</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <p class="eyebrow">Contact</p>
+    <h2>Let's build learning people <em>actually enjoy.</em></h2>
+    <p>Based in Dubai on my own visa, available to join immediately. If you're hiring or have a project in mind, I'd love to hear from you.</p>
+    <div class="contact-links">
+      <a class="btn" href="mailto:mkshaikh118@gmail.com">Email me</a>
+      <a class="link-quiet" href="https://www.linkedin.com/in/muhammad-muzamil-haq/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="link-quiet" href="tel:+971501322614">+971 50 132 2614</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 Muhammad Muzamil Haq</span>
+  <span>Dubai, United Arab Emirates</span>
+</footer>
+
+</div>
+
+</body>
+</html>
