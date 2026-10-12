@@ -1859,7 +1859,7 @@ function vidSlot(host,name,opts){
   opts=opts||{};
   var w=el('<div class="vidwrap" hidden><div class="vidctl"><button type="button" class="vc mute" aria-pressed="false"></button><button type="button" class="vc cc" aria-pressed="true">CC</button><button type="button" class="vc fs" aria-label="'+U('fullScreen')+'" title="'+U('fullScreen')+'">⛶</button></div></div>');
   var v=document.createElement('video');
-  v.setAttribute('playsinline','');v.muted=false;v.preload='metadata';
+  v.setAttribute('playsinline','');v.muted=false;v.preload=opts.placeholder?'auto':'metadata';   /* a slot with a placeholder loads at once, so the placeholder can go (2026-10-12) */
   if(opts.loop)v.loop=true;
   var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduced)v.controls=true;
@@ -1879,7 +1879,10 @@ function vidSlot(host,name,opts){
   if(opts.placeholder&&!opts.hide){
     var ph=el('<div class="mediaph"><span class="mpi">▶</span><b>'+T(opts.placeholder)+'</b><span class="mpf">video/'+name+'.mp4</span></div>');
     host.insertBefore(ph,w);
-    v.addEventListener('loadeddata',function(){ph.remove();});
+    /* the placeholder goes the moment the browser knows the clip exists (metadata), not only once frames arrive */
+    var gone=false,drop=function(){if(gone)return;gone=true;ph.remove();w.hidden=false;};
+    ['loadedmetadata','loadeddata','canplay'].forEach(function(ev){v.addEventListener(ev,drop);});
+    if(v.readyState>=1)drop();
     v.addEventListener('error',function(){ph.classList.add('missing');});
     if(opts.onReady)v.addEventListener('loadeddata',opts.onReady);
     if(opts.onMissing)v.addEventListener('error',opts.onMissing);
@@ -1895,6 +1898,7 @@ function vidSlot(host,name,opts){
   v.addEventListener('loadedmetadata',function(){ // size the frame to the clip: portrait screen-recordings stay big and readable
     if(v.videoWidth&&v.videoHeight){var ar=v.videoWidth/v.videoHeight;v.style.aspectRatio=ar;w.classList.toggle('portrait',ar<1);}
   });
+  v.addEventListener('loadedmetadata',function(){if(v.isConnected)w.hidden=false;});   /* the frame shows as soon as the clip is known */
   v.addEventListener('loadeddata',function(){
     if(!v.isConnected)return; // user already navigated away
     w.hidden=false;
