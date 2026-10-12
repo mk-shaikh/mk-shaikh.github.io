@@ -81,6 +81,7 @@
       <file href="icons/fluent-3d-repeat-button.png"/>
       <file href="icons/fluent-3d-right-arrow.png"/>
       <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
       <file href="icons/fluent-3d-shield.png"/>
       <file href="icons/fluent-3d-slightly-smiling-face.png"/>
       <file href="icons/fluent-3d-spiral-notepad.png"/>
@@ -118,10 +119,6 @@
       <file href="video/smp21-v3-poor.mp4"/>
       <file href="video/smp21-v4-gate.mp4"/>
       <file href="video/smp21-v4-hold.mp4"/>
-      <file href="video/smp21-v5-c2.mp4"/>
-      <file href="video/smp21-v5-c5.mp4"/>
-      <file href="video/smp21-v5-c8.mp4"/>
-      <file href="video/smp21-v5-stem.mp4"/>
     </resource>
   </resources>
 </manifest>
