@@ -49,6 +49,7 @@
       <file href="icons/fluent-3d-check-mark.png"/>
       <file href="icons/fluent-3d-clipboard.png"/>
       <file href="icons/fluent-3d-cross-mark.png"/>
+      <file href="icons/fluent-3d-dashing-away.png"/>
       <file href="icons/fluent-3d-desktop-computer.png"/>
       <file href="icons/fluent-3d-door.png"/>
       <file href="icons/fluent-3d-elevator.png"/>
@@ -111,23 +112,15 @@
       <file href="images/smp21-s5-watch.jpg"/>
       <file href="images/smp21-s7-gate4.jpg"/>
       <file href="images/smp21-s8-team.jpg"/>
-      <file href="incoming/smp21-a2-kiosk.mp4"/>
       <file href="scorm.js"/>
-      <file href="video/smp21-a2-kiosk.mp4"/>
       <file href="video/smp21-v2-flare-grab.mp4"/>
       <file href="video/smp21-v3-good.mp4"/>
       <file href="video/smp21-v3-poor.mp4"/>
       <file href="video/smp21-v4-gate.mp4"/>
       <file href="video/smp21-v4-hold.mp4"/>
-      <file href="video/smp21-v5-c1.mp4"/>
       <file href="video/smp21-v5-c2.mp4"/>
-      <file href="video/smp21-v5-c3.mp4"/>
-      <file href="video/smp21-v5-c4.mp4"/>
       <file href="video/smp21-v5-c5.mp4"/>
-      <file href="video/smp21-v5-c6.mp4"/>
-      <file href="video/smp21-v5-c7.mp4"/>
       <file href="video/smp21-v5-c8.mp4"/>
-      <file href="video/smp21-v5-c9.mp4"/>
       <file href="video/smp21-v5-stem.mp4"/>
     </resource>
   </resources>
