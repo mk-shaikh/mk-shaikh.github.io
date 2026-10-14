@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/lab.css"><script src="../assets/lab.js"></script>
+<style>
+.steps{display:flex;gap:6px;margin:4px 0 16px}
+.steps span{flex:1;text-align:center;font-weight:700;font-size:13px;padding:6px;border-radius:6px;background:#eceaf2;color:var(--muted)}
+.steps span.on{background:var(--purple);color:#fff}.steps span.done{background:var(--teal-tint);color:var(--teal)}
+.scene{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.parts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}
+.parts div{border:1px solid var(--soft);background:var(--tint);border-radius:10px;padding:8px;text-align:center;font-weight:700;font-size:14px}
+.parts .ico{display:block;margin:0 auto 4px;width:36px;height:36px}
+.rec{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;border:2px dashed var(--soft);border-radius:14px}
+.recbtn{width:96px;height:96px;border-radius:50%;border:none;background:var(--red);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(216,58,31,.35)}
+.recbtn.on{animation:rp 1.2s infinite}
+@keyframes rp{0%{box-shadow:0 0 0 0 rgba(216,58,31,.5)}100%{box-shadow:0 0 0 22px rgba(216,58,31,0)}}
+.lvl{width:220px;height:8px;background:#eceaf2;border-radius:5px;overflow:hidden}.lvl i{display:block;height:100%;width:0;background:var(--teal)}
+.clock{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted)}
+audio{width:100%;margin-top:6px}
+.model{border-left:5px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;padding:12px 16px}
+.model p{margin:4px 0}.model b{color:var(--teal)}
+.checks{display:grid;gap:8px;margin-top:10px}
+.checks button{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;min-height:52px}
+.checks .box{width:26px;height:26px;border:2px solid var(--purple);border-radius:6px;flex:none;text-align:center;line-height:22px;font-weight:700;color:#fff}
+.checks button[aria-pressed=true]{border-color:var(--teal);background:var(--teal-tint)}
+.checks button[aria-pressed=true] .box{background:var(--teal);border-color:var(--teal)}
+.checks .ico{width:34px;height:34px}
+@media (max-width:560px){.parts{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<script>
+/* SMP 2.1 RL 6.2 radio call. The model call = the client's best piece for each step. */
+var PARTS=[{k:"Call sign",i:"radio",m:"'Sierra 2, Sierra 2, this is Marshal 22. Over.'"},
+ {k:"Where",i:"round pushpin",m:"'Gate 4 inner concourse, next to the media entrance door.'"},
+ {k:"What",i:"warning",m:"'A fan has gone into the restricted media area and won't come out.'"},
+ {k:"Who",i:"bust in silhouette",m:"'Man, about 30, green team shirt, grey cap, blue jeans.'"},
+ {k:"What I'm doing",i:"eye",m:"'I've asked him to come out. I'm keeping him in sight at a distance. Request Security. Over.'"}];
+var stage=shell({n:3,code:"Activity 87 · Record, replay and compare",where:"Lesson 6 · Try it",kicker:"Say it out loud.",
+  title:"A fan has gone into the restricted media area and will not come out.",
+  task:"Record your radio call to Sierra 2, play it back, then compare it with the model call. Keep it short, calm and exact."});
+stage.appendChild(el('<div class="steps"><span class="on" id="s1">1 Record</span><span id="s2">2 Compare</span><span id="s3">3 Check yourself</span></div>'));
+var body=el('<div></div>');stage.appendChild(body);
+var rec,chunks=[],stream,url=null,t0,tick,ac,an;
+function step(n){[1,2,3].forEach(function(k){var s=$('#s'+k);s.className=k<n?'done':k===n?'on':'';});}
+function one(){step(1);body.innerHTML='';
+  body.appendChild(el('<div class="scene">'+icon('radio','lg')+'<div>You are Marshal 22. Your supervisor is <b>Sierra 2</b>. Your call needs five parts:</div></div>'));
+  var p=el('<div class="parts"></div>');PARTS.forEach(function(x){p.appendChild(el('<div>'+icon(x.i)+x.k+'</div>'));});body.appendChild(p);
+  var r=el('<div class="rec"><button class="recbtn" id="rb" aria-label="Start recording">● Record</button><div class="lvl" aria-hidden="true"><i></i></div><div class="clock" id="ck">0:00</div><div class="small" id="msg">Your recording stays on this device. Nothing is uploaded.</div><div id="play"></div></div>');
+  body.appendChild(r);
+  var a=el('<div class="actions"><button class="btn" id="skip">I can\'t record now</button><button class="btn primary" id="next" disabled>Compare with the model</button></div>');body.appendChild(a);
+  $('#rb').addEventListener('click',toggle);$('#next').addEventListener('click',two);$('#skip').addEventListener('click',two);
+}
+function toggle(){
+  if(rec&&rec.state==='recording'){rec.stop();return;}
+  if(!navigator.mediaDevices||!window.MediaRecorder){$('#msg').textContent='This browser cannot record. Say your call out loud, then compare it with the model.';$('#next').disabled=false;return;}
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){stream=s;chunks=[];rec=new MediaRecorder(s);
+    rec.ondataavailable=function(e){if(e.data.size)chunks.push(e.data);};
+    rec.onstop=function(){clearInterval(tick);stream.getTracks().forEach(function(t){t.stop();});if(ac)ac.close();
+      if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));
+      $('#rb').classList.remove('on');$('#rb').textContent='● Record again';$('.lvl i').style.width='0';
+      $('#play').innerHTML='<audio controls src="'+url+'"></audio>';$('#next').disabled=false;$('#msg').textContent='Play it back. Happy with it? Compare it with the model.';addXp(5);};
+    rec.start();t0=Date.now();$('#rb').classList.add('on');$('#rb').textContent='■ Stop';$('#msg').textContent='Recording… press Stop when you finish.';
+    tick=setInterval(function(){var s=Math.floor((Date.now()-t0)/1000);$('#ck').textContent=Math.floor(s/60)+':'+('0'+s%60).slice(-2);},250);
+    try{ac=new AudioContext();an=ac.createAnalyser();ac.createMediaStreamSource(s).connect(an);var d=new Uint8Array(an.fftSize);
+      (function lv(){if(!rec||rec.state!=='recording')return;an.getByteTimeDomainData(d);var m=0;for(var i=0;i<d.length;i++)m=Math.max(m,Math.abs(d[i]-128));$('.lvl i').style.width=Math.min(100,m*1.6)+'%';requestAnimationFrame(lv);})();}catch(e){}
+  }).catch(function(){$('#msg').textContent='The microphone is blocked. Say your call out loud, then compare it with the model.';$('#next').disabled=false;});
+}
+function two(){step(2);body.innerHTML='';
+  if(url)body.appendChild(el('<div><b>Your call</b><audio controls src="'+url+'"></audio></div>'));
+  var m=el('<div class="model" style="margin-top:12px"><b>The model call</b></div>');PARTS.forEach(function(x){m.appendChild(el('<p><b>'+x.k+':</b> '+x.m+'</p>'));});body.appendChild(m);
+  body.appendChild(el('<p class="small">Play your call again and listen for each part.</p>'));
+  var a=el('<div class="actions"><button class="btn" id="again">Record again</button><button class="btn primary" id="go">Check yourself</button></div>');body.appendChild(a);
+  $('#again').addEventListener('click',one);$('#go').addEventListener('click',three);
+}
+function three(){step(3);body.innerHTML='';
+  body.appendChild(el('<p><b>Tap each thing your call had.</b></p>'));
+  var c=el('<div class="checks"></div>'),L=PARTS.map(function(x){return {t:{"Call sign":"I said the call sign twice and ended with 'over'","Where":"I said exactly where","What":"I said what is happening","Who":"I described the person","What I'm doing":"I said what I'm doing and what I need"}[x.k],i:x.i};}).concat([{t:"I kept it short, calm and exact",i:"check mark button"}]);
+  L.forEach(function(x){var b=el('<button type="button" aria-pressed="false"><span class="box">✓</span>'+icon(x.i)+'<span>'+x.t+'</span></button>');b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});c.appendChild(b);});
+  body.appendChild(c);var host=el('<div aria-live="polite"></div>');body.appendChild(host);
+  var a=el('<div class="actions"><button class="btn" id="again">Record again</button><button class="btn primary" id="done">Done</button></div>');body.appendChild(a);
+  $('#again').addEventListener('click',one);
+  $('#done').addEventListener('click',function(){var n=$$('.checks button[aria-pressed=true]').length;host.innerHTML='';
+    if(n===L.length){host.appendChild(fb('good','Loud and clear','Your call had all six. Your supervisor can act on it straight away.'));addXp(10);}
+    else host.appendChild(fb('tip',n+' of '+L.length,'Record it again and add what was missing. Get the right person first; wait for \'Go ahead\'.'));});
+}
+one();
+</script></body></html>

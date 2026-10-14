@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/lab.css"><script src="../assets/lab.js"></script>
+<style>
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.m{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px}
+.m b{display:block;font-size:16px}.m .tag{display:inline-block;background:var(--tint);color:var(--purple-d);border-radius:12px;padding:1px 8px;font-size:12px;font-weight:700;margin:2px 2px 0 0}
+.m .cnt{float:right;font-weight:700;color:var(--muted)}
+table{width:100%;border-collapse:separate;border-spacing:6px}
+th{font-size:13px;text-align:left;color:var(--muted)}
+th.post{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:15px}
+th.post .ico{width:32px;height:32px}
+.cell{width:100%;min-height:52px;border:2px dashed var(--soft);background:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:15px}
+.cell.set{border-style:solid;border-color:var(--purple);background:var(--tint)}
+.cell.bad{border-color:var(--red);background:var(--red-tint)}
+.cell.good{border-color:var(--teal);background:var(--teal-tint)}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;box-shadow:0 -6px 30px rgba(64,41,120,.25);border-radius:16px 16px 0 0;padding:16px;z-index:30;max-width:760px;margin:0 auto}
+.sheet .pick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.sheet button.p{min-height:52px;border:1px solid var(--line);background:#fff;border-radius:10px;font-weight:700;cursor:pointer}
+.sheet button.p small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.issues{margin:10px 0 0;padding-left:20px}.issues li{margin:4px 0}
+@media (max-width:560px){.team{grid-template-columns:1fr 1fr}.sheet .pick{grid-template-columns:1fr 1fr}th.post .ico{display:none}}
+</style></head><body>
+<script>
+/* Demo data for the trial (names and skills are made up). Posts are SMP 2.1 posts at Gate 4. */
+var TEAM=[{n:"Noura",s:["Arabic","English"]},{n:"Faisal",s:["Arabic","English"]},{n:"Sara",s:["Arabic","Accessibility trained"]},
+  {n:"Omar",s:["Arabic","Accessibility trained"]},{n:"Huda",s:["Arabic"]},{n:"Yousef",s:["Arabic"]}];
+var POSTS=[{t:"Soft ticket check",i:"ticket"},{t:"Queuing",i:"busts in silhouette"},{t:"Megaphone announcer",i:"megaphone",need:"English",why:"announcements go out in Arabic and English"},
+  {t:"Accessibility",i:"person in manual wheelchair",need:"Accessibility trained",why:"this post needs someone trained in accessibility"}];
+var SLOTS=["KO −120 to −80","KO −80 to −40","KO −40 to 0"];
+var stage=shell({n:5,code:"Activity 19 · Schedule parallel work",where:"Supervisor track · Deploy your team",kicker:"Plan it.",
+  title:"Deploy your team at Gate 4",
+  lead:"You are Sierra 2. Before the gates open you place six marshals on four posts for three shifts.",
+  task:"Tap each empty box and choose a marshal. Every post covered in every shift, nobody in two places, and everyone gets one shift off for a break. Then press Check my plan."});
+var team=el('<div class="team"></div>');TEAM.forEach(function(m,i){team.appendChild(el('<div class="m" id="m'+i+'"><span class="cnt"></span><b>'+m.n+'</b>'+m.s.map(function(s){return '<span class="tag">'+s+'</span>';}).join('')+'</div>'));});stage.appendChild(team);
+var tb='<table><tr><th></th>'+SLOTS.map(function(s){return '<th>'+s+'</th>';}).join('')+'</tr>';
+POSTS.forEach(function(p,pi){tb+='<tr><th class="post">'+icon(p.i)+p.t+'</th>'+SLOTS.map(function(s,si){return '<td><button type="button" class="cell" data-p="'+pi+'" data-s="'+si+'" aria-label="'+p.t+', '+s+': empty">+</button></td>';}).join('')+'</tr>';});
+stage.appendChild(el('<div style="overflow-x:auto">'+tb+'</table></div>'));
+var host=el('<div aria-live="polite"></div>');stage.appendChild(host);
+stage.appendChild(el('<div class="actions"><button class="btn" id="clr">Clear</button><button class="btn primary" id="chk">Check my plan</button></div>'));
+var plan={};
+function key(p,s){return p+'-'+s;}
+function counts(){TEAM.forEach(function(m,i){var c=Object.keys(plan).filter(function(k){return plan[k]===i;}).length;$('#m'+i+' .cnt').textContent=c+' shift'+(c===1?'':'s');});}
+function paint(){$$('.cell').forEach(function(c){var v=plan[key(c.dataset.p,c.dataset.s)];c.classList.remove('bad','good');c.classList.toggle('set',v!==undefined);c.textContent=v===undefined?'+':TEAM[v].n;
+  c.setAttribute('aria-label',POSTS[c.dataset.p].t+', '+SLOTS[c.dataset.s]+': '+(v===undefined?'empty':TEAM[v].n));});counts();}
+var sheet=null;
+$$('.cell').forEach(function(c){c.addEventListener('click',function(){
+  if(sheet)sheet.remove();var p=+c.dataset.p,s=+c.dataset.s;
+  sheet=el('<div class="sheet" role="dialog" aria-label="Choose a marshal"><b>'+POSTS[p].t+' · '+SLOTS[s]+'</b><div class="pick"></div><div class="actions"><button class="btn" id="none">Leave empty</button><button class="btn" id="x">Close</button></div></div>');
+  TEAM.forEach(function(m,i){var busy=Object.keys(plan).some(function(k){return plan[k]===i&&+k.split('-')[1]===s&&k!==key(p,s);});
+    var b=el('<button type="button" class="p">'+m.n+'<small>'+(busy?'already on a post this shift':m.s.join(' · '))+'</small></button>');
+    b.addEventListener('click',function(){plan[key(p,s)]=i;sheet.remove();sheet=null;paint();host.innerHTML='';c.focus();});sheet.querySelector('.pick').appendChild(b);});
+  sheet.querySelector('#none').addEventListener('click',function(){delete plan[key(p,s)];sheet.remove();sheet=null;paint();});
+  sheet.querySelector('#x').addEventListener('click',function(){sheet.remove();sheet=null;});
+  document.body.appendChild(sheet);sheet.querySelector('.p').focus();});});
+$('#clr').addEventListener('click',function(){plan={};paint();host.innerHTML='';});
+$('#chk').addEventListener('click',function(){var issues=[],bad={},empty=0;
+  POSTS.forEach(function(p,pi){SLOTS.forEach(function(s,si){var v=plan[key(pi,si)];
+    if(v===undefined){empty++;bad[key(pi,si)]=1;}
+    else if(p.need&&TEAM[v].s.indexOf(p.need)<0){issues.push('<b>'+TEAM[v].n+'</b> on '+p.t+' ('+s+'): '+p.why+'.');bad[key(pi,si)]=1;}});});
+  SLOTS.forEach(function(s,si){TEAM.forEach(function(m,i){var ks=Object.keys(plan).filter(function(k){return plan[k]===i&&+k.split('-')[1]===si;});
+    if(ks.length>1){issues.push('<b>'+m.n+'</b> is on two posts at once in '+s+'.');ks.forEach(function(k){bad[k]=1;});}});});
+  TEAM.forEach(function(m,i){var ks=Object.keys(plan).filter(function(k){return plan[k]===i;});if(ks.length>=3){issues.push('<b>'+m.n+'</b> works all three shifts with no break.');ks.forEach(function(k){bad[k]=1;});}});
+  if(empty)issues.unshift('<b>'+empty+' box'+(empty>1?'es are':' is')+' still empty.</b> Every post needs someone in every shift.');
+  $$('.cell').forEach(function(c){var k=key(c.dataset.p,c.dataset.s);if(plan[k]!==undefined||bad[k])c.classList.add(bad[k]?'bad':'good');});
+  host.innerHTML='';
+  if(!issues.length){host.appendChild(fb('good','Your plan works','Every post is covered, nobody is in two places, and everyone gets a break. Brief your team on their posts and tasks.'));addXp(20);}
+  else host.appendChild(fb('bad',issues.length+' thing'+(issues.length>1?'s':'')+' to fix','<ul class="issues">'+issues.slice(0,8).map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'));});
+paint();
+</script></body></html>

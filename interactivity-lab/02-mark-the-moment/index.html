@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/lab.css"><script src="../assets/lab.js"></script>
+<style>
+.vbox{position:relative;border-radius:12px;overflow:hidden;background:#000}
+.vbox video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.flash{position:absolute;inset:0;border:6px solid #f5b400;opacity:0;pointer-events:none;transition:opacity .3s}
+.flash.on{opacity:1}
+.tl{position:relative;height:34px;margin:12px 0 4px;background:#eceaf2;border-radius:8px;cursor:pointer}
+.tl .played{position:absolute;left:0;top:0;bottom:0;background:var(--soft);border-radius:8px}
+.tl .pin{position:absolute;top:-6px;width:4px;height:46px;margin-left:-2px;border-radius:2px}
+.tl .pin.ok{background:var(--teal)}.tl .pin.no{background:#e6a417}
+.tl .pin span{position:absolute;top:-22px;left:-9px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;text-align:center;line-height:22px}
+.tl .pin.ok span{background:var(--teal)}.tl .pin.no span{background:#e6a417}
+.ctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ctrl .t{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;margin-left:auto}
+.markbtn{background:#f5b400;border-color:#f5b400;color:var(--ink);font-size:19px;flex:1 1 240px}
+.found{display:grid;gap:8px;margin-top:14px}
+.found .row{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.found .row.ok{border-color:#9fd9cf;background:var(--teal-tint)}
+.found .row .num{width:26px;height:26px;border-radius:50%;background:var(--line);text-align:center;line-height:26px;font-weight:700;flex:none}
+.found .row.ok .num{background:var(--teal);color:#fff}
+.ask{border:2px solid var(--purple);border-radius:12px;padding:14px;margin-top:14px}
+.ask .opts{display:grid;gap:8px;margin-top:8px}
+.ask .opt{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;min-height:52px}
+.ask .opt .ico{width:36px;height:36px}
+.ask .opt.no{border-color:var(--red);background:var(--red-tint)}
+</style></head><body>
+<script>
+/* SMP 2.1 RL 5.1 'Spot the difference: the poor way' (smp21-v3-poor). Moments from the clip's shot list:
+   6-12 s Noura sees him, leaves her post and runs after him; 12-16 s the post is empty and the queue pushes through the gap. */
+var MOM=[
+ {a:8.5,b:13.2,name:"Noura leaves her post",ask:"What do you see at this moment?",
+  opts:[{t:"She left her own post",i:"person running",ok:true},{t:"She called her supervisor",i:"radio"},{t:"She stayed at the ticket check",i:"round pushpin"}],
+  why:"She left her own post to run after the man. Use your radio. Stay at your post."},
+ {a:12.2,b:19.5,name:"The queue pushes into the empty post",ask:"What do you see at this moment?",
+  opts:[{t:"The queue keeps moving in order",i:"busts in silhouette"},{t:"The post is empty and the queue pushes through the gap",i:"warning",ok:true},{t:"Security arrive at the gate",i:"shield"}],
+  why:"Behind her the post is empty and the queue pushes forward through the gap. An empty post is a safety risk."}];
+var stage=shell({n:2,code:"Activity 82 · Mark the evidence in a video",where:"Lesson 5 · Spot the difference",kicker:"Watch closely.",
+  title:"Spot the difference: the poor way",
+  lead:"Watch Noura. What should she have noticed before she left her post?",
+  task:"Press Mark the moment you see a mistake or a risk. There are two to find. Take your time: you can pause and replay."});
+stage.appendChild(el('<div class="vbox"><video playsinline preload="auto" src="../assets/video/smp21-v3-poor.mp4"></video><div class="flash"></div></div>'));
+stage.appendChild(el('<div class="tl" aria-hidden="true"><div class="played"></div></div>'));
+stage.appendChild(el('<div class="ctrl"><button class="btn" id="pp">▶ Play</button><button class="btn" id="back">↺ 5 s</button><button class="btn markbtn" id="mark">⚑ Mark the moment</button><span class="t" id="t">0:00 / 0:20</span></div>'));
+var found=el('<div class="found"></div>');MOM.forEach(function(m,i){found.appendChild(el('<div class="row" id="r'+i+'"><span class="num">'+(i+1)+'</span><span>Moment '+(i+1)+': <b>not found yet</b></span></div>'));});stage.appendChild(found);
+var fbHost=el('<div aria-live="polite"></div>');stage.appendChild(fbHost);
+var v=$('video'),tl=$('.tl'),got={},asking=false,marks=0;
+function fmt(s){s=Math.max(0,s||0);return Math.floor(s/60)+':'+('0'+Math.floor(s%60)).slice(-2);}
+function pp(){if(asking)return;if(v.paused)v.play();else v.pause();}
+v.addEventListener('play',function(){$('#pp').textContent='❚❚ Pause';});
+v.addEventListener('pause',function(){$('#pp').textContent='▶ Play';});
+v.addEventListener('timeupdate',function(){$('.played').style.width=(v.currentTime/(v.duration||20)*100)+'%';$('#t').textContent=fmt(v.currentTime)+' / '+fmt(v.duration||20);});
+v.addEventListener('ended',function(){var miss=MOM.filter(function(m,i){return !got[i];});
+  if(miss.length){fbHost.innerHTML='';fbHost.appendChild(fb('tip','The clip has ended','You found '+(MOM.length-miss.length)+' of '+MOM.length+'. Press Play to watch again and look for the rest.'));v.currentTime=0;}});
+$('#pp').addEventListener('click',pp);v.addEventListener('click',pp);
+$('#back').addEventListener('click',function(){v.currentTime=Math.max(0,v.currentTime-5);});
+tl.addEventListener('click',function(e){var r=tl.getBoundingClientRect();v.currentTime=(e.clientX-r.left)/r.width*(v.duration||20);});
+function pin(t,ok,label){var p=el('<div class="pin '+(ok?'ok':'no')+'" style="left:'+(t/(v.duration||20)*100)+'%"><span>'+label+'</span></div>');tl.appendChild(p);}
+$('#mark').addEventListener('click',function(){
+  if(asking)return;var t=v.currentTime;marks++;
+  var i=MOM.map(function(m,k){return (!got[k]&&t>=m.a&&t<=m.b)?k:-1;}).filter(function(k){return k>=0;})[0];
+  v.pause();$('.flash').classList.add('on');setTimeout(function(){$('.flash').classList.remove('on');},400);fbHost.innerHTML='';
+  if(i===undefined){pin(t,false,'?');fbHost.appendChild(fb('tip','Not this moment','Nothing has gone wrong yet at '+fmt(t)+'. Keep watching, then mark again.'));return;}
+  pin(t,true,i+1);asking=true;var m=MOM[i];
+  var box=el('<div class="ask"><b>Moment marked at '+fmt(t)+'.</b> '+m.ask+'<div class="opts"></div></div>');
+  m.opts.forEach(function(o){var b=el('<button type="button" class="opt">'+icon(o.i)+'<span>'+o.t+'</span></button>');
+    b.addEventListener('click',function(){
+      if(o.ok){got[i]=1;asking=false;box.remove();addXp(5);
+        $('#r'+i).classList.add('ok');$('#r'+i).querySelector('span:last-child').innerHTML='Moment '+(i+1)+' at '+fmt(t)+': <b>'+o.t+'</b>';
+        fbHost.innerHTML='';fbHost.appendChild(fb('good','Spot on',m.why));
+        if(Object.keys(got).length===MOM.length)finish();}
+      else{b.classList.add('no');b.disabled=true;}
+    });box.querySelector('.opts').appendChild(b);});
+  fbHost.appendChild(box);
+});
+function finish(){$('#mark').disabled=true;addXp(10);
+  stage.appendChild(fb('good','You found both moments','Now watch the good way: how was it improved? Listen for where, what, who, and what Noura is doing.'));
+  stage.appendChild(el('<div class="actions"><button class="btn primary">Continue</button></div>'));}
+</script></body></html>

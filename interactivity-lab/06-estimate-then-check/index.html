@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/lab.css"><script src="../assets/lab.js"></script>
+<style>
+.rnd{font-weight:700;color:var(--purple);margin-bottom:6px}
+.view{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#d8d2c2}
+.view svg{display:block;width:100%;height:auto}
+.head{transition:fill .4s}
+.est{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.est .val{font-family:var(--disp);font-size:42px;color:var(--navy);line-height:1}
+.est .val small{font-size:16px;color:var(--muted);font-family:var(--font)}
+.est input{width:100%;max-width:420px;accent-color:var(--purple);height:34px}
+.step{display:flex;gap:10px}.step .btn{min-width:56px;font-size:22px;padding:6px}
+.scale{display:flex;justify-content:space-between;width:100%;max-width:420px;font-size:13px;color:var(--muted)}
+.bands{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;font-size:13px;font-weight:700;text-align:center}
+.bands div{border-radius:8px;padding:6px}
+.bands .b1{background:var(--teal-tint);color:var(--teal)}.bands .b2{background:var(--amber-tint);color:var(--amber)}.bands .b3{background:var(--red-tint);color:var(--red)}
+.bands .hit{outline:3px solid var(--ink)}
+.decide{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.decide button{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;min-height:60px;font-size:16px}
+.decide button.no{border-color:var(--red);background:var(--red-tint)}
+@media (max-width:560px){.decide{grid-template-columns:1fr}}
+</style></head><body>
+<script>
+/* SMP 2.1 lesson 1: 'Watch how crowded your area is, and report build-up early.'
+   The three bands below are for this trial only: the client's density guide sets the real picture scale. */
+var ROUNDS=[{n:2,near:2,band:0},{n:4,near:4,band:1},{n:6,near:6,band:2}];
+var BANDS=[{t:"Comfortable",do:"Keep watching"},{t:"Busy",do:"Keep watching closely"},{t:"Packing tight",do:"Report to Sierra 2 now"}];
+var stage=shell({n:6,code:"Activity 25 · Estimate, then check",where:"Lesson 1 · Safety",kicker:"Read the crowd.",
+  title:"How crowded is your area?",
+  lead:"Watch how crowded your area is, and report build-up early. This is the Gate 4 queue seen from above. The yellow square is one metre by one metre.",
+  task:"Estimate how many people are standing in the yellow square, then check. Three views to read."});
+var body=el('<div></div>');stage.appendChild(body);
+var ri=0,score=0,seed=11;function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
+function scene(r){var W=600,H=300,S=110,sx=245,sy=95,heads=[],dens=r.n/(S*S),tries=0;
+  /* the same density all around, with exactly r.n people inside the square */
+  function free(x,y,min){return heads.every(function(h){return (h.x-x)*(h.x-x)+(h.y-y)*(h.y-y)>min*min;});}
+  var min=Math.max(16,Math.min(44,Math.sqrt(1/dens)*0.72)),inside=0;
+  while(inside<r.n&&tries<4000){tries++;var x=sx+12+rnd()*(S-24),y=sy+12+rnd()*(S-24);if(free(x,y,min)){heads.push({x:x,y:y,in:1});inside++;}}
+  var want=Math.round(dens*W*H*0.9);tries=0;
+  while(heads.length<want&&tries<20000){tries++;var x2=10+rnd()*(W-20),y2=10+rnd()*(H-20);
+    if(x2>sx-8&&x2<sx+S+8&&y2>sy-8&&y2<sy+S+8)continue;if(free(x2,y2,min))heads.push({x:x2,y:y2});}
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="People in the queue seen from above"><rect width="'+W+'" height="'+H+'" fill="#d8d2c2"/>'+
+    heads.map(function(h){return '<g><circle cx="'+h.x+'" cy="'+(h.y+3)+'" r="12" fill="#000" opacity=".12"/><circle class="head'+(h.in?' in':'')+'" cx="'+h.x+'" cy="'+h.y+'" r="10" fill="#5b4a8a"/><circle cx="'+(h.x-3)+'" cy="'+(h.y-3)+'" r="3" fill="#fff" opacity=".25"/></g>';}).join('')+
+    '<rect x="'+sx+'" y="'+sy+'" width="'+S+'" height="'+S+'" fill="rgba(245,180,0,.12)" stroke="#f5b400" stroke-width="4"/><text x="'+(sx+S/2)+'" y="'+(sy-8)+'" text-anchor="middle" font-family="Source Sans 3" font-weight="700" font-size="14" fill="#2A1B52" stroke="#fff" stroke-width="4" paint-order="stroke">1 m × 1 m</text></svg>';
+  return svg;}
+function show(){var r=ROUNDS[ri],v=3;body.innerHTML='';
+  body.appendChild(el('<div class="rnd">View '+(ri+1)+' of '+ROUNDS.length+'</div>'));
+  body.appendChild(el('<div class="view">'+scene(r)+'</div>'));
+  var e=el('<div class="est"><div class="val"><span id="v">3</span> <small>people in the square</small></div>'+
+    '<input type="range" min="0" max="8" step="1" value="3" aria-label="Your estimate: people in the square">'+
+    '<div class="scale"><span>0</span><span>8</span></div><div class="step"><button class="btn" id="mi" aria-label="One fewer">−</button><button class="btn" id="pl" aria-label="One more">+</button></div></div>');body.appendChild(e);
+  var inp=e.querySelector('input');function set(x){v=Math.max(0,Math.min(8,x));inp.value=v;$('#v').textContent=v;}
+  inp.addEventListener('input',function(){set(+inp.value);});$('#mi').addEventListener('click',function(){set(v-1);});$('#pl').addEventListener('click',function(){set(v+1);});
+  var host=el('<div aria-live="polite"></div>');body.appendChild(host);
+  var a=el('<div class="actions"><button class="btn primary">Check</button></div>');body.appendChild(a);
+  a.querySelector('button').addEventListener('click',function(){a.remove();inp.disabled=true;$('#mi').disabled=true;$('#pl').disabled=true;
+    $$('.head.in').forEach(function(h){h.setAttribute('fill','#f5b400');});
+    var d=Math.abs(v-r.n),ok=d<=1;if(ok){score++;addXp(5);}
+    host.appendChild(fb(ok?'good':'tip',ok?'Close: there are '+r.n:'There are '+r.n,'You said '+v+'. '+(d===0?'Exactly right.':ok?'Within one, which is a good read.':'Count the heads now lit in yellow.')));
+    host.appendChild(el('<div class="bands">'+BANDS.map(function(b,k){return '<div class="b'+(k+1)+(k===r.band?' hit':'')+'">'+b.t+'</div>';}).join('')+'</div>'));
+    host.appendChild(el('<p style="margin:12px 0 0"><b>What do you do?</b></p>'));
+    var dd=el('<div class="decide"></div>');
+    [{t:"Keep watching",i:"eye",ok:r.band<2},{t:"Radio Sierra 2 now: the queue is packing tight",i:"radio",ok:r.band===2}].forEach(function(o){
+      var b=el('<button type="button">'+icon(o.i)+'<span>'+o.t+'</span></button>');
+      b.addEventListener('click',function(){if(!o.ok){b.classList.add('no');b.disabled=true;return;}$$('button',dd).forEach(function(x){x.disabled=true;});addXp(5);
+        host.appendChild(fb('good','Right call',r.band===2?'Crowd safety is your job: report it to your supervisor straight away and follow instructions (e.g., Stop & Hold). Never push into the crowd.':'Not tight yet. Keep watching how crowded your area is, and report build-up early.'));
+        var nx=el('<div class="actions"><button class="btn primary">'+(ri<ROUNDS.length-1?'Next view':'Finish')+'</button></div>');host.appendChild(nx);
+        nx.querySelector('button').addEventListener('click',function(){ri++;if(ri<ROUNDS.length)show();else end();});});dd.appendChild(b);});
+    host.appendChild(dd);});}
+function end(){body.innerHTML='';body.appendChild(fb('good','You read '+score+' of '+ROUNDS.length+' views within one','Watch how crowded your area is, and report build-up early.'));
+  var a=el('<div class="actions"><button class="btn">Try again</button><button class="btn primary">Continue</button></div>');body.appendChild(a);
+  a.querySelector('button').addEventListener('click',function(){ri=0;score=0;show();});}
+show();
+</script></body></html>

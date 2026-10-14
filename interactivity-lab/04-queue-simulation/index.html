@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/lab.css"><script src="../assets/lab.js"></script>
+<style>
+.ko{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ko .clockbig{font-family:var(--disp);font-size:30px;color:var(--navy);font-weight:700}
+.ko .dots{display:flex;gap:6px;margin-left:auto}.ko .dots i{width:12px;height:12px;border-radius:50%;background:#eceaf2}.ko .dots i.on{background:var(--purple)}.ko .dots i.done{background:var(--teal)}
+.yard{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#e3ddcf}
+.yard svg{display:block;width:100%;height:auto}
+.fan{transition:cx .8s,cy .8s,fill .8s,opacity .8s}
+.event{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--soft);background:var(--tint);border-radius:12px;padding:12px 14px;margin-top:12px}
+.event .who{font-weight:700;color:var(--purple)}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;min-height:56px;font-size:16px}
+.opt:hover{border-color:var(--purple)}
+.opt:disabled{cursor:default;opacity:.55}.opt.pick{opacity:1;border-width:2px}
+.opt.g{border-color:var(--teal)}.opt.m{border-color:#e6a417}.opt.b{border-color:var(--red)}
+.redline{display:inline-block;background:var(--red);color:#fff;border-radius:4px;padding:1px 7px;font-size:12px;font-weight:700;margin-left:4px}
+.sum{display:grid;gap:8px;margin-top:12px}.sum div{display:flex;gap:10px;border-bottom:1px solid var(--line);padding:6px 0}
+</style></head><body>
+<script>
+/* Built from SMP 2.1 rules (lessons 1, 2, 6, 7): report build-up early, act on Stop & Hold, never push into the crowd,
+   emergency gates open only on instruction, stay at your post, stay-call-guide for a collapsed fan. */
+var R=[
+ {k:"Kick-off minus 45",q:72,ev:"The Gate 4 queue is packing tight. People at the front are pressed against the barrier.",
+  o:[{t:"Radio Sierra 2: the Gate 4 queue is packing tight at the barrier. Keep watching.",s:+15,m:0,r:"g",f:"Crowd safety is your job: report it to your supervisor straight away and follow instructions (e.g., Stop & Hold)."},
+     {t:"Step into the queue and push people back from the barrier.",s:-15,m:-15,r:"b",red:1,f:"Never push into the crowd. Report it to your supervisor straight away."},
+     {t:"Wait. It will clear when the scanners catch up.",s:-20,m:0,r:"m",f:"Watch how crowded your area is, and report build-up early."}]},
+ {k:"Kick-off minus 35",q:80,who:"Sierra 2 on the radio",ev:"'Marshal 22, Stop & Hold at the Gate 4 lanes. Over.'",
+  o:[{t:"Stop & Hold the lane entry. Tell fans calmly why, and that the wait is short.",s:+20,m:-5,r:"g",f:"Act on instructions, for example Stop & Hold. Explaining the reason keeps fans calm."},
+     {t:"Keep letting people in. Fans are getting annoyed.",s:-20,m:+5,r:"b",f:"Stop & Hold is an instruction from your chain. Act on it."},
+     {t:"Open the side emergency gate to take the pressure off.",s:-30,m:+5,r:"b",red:1,f:"Emergency gates open only on instruction through your chain. Not for anyone else."}]},
+ {k:"Kick-off minus 25",q:60,ev:"A fan's ticket is for Gate 7, but he is in your Gate 4 queue.",
+  o:[{t:"Explain politely and redirect him to Gate 7.",s:+5,m:+10,r:"g",f:"Soft ticket check: explain politely and redirect him to the correct gate."},
+     {t:"Let him through. It is quicker.",s:-5,m:0,r:"m",f:"He will be stopped later and the queue behind him waits. Explain politely and redirect him."},
+     {t:"Walk him to Gate 7 yourself.",s:-15,m:+5,r:"m",f:"Use your radio. Stay at your post."}]},
+ {k:"Kick-off minus 15",q:55,who:"Sierra 2 on the radio",ev:"'Marshal 22, release the Gate 4 lanes, controlled. Over.'",
+  o:[{t:"Release one lane at a time. Ask fans to walk: there is plenty of time.",s:+15,m:+10,r:"g",f:"A controlled release keeps fans flowing safely."},
+     {t:"Move all the barriers at once so everyone gets in fast.",s:-25,m:+5,r:"b",f:"A sudden release makes the crowd surge. Release as instructed: controlled."},
+     {t:"Tell fans to hurry or they will miss kick-off.",s:-15,m:-5,r:"m",f:"Rushing fans push and fall. Keep your words calm."}]},
+ {k:"Kick-off minus 5",q:30,ev:"A fan collapses in the queue and does not respond.",
+  o:[{t:"Stay with him, radio for medical help and keep space around him. Tell Sierra 2.",s:+15,m:+5,r:"g",f:"Stay, call, guide: radio for medical help and keep space around the fan. Medical teams treat."},
+     {t:"Treat him yourself.",s:-10,m:0,r:"b",red:1,f:"Medical teams treat. Stay, call, guide."},
+     {t:"Keep the queue moving. Someone else will help.",s:-20,m:-10,r:"b",f:"Stay, call, guide: radio for medical help and keep space around the fan."}]}];
+var stage=shell({n:4,code:"Activity 69 · Stabilise a changing system",where:"Lesson 7 · Apply it",kicker:"Simulation.",
+  title:"Kick-off Countdown at Gate 4",
+  lead:"You are Marshal 22 at the Gate 4 soft ticket check. Your supervisor is Sierra 2. Keep the queue safe and the fans happy as kick-off gets closer.",
+  task:"Five moments are coming. Choose what you do at each one and watch the queue. Take your time: there is no clock."});
+stage.appendChild(el('<div class="ko"><span class="clockbig" id="kc">Kick-off minus 45</span><span class="dots">'+R.map(function(){return '<i></i>';}).join('')+'</span></div>'));
+/* the queue: 3 lanes in front of the gate; dots crowd towards the barrier as the queue builds */
+var W=600,H=230,fans=[];
+var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="The Gate 4 queue seen from above"><rect width="'+W+'" height="'+H+'" fill="#e3ddcf"/>'+
+  '<rect x="0" y="0" width="'+W+'" height="40" fill="#402978"/><text x="300" y="26" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="700" font-size="15">GATE 4 · SCREENING AND SCANNERS</text>'+
+  '<rect x="0" y="40" width="70" height="'+(H-40)+'" fill="#d6cfbd"/><text x="35" y="140" fill="#7a705a" font-size="11" font-family="Source Sans 3" font-weight="700" text-anchor="middle" transform="rotate(-90 35 140)">EMERGENCY ROUTE</text>'+
+  '<line x1="90" y1="70" x2="580" y2="70" stroke="#666" stroke-width="4" id="barrier"/>'+
+  '<line x1="90" y1="120" x2="580" y2="120" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="4 4"/><line x1="90" y1="170" x2="580" y2="170" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="4 4"/>'+
+  '<g id="fans"></g><circle cx="560" cy="58" r="10" fill="#f5b400" stroke="#fff" stroke-width="2"/><text x="560" y="62" text-anchor="middle" font-size="9" font-weight="700" font-family="Source Sans 3">22</text></svg>';
+stage.appendChild(el('<div class="yard">'+svg+'</div>'));
+stage.appendChild(el('<div class="meterrow"><div class="meter"><div class="lab"><span>Queue safety</span><span id="sv"></span></div><div class="tr"><div class="fl" id="sf"></div></div></div>'+
+  '<div class="meter"><div class="lab"><span>Fan mood</span><span id="mv"></span></div><div class="tr"><div class="fl" id="mf"></div></div></div></div>'));
+var play=el('<div aria-live="polite"></div>');stage.appendChild(play);
+var g=$('#fans'),N=60,seed=7;function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
+for(var i=0;i<N;i++){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('r',6);c.setAttribute('class','fan');g.appendChild(c);fans.push({c:c,rx:rnd(),ry:rnd()});}
+var safety=60,mood=60,ri=0,best=0,reds=0,log=[];
+function col(v){return v>=65?'var(--teal)':v>=40?'#e6a417':'var(--red)';}
+function draw(q){ /* q = how many fans (0-100) and how tight they press */
+  var n=Math.round(N*q/100),tf=Math.max(0,(70-safety)/70);   /* lower safety = fans pressed together against the barrier */
+  fans.forEach(function(f,i){var on=i<n;var lane=i%3,depth=Math.floor(i/3);
+    var y=80+lane*(50-30*tf)+f.ry*(30-16*tf),x=100+depth*(22-9*tf)+f.rx*(10-5*tf);if(x>575)x=575-f.rx*20;
+    f.c.setAttribute('cx',x);f.c.setAttribute('cy',y);f.c.style.opacity=on?1:0;
+    f.c.setAttribute('fill',safety>=65?'#653BB8':safety>=40?'#e6a417':'#d83a1f');});
+  $('#sf').style.width=safety+'%';$('#sf').style.background=col(safety);$('#sv').textContent=safety+'%';
+  $('#mf').style.width=mood+'%';$('#mf').style.background=col(mood);$('#mv').textContent=mood+'%';
+  $('#barrier').setAttribute('stroke',safety<40?'#d83a1f':'#666');}
+function clamp(v){return Math.max(5,Math.min(100,v));}
+function round(){var r=R[ri];$('#kc').textContent=r.k;$$('.ko .dots i').forEach(function(d,k){d.className=k<ri?'done':k===ri?'on':'';});draw(r.q);
+  play.innerHTML='';play.appendChild(el('<div class="event">'+icon(r.who?'radio':'warning','lg')+'<div>'+(r.who?'<div class="who">'+r.who+'</div>':'')+r.ev+'</div></div>'));
+  var os=el('<div class="opts"></div>');r.o.forEach(function(o){var b=el('<button type="button" class="opt">'+o.t+'</button>');
+    b.addEventListener('click',function(){$$('.opt',os).forEach(function(x){x.disabled=true;});b.classList.add('pick',o.r);
+      safety=clamp(safety+o.s);mood=clamp(mood+o.m);if(o.r==='g'){best++;addXp(10);}if(o.red)reds++;log.push({k:r.k,o:o});draw(r.q);
+      var head=o.r==='g'?'Good call':o.r==='m'?'It works, but':'That puts people at risk';
+      play.appendChild(fb(o.r==='g'?'good':o.r==='m'?'tip':'bad',head+(o.red?' <span class="redline">RED LINE</span>':''),o.f));
+      var a=el('<div class="actions"><button class="btn primary">'+(ri<R.length-1?'Next moment':'See how it went')+'</button></div>');play.appendChild(a);
+      a.querySelector('button').addEventListener('click',function(){ri++;if(ri<R.length)round();else end();});});os.appendChild(b);});
+  play.appendChild(os);}
+function end(){$('#kc').textContent='Kick-off';$$('.ko .dots i').forEach(function(d){d.className='done';});draw(5);play.innerHTML='';
+  var ok=safety>=65&&reds===0;if(best===R.length)addXp(20);
+  play.appendChild(fb(ok?'good':'tip',ok?'Gate 4 is safe for kick-off':'Kick-off: the gate got through, with risks',
+    'Best choices: <b>'+best+' of '+R.length+'</b> · Red lines crossed: <b>'+reds+'</b> · Queue safety: <b>'+safety+'%</b> · Fan mood: <b>'+mood+'%</b>'));
+  var s=el('<div class="sum"></div>');log.forEach(function(l){s.appendChild(el('<div><span class="'+(l.o.r==='g'?'done-ok':'done-no')+'">'+(l.o.r==='g'?'✓':'→')+'</span><span><b>'+l.k+':</b> '+l.o.t+'</span></div>'));});play.appendChild(s);
+  var a=el('<div class="actions"><button class="btn">Play again</button><button class="btn primary">Continue</button></div>');play.appendChild(a);
+  a.querySelector('button').addEventListener('click',function(){safety=60;mood=60;ri=0;best=0;reds=0;log=[];round();});}
+round();
+</script></body></html>
