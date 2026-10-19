@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp81egressstophold" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Egress, redirection and Stop &amp; Hold</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Egress, redirection and Stop &amp; Hold</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-ambulance.png"/>
+      <file href="icons/fluent-3d-broom.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-construction.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-eye.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-metro.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-palm-up-hand.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-standing.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-scroll.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-stopwatch.png"/>
+      <file href="icons/fluent-3d-toilet.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/cast/F-03.jpg"/>
+      <file href="images/cast/F-08.jpg"/>
+      <file href="images/smp81-hero.jpg"/>
+      <file href="images/smp81-s1-cutaway.jpg"/>
+      <file href="images/smp81-s10-dp1.jpg"/>
+      <file href="images/smp81-s14-dp2.jpg"/>
+      <file href="images/smp81-s18-dp3.jpg"/>
+      <file href="images/smp81-s2-route.jpg"/>
+      <file href="images/smp81-s21-dp3c.jpg"/>
+      <file href="images/smp81-s26-dp5.jpg"/>
+      <file href="images/smp81-s27-dp5a.jpg"/>
+      <file href="images/smp81-s29-dp5c.jpg"/>
+      <file href="images/smp81-s3-holdline.jpg"/>
+      <file href="images/smp81-s4-stop.jpg"/>
+      <file href="images/smp81-s5-gomove.jpg"/>
+      <file href="images/smp81-s6-redirect.jpg"/>
+      <file href="images/smp81-s9-stem.jpg"/>
+      <file href="scorm.js"/>
+    </resource>
+  </resources>
+</manifest>
