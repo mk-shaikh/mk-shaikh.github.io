@@ -1731,6 +1731,51 @@ body{background:var(--surface-2)}
   .stage.cl-withaside .screen{max-width:960px}
 }
 
+/* Review comments — a reviewer's tool, not part of the course: sticky-note yellow so nobody mistakes it for course content.
+   Only in --preview builds and review.html (never in a release index.html or the SCORM zip). */
+.rv-tab{position:fixed;z-index:150;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;
+  font:800 16px/1.2 system-ui,"Segoe UI",Arial,sans-serif;background:#ffd84d;color:#2b2200;border:2px solid #b38f00;border-radius:28px;
+  min-height:52px;padding:10px 18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.28);animation:rvPulse 1.6s ease-in-out .8s 3}
+.rv-tab .rv-ic{font-size:20px;line-height:1}
+.rv-tab:hover{background:#ffcd1a}
+.rv-tab:focus-visible{outline:3px solid #1f5fb8;outline-offset:3px}
+.rv-n:not(:empty){background:#2b2200;color:#ffd84d;border-radius:12px;min-width:24px;padding:2px 7px;text-align:center;font-size:13px}
+@keyframes rvPulse{0%,100%{box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 0 rgba(255,200,0,.75)}50%{box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 14px rgba(255,200,0,0)}}
+.rv-tip{position:fixed;z-index:151;left:16px;max-width:min(300px,calc(100vw - 32px));background:#2b2200;color:#fff;
+  font:600 14px/1.35 system-ui,"Segoe UI",Arial,sans-serif;border-radius:12px;padding:10px 14px;box-shadow:0 6px 18px rgba(0,0,0,.3);cursor:pointer}
+.rv-tip[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.rv-tab{animation:none}}
+body::after{content:"";display:block;height:88px}   /* room at the page end, so the last course button can always scroll clear of the Comment button */
+.rv-panel{position:fixed;z-index:160;inset-inline-end:12px;bottom:12px;width:min(380px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;
+  background:#fffbe6;color:#2b2500;border:2px solid #e0b800;border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,.28);padding:14px 16px;
+  font:15px/1.4 system-ui,"Segoe UI",Arial,sans-serif;text-align:start}
+.rv-panel[hidden]{display:none}
+.rv-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rv-head h2{margin:0;font-size:17px;font-weight:800;color:#2b2500}
+.rv-x{border:0;background:transparent;font-size:20px;line-height:1;cursor:pointer;color:#2b2500;min-width:40px;min-height:40px;border-radius:8px}
+.rv-where{margin:4px 0 10px;font-size:14px;color:#4a4000;overflow-wrap:anywhere}.rv-where span{color:#6b5e1a}
+.rv-l{display:block;font-weight:700;font-size:13px;margin:8px 0 3px}
+.rv-in{display:block;box-sizing:border-box;width:100%;font:inherit;color:#1c1c1c;background:#fff;border:1.5px solid #c9b45a;border-radius:8px;padding:8px 10px}
+textarea.rv-in{resize:vertical;min-height:84px}
+.rv-in:focus{outline:3px solid #1f5fb8;outline-offset:1px}
+.rv-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.rv-b{font:700 14px/1.2 system-ui,"Segoe UI",Arial,sans-serif;min-height:42px;padding:9px 14px;border-radius:21px;cursor:pointer;background:#3a2e00;color:#fff;border:1.5px solid #3a2e00}
+.rv-b:disabled{opacity:.45;cursor:default}
+.rv-b.rv-quiet{background:transparent;color:#3a2e00}
+.rv-msg{font-size:13px;font-weight:700;color:#0b6b3a}
+.rv-list{list-style:none;margin:12px 0 0;padding:0}
+.rv-list li{background:#fff;border:1px solid #e6d58a;border-radius:8px;padding:8px 10px;margin-top:6px;overflow-wrap:anywhere;white-space:pre-wrap}
+.rv-list li.rv-wait{border-style:dashed;background:#fffdf3}
+.rv-list small{display:block;color:#6b5e1a;margin-top:3px;white-space:normal}
+.rv-k{display:inline-block;font-size:11px;font-weight:800;background:#ffe680;border-radius:6px;padding:1px 6px;margin-inline-end:4px;white-space:normal}
+.rv-del{border:0;background:transparent;color:#a3261a;font:700 12px system-ui,Arial,sans-serif;cursor:pointer;padding:4px 0;min-height:28px}
+.rv-foot{border-top:1px dashed #d8c36a;margin-top:12px;padding-top:8px;font-size:14px}.rv-foot p{margin:4px 0}
+.rv-hint{color:#5a4f12;font-size:13px}
+@media (max-width:639px){.rv-tab{width:56px;height:56px;min-height:0;padding:0;justify-content:center;border-radius:50%;gap:0}.rv-tab .rv-ic{font-size:26px}
+  #rvLbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .rv-n:not(:empty){position:absolute;top:-6px;right:-6px}}   /* a phone: a round chat button (its name stays for screen readers); review.js keeps it clear of the course */
+@media print{.rv-tab,.rv-panel,.rv-tip{display:none!important}}
+
 </style>
 <style>
 @font-face{font-family:'Twemoji Country Flags';unicode-range:U+1F1E6-1F1FF,U+1F3F4,U+E0062-E0063,U+E0065,U+E0067,U+E006C,U+E006E,U+E0073-E0074,U+E0077,U+E007F;font-display:swap;src:url(fonts/TwemojiCountryFlags.woff2) format('woff2')}
@@ -4656,6 +4701,138 @@ function clFillTranscript(box,sc){
 function clBarH(){var b=g('bar');if(b)document.documentElement.style.setProperty('--cl-barh',b.offsetHeight+'px');}
 window.addEventListener('resize',clBarH);window.addEventListener('load',clBarH);
 
+
+COURSE.reviewSheet="https://script.google.com/macros/s/AKfycbx5ytdUHl8PepmGOV02BoWL37g7uhVUnxN7YMKvlL85H3Ashe8Sx98be2LI5gApxkDK/exec";
+/* ---- Review comments (user, 2026-10-17): a comment box on every screen of a course under review ----
+   Built in ONLY by build.py: in a --preview build (index.html) and in review.html beside a release build. Never in index.html of a
+   release, never in the SCORM zip. Runs inside the engine's closure (S, cur, render, COURSE, LANG, T).
+   Shared mode (COURSE.reviewSheet = the team's Google Sheet web app, system/docs/REVIEW-COMMENTS.md): every comment goes to the
+   sheet and shows on its screen for every reviewer, with no login; reviewers cannot delete it — it leaves the course only when the
+   team marks it Resolved in the sheet. A comment that cannot be sent yet waits in this browser and is sent when the line is back.
+   Without a sheet: comments stay in this browser until the reviewer downloads them (CSV, opens in Excel) and sends the file. */
+(function(){
+var URL_=COURSE.reviewSheet||'',SHARED=!!URL_,KEY='ck-review-'+COURSE.id,QKEY=KEY+'-unsent',NAME='ck-review-name',BOM=String.fromCharCode(0xFEFF);
+var mine=[],remote=[],mem=false,net='',lastLoad=0,sending=false;   /* mine: this browser's comments (all of them without a sheet; the unsent ones with one) */
+try{mine=JSON.parse(localStorage.getItem(SHARED?QKEY:KEY)||'[]')||[];}catch(e){mem=true;}
+function store(){try{localStorage.setItem(SHARED?QKEY:KEY,JSON.stringify(mine));}catch(e){mem=true;}}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function txt(v){try{return typeof T==='function'?T(v):(v&&v.en)||v||'';}catch(e){return '';}}
+function uid(){return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);}
+function here(){
+  var d=S[cur]||{},sc=null;
+  if(typeof SCRIPT!=='undefined'&&SCRIPT&&SCRIPT.screens)for(var i=0;i<SCRIPT.screens.length;i++)if(SCRIPT.screens[i].id===d.id){sc=SCRIPT.screens[i];break;}
+  var h=document.querySelector('#stage h2,#stage h1,#stage .kicker');
+  var head=(sc&&txt(sc.heading))||(h?h.textContent:'')||'';
+  return {id:d.id||'',sec:d.sec==null?'':String(d.sec),type:(sc&&sc.type)||'',head:String(head).replace(/\s+/g,' ').trim().slice(0,120),n:cur+1,of:S.length};
+}
+function all(){var seen={},out=[];remote.concat(mine).forEach(function(c){if(!seen[c.id]){seen[c.id]=1;out.push(c);}});return out;}
+function sent(c){return !SHARED||remote.some(function(r){return r.id===c.id;});}
+var KINDS=['Wording','Translation','Picture or video','Activity','Not working','Other'];
+var tab=el('<button type="button" class="rv-tab" id="rvTab" aria-haspopup="dialog" aria-controls="rvPanel"><span class="rv-ic" aria-hidden="true">💬</span><span id="rvLbl">Comment</span> <b class="rv-n" id="rvN"></b></button>');
+var tip=el('<div class="rv-tip" id="rvTip" role="note" hidden>Reviewers: tap here to leave a comment on this screen.</div>');
+var pn=el('<div class="rv-panel" id="rvPanel" role="dialog" aria-modal="false" aria-labelledby="rvTitle" hidden>'+
+  '<div class="rv-head"><h2 id="rvTitle">Review comments</h2><button type="button" class="rv-x" id="rvClose" aria-label="Close">✕</button></div>'+
+  '<p class="rv-where" id="rvWhere"></p>'+
+  '<ul class="rv-list" id="rvList"></ul>'+
+  '<label class="rv-l" for="rvBy">Your name</label><input class="rv-in" id="rvBy" type="text" autocomplete="name">'+
+  '<label class="rv-l" for="rvKind">What is it about?</label><select class="rv-in" id="rvKind">'+KINDS.map(function(k){return '<option>'+k+'</option>';}).join('')+'</select>'+
+  '<label class="rv-l" for="rvText">Your comment on this screen</label><textarea class="rv-in" id="rvText" rows="4"></textarea>'+
+  '<div class="rv-row"><button type="button" class="rv-b rv-save" id="rvSave">Save comment</button><span class="rv-msg" id="rvMsg" role="status"></span></div>'+
+  '<div class="rv-foot"><p id="rvAll"></p><p class="rv-hint" id="rvHint"></p>'+
+  '<div class="rv-row"><button type="button" class="rv-b" id="rvDown">Download all comments</button>'+(SHARED?'':'<button type="button" class="rv-b rv-quiet" id="rvClear">Delete all</button>')+'</div></div>'+
+  '</div>');
+document.body.appendChild(tab);document.body.appendChild(tip);document.body.appendChild(pn);
+/* keep the button clear of the course: above the sticky button bar on a phone; the tip sits just above the button */
+function pinned(e){   /* inside a bar that stays put on screen (sticky / fixed), not content that scrolls past */
+  for(var n=e;n&&n.id!=='stage';n=n.parentElement){var p=getComputedStyle(n).position;if(p==='sticky'||p==='fixed')return true;}return false;}
+function place(){   /* keep clear of the course: rise above the fixed bars (sticky Next bar, side lesson list) and, by a little, above
+                       buttons near the bottom; use the bottom corner that is freest (the reading-start corner on a tie) */
+  var w=tab.offsetWidth,h=tab.offsetHeight,start=getComputedStyle(document.documentElement).direction==='rtl'?'right':'left';
+  var els=[].slice.call(document.querySelectorAll('#stage button,#stage a,#stage input,#stage select,#stage [role=button]'))
+    .map(function(e){var r=e.getBoundingClientRect();return {r:r,pin:pinned(e)};}).filter(function(x){return x.r.width&&x.r.height;});
+  function fit(side){var left=side==='left'?16:innerWidth-16-w,bottom=16,hit=0;
+    for(var pass=0;pass<8;pass++){var top=innerHeight-bottom-h,moved=false;
+      els.forEach(function(x){var r=x.r;if(r.right>left&&r.left<left+w&&r.bottom>top&&r.top<top+h){var nb=innerHeight-r.top+10;
+        if(x.pin||nb<=160){bottom=Math.max(bottom,nb);moved=true;}}});
+      if(!moved)break;}
+    bottom=Math.min(bottom,innerHeight*0.5);var top2=innerHeight-bottom-h;   /* what still lies under it: a fixed bar counts more (it cannot be scrolled away) */
+    els.forEach(function(x){var r=x.r;if(r.right>left&&r.left<left+w&&r.bottom>top2&&r.top<top2+h)hit+=x.pin?10:1;});
+    return {side:side,bottom:bottom,hit:hit};}
+  var a=fit(start),b=fit(start==='left'?'right':'left');
+  var best=(b.hit<a.hit||(b.hit===a.hit&&b.bottom<a.bottom))?b:a;
+  tab.style.left=tip.style.left=best.side==='left'?'16px':'auto';tab.style.right=tip.style.right=best.side==='right'?'16px':'auto';
+  tab.style.bottom=best.bottom+'px';tip.style.bottom=(best.bottom+h+10)+'px';}
+window.addEventListener('resize',place);window.addEventListener('scroll',place,{passive:true});
+var TIPKEY='ck-review-tip-seen';try{if(!localStorage.getItem(TIPKEY)){tip.hidden=false;setTimeout(function(){tip.hidden=true;},9000);}}catch(e){}
+function tipDone(){tip.hidden=true;try{localStorage.setItem(TIPKEY,'1');}catch(e){}}
+tip.addEventListener('click',function(){tipDone();open_();});
+var by=g('rvBy');try{by.value=localStorage.getItem(NAME)||'';}catch(e){}
+function onScreen(id){return all().filter(function(c){return c.screen===id;}).sort(function(a,b){return a.saved_at<b.saved_at?-1:1;});}
+function refresh(){
+  var w=here(),m=onScreen(w.id);
+  g('rvN').textContent=m.length?String(m.length):'';place();
+  tab.setAttribute('aria-label','Review comments'+(m.length?' ('+m.length+' on this screen)':''));
+  if(pn.hidden)return;
+  g('rvWhere').innerHTML='Screen <b>'+esc(w.id||'start')+'</b>'+(w.head?' · '+esc(w.head):'')+' <span>('+w.n+' of '+w.of+')</span>';
+  g('rvList').innerHTML=m.map(function(c){var ok=sent(c);return '<li'+(ok?'':' class="rv-wait"')+'><span class="rv-k">'+esc(c.kind)+'</span> '+esc(c.comment)+
+    '<small>'+esc(c.reviewer||'Reviewer')+' · '+esc(String(c.saved_at||'').slice(0,10))+(c.language?' · '+esc(c.language):'')+(ok?'':' · <b>Not sent yet</b>')+'</small>'+
+    (ok&&SHARED?'':'<button type="button" class="rv-del" data-id="'+esc(c.id)+'">Delete</button>')+'</li>';}).join('');
+  var n=all().length;
+  g('rvAll').textContent=SHARED?(n===1?'1 open comment on this course.':n+' open comments on this course.'):(n===1?'1 comment saved in this course.':n+' comments saved in this course.');
+  g('rvHint').textContent=SHARED?(net==='down'?'Cannot reach the comment sheet. Your comments are kept here and sent when the connection is back.':
+      'Everyone reviewing this course sees these comments. The course team removes a comment when it is fixed.'):
+    (mem?'This browser cannot keep comments. Download them before you close the page.':
+      'Comments stay in this browser. When you finish, tap "Download all comments" and send the file back.');
+  g('rvDown').disabled=!n;if(g('rvClear'))g('rvClear').disabled=!n;
+}
+/* ---- the shared sheet: read open comments, send waiting ones (plain-text POST: no login, no preflight) ---- */
+function load(force){
+  if(!SHARED||(!force&&Date.now()-lastLoad<15000))return;lastLoad=Date.now();
+  fetch(URL_+(URL_.indexOf('?')<0?'?':'&')+'course='+encodeURIComponent(COURSE.id)+'&t='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.json();}).then(function(d){if(!d||!d.ok)throw 0;remote=d.comments||[];net='up';
+      mine=mine.filter(function(c){return !remote.some(function(r){return r.id===c.id;});});store();refresh();})
+    .catch(function(){net='down';refresh();});
+}
+function send(){
+  if(!SHARED||sending||!mine.length)return;sending=true;
+  var c=mine[0];
+  fetch(URL_,{method:'POST',body:JSON.stringify({action:'add',comment:c})}).then(function(r){return r.json();}).then(function(d){
+    if(!d||!d.ok)throw 0;net='up';remote.push(c);mine=mine.filter(function(x){return x.id!==c.id;});store();sending=false;refresh();send();
+  }).catch(function(){sending=false;net='down';refresh();});
+}
+function open_(){pn.hidden=false;tab.setAttribute('aria-expanded','true');g('rvMsg').textContent='';refresh();load();send();g('rvText').focus();}
+function close_(){pn.hidden=true;tab.setAttribute('aria-expanded','false');tab.focus();}
+tab.addEventListener('click',function(){tipDone();if(pn.hidden)open_();else close_();});
+g('rvClose').addEventListener('click',close_);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pn.hidden)close_();});
+g('rvSave').addEventListener('click',function(){
+  var t=g('rvText').value.trim();if(!t){g('rvMsg').textContent='Type a comment first.';g('rvText').focus();return;}
+  var w=here(),name=by.value.trim();try{localStorage.setItem(NAME,name);}catch(e){}
+  mine.push({id:uid(),course:COURSE.id,screen:w.id,screen_no:w.n,lesson:w.sec,screen_type:w.type,heading:w.head,
+    language:(typeof LANG!=='undefined'?LANG:''),kind:g('rvKind').value,comment:t,reviewer:name,saved_at:new Date().toISOString()});
+  store();g('rvText').value='';g('rvMsg').textContent='Saved.';refresh();send();
+});
+g('rvList').addEventListener('click',function(e){var b=e.target.closest('.rv-del');if(!b)return;   /* only this browser's own, not-yet-sent comments */
+  mine=mine.filter(function(c){return c.id!==b.getAttribute('data-id');});store();refresh();});
+function csv(v){v=String(v==null?'':v);return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+g('rvDown').addEventListener('click',function(){
+  var cols=['course','screen','screen_no','lesson','screen_type','heading','language','kind','comment','reviewer','saved_at','id'];
+  var rows=all().sort(function(a,b){return (a.screen_no-b.screen_no)||(a.saved_at<b.saved_at?-1:1);}).map(function(c){
+    return cols.map(function(k){return csv(k==='course'?COURSE.id:c[k]);}).join(',');});
+  var blob=new Blob([BOM+cols.join(',')+'\r\n'+rows.join('\r\n')+'\r\n'],{type:'text/csv;charset=utf-8'});
+  var who=(by.value.trim()||'reviewer').replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'')||'reviewer';
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=COURSE.id+'-review-'+who+'.csv';
+  document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+});
+if(g('rvClear'))g('rvClear').addEventListener('click',function(){
+  if(!mine.length||!window.confirm('Delete all '+mine.length+' comments in this course? Download them first if you have not sent them.'))return;
+  mine=[];store();refresh();
+});
+var _render=render;
+render=function(i){_render(i);refresh();setTimeout(place,250);};
+if(SHARED){load(true);send();setInterval(function(){if(!document.hidden){load();send();}},60000);window.addEventListener('online',function(){load(true);send();});}
+window.addEventListener('beforeunload',function(e){if((mem||SHARED)&&mine.length&&(mem||net==='down')){e.preventDefault();e.returnValue='';}});
+})();
 
 boot();
 })();
