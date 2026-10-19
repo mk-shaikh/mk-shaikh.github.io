@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.ssp61dimiceflowdensity" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>DIM-ICE, flow, density &amp; the 3 Ds</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>DIM-ICE, flow, density &amp; the 3 Ds</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-abacus.png"/>
+      <file href="icons/fluent-3d-balance-scale.png"/>
+      <file href="icons/fluent-3d-building-construction.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-chart-increasing.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-children-crossing.png"/>
+      <file href="icons/fluent-3d-clipboard.png"/>
+      <file href="icons/fluent-3d-cloud-with-rain.png"/>
+      <file href="icons/fluent-3d-construction.png"/>
+      <file href="icons/fluent-3d-counterclockwise-arrows-button.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-hamburger.png"/>
+      <file href="icons/fluent-3d-hourglass-done.png"/>
+      <file href="icons/fluent-3d-inbox-tray.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-left-right-arrow.png"/>
+      <file href="icons/fluent-3d-outbox-tray.png"/>
+      <file href="icons/fluent-3d-person-climbing.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-place-of-worship.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-right-arrow-curving-left.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-spiral-notepad.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stopwatch.png"/>
+      <file href="icons/fluent-3d-straight-ruler.png"/>
+      <file href="icons/fluent-3d-tent.png"/>
+      <file href="icons/fluent-3d-ticket.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/ssp61-p1-fine.jpg"/>
+      <file href="images/ssp61-p2-busy.jpg"/>
+      <file href="images/ssp61-p3-full.jpg"/>
+      <file href="images/ssp61-p4-capacity.jpg"/>
+      <file href="images/ssp61-s1-gap.jpg"/>
+      <file href="images/ssp61-s10-plan.jpg"/>
+      <file href="images/ssp61-s11-dotplan.jpg"/>
+      <file href="images/ssp61-s12-turn.jpg"/>
+      <file href="images/ssp61-s13-exit.jpg"/>
+      <file href="images/ssp61-s14-toilets.jpg"/>
+      <file href="images/ssp61-s15-plaza.jpg"/>
+      <file href="images/ssp61-s2-gate7a.jpg"/>
+      <file href="images/ssp61-s3-stair107.jpg"/>
+      <file href="images/ssp61-s4-turn.jpg"/>
+      <file href="images/ssp61-s5-shortcut.jpg"/>
+      <file href="images/ssp61-s6-lanes.jpg"/>
+      <file href="images/ssp61-s7-arch.jpg"/>
+      <file href="images/ssp61-s8-corner.jpg"/>
+      <file href="images/ssp61-s9-push.jpg"/>
+      <file href="images/ssp61-thumb-1.jpg"/>
+      <file href="images/ssp61-thumb-4.jpg"/>
+      <file href="images/ssp61-thumb-6.jpg"/>
+      <file href="scorm.js"/>
+    </resource>
+  </resources>
+</manifest>
