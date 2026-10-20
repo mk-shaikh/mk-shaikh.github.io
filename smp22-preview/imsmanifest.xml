@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp22matchdaydutiesposts" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Match-day duties, posts &amp; standards</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Match-day duties, posts &amp; standards</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp22-v01-hook.en.vtt"/>
+      <file href="captions/smp22-v02-opening.en.vtt"/>
+      <file href="captions/smp22-v03-match-clock.en.vtt"/>
+      <file href="captions/smp22-v04-noura-ready.en.vtt"/>
+      <file href="captions/smp22-v05-noura-egress.en.vtt"/>
+      <file href="captions/smp22-v13-dp3a.en.vtt"/>
+      <file href="captions/smp22-v14-dp3b.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-admission-tickets.png"/>
+      <file href="icons/fluent-3d-alarm-clock.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-chequered-flag.png"/>
+      <file href="icons/fluent-3d-clipboard.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-hamburger.png"/>
+      <file href="icons/fluent-3d-identification-card.png"/>
+      <file href="icons/fluent-3d-locked-with-key.png"/>
+      <file href="icons/fluent-3d-low-battery.png"/>
+      <file href="icons/fluent-3d-memo.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-mosque.png"/>
+      <file href="icons/fluent-3d-no-smoking.png"/>
+      <file href="icons/fluent-3d-package.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-spiral-calendar.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-t-shirt.png"/>
+      <file href="icons/fluent-3d-vertical-traffic-light.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp22-hero.jpg"/>
+      <file href="images/smp22-s01-clock.jpg"/>
+      <file href="images/smp22-s02-dot-plan.jpg"/>
+      <file href="images/smp22-s03-friendly-map.jpg"/>
+      <file href="images/smp22-s04-radio-sheet.jpg"/>
+      <file href="images/smp22-s05-incident-card.jpg"/>
+      <file href="images/smp22-s06-gate.jpg"/>
+      <file href="images/smp22-s07-seating.jpg"/>
+      <file href="images/smp22-s08-crossing.jpg"/>
+      <file href="images/smp22-s09-queue.jpg"/>
+      <file href="images/smp22-s10-parking.jpg"/>
+      <file href="images/smp22-s11-on-post.jpg"/>
+      <file href="images/smp22-s12-noura-ready.jpg"/>
+      <file href="images/smp22-s13-majed-check.jpg"/>
+      <file href="images/smp22-s14-majed-ready.jpg"/>
+      <file href="images/smp22-s17-dp3.jpg"/>
+      <file href="incoming/smp22-v01-hook.mp4"/>
+      <file href="incoming/smp22-v03-match-clock.mp4"/>
+      <file href="incoming/smp22-v04-noura-ready.mp4"/>
+      <file href="incoming/smp22-v05-noura-egress.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp22-v01-hook.mp4"/>
+      <file href="video/smp22-v02-opening.mp4"/>
+      <file href="video/smp22-v03-match-clock.mp4"/>
+      <file href="video/smp22-v04-noura-ready.mp4"/>
+      <file href="video/smp22-v05-noura-egress.mp4"/>
+      <file href="video/smp22-v13-dp3a.mp4"/>
+      <file href="video/smp22-v14-dp3b.mp4"/>
+    </resource>
+  </resources>
+</manifest>
