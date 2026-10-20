@@ -27,6 +27,12 @@
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
       <file href="brand/jam-training-primary.png"/>
       <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp81-a1-hook.en.vtt"/>
+      <file href="captions/smp81-a2-gate-demo.en.vtt"/>
+      <file href="captions/smp81-a3-stem.en.vtt"/>
+      <file href="captions/smp81-v1-good.en.vtt"/>
+      <file href="captions/smp81-v1-poor.en.vtt"/>
+      <file href="captions/smp81-v2-redirect.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/fluent-3d-ambulance.png"/>
@@ -82,16 +88,29 @@
       <file href="images/smp81-s7-megaphone.jpg"/>
       <file href="images/smp81-s9-stem.jpg"/>
       <file href="images/smp81-thumb-3.jpg"/>
+      <file href="images/smp81-thumb-4.jpg"/>
       <file href="images/smp81-thumb-5.jpg"/>
       <file href="images/smp81-thumb-6.jpg"/>
+      <file href="images/smp81-thumb-8.jpg"/>
+      <file href="incoming/smp81-v1-good.mp4"/>
+      <file href="incoming/smp81-v1-poor.mp4"/>
+      <file href="incoming/smp81-v2-redirect.mp4"/>
       <file href="scorm.js"/>
+      <file href="video/smp81-a1-hook.mp4"/>
+      <file href="video/smp81-a2-gate-demo.mp4"/>
+      <file href="video/smp81-a3-stem.mp4"/>
       <file href="video/smp81-s11-dp1a.mp4"/>
       <file href="video/smp81-s13-dp1c.mp4"/>
+      <file href="video/smp81-s15-dp2a.mp4"/>
+      <file href="video/smp81-s17-dp2c.mp4"/>
       <file href="video/smp81-s19-dp3a.mp4"/>
       <file href="video/smp81-s20-dp3b.mp4"/>
       <file href="video/smp81-s23-dp4a.mp4"/>
       <file href="video/smp81-s24-dp4b.mp4"/>
       <file href="video/smp81-s25-dp4c.mp4"/>
+      <file href="video/smp81-v1-good.mp4"/>
+      <file href="video/smp81-v1-poor.mp4"/>
+      <file href="video/smp81-v2-redirect.mp4"/>
     </resource>
   </resources>
 </manifest>
