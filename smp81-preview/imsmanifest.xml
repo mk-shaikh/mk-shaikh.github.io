@@ -63,8 +63,11 @@
       <file href="images/cast/F-08.jpg"/>
       <file href="images/smp81-hero.jpg"/>
       <file href="images/smp81-s1-cutaway.jpg"/>
+      <file href="images/smp81-s10-dp1.jpg"/>
       <file href="images/smp81-s12-dp1b.jpg"/>
       <file href="images/smp81-s14-dp2.jpg"/>
+      <file href="images/smp81-s16-dp2b.jpg"/>
+      <file href="images/smp81-s18-dp3.jpg"/>
       <file href="images/smp81-s2-route.jpg"/>
       <file href="images/smp81-s21-dp3c.jpg"/>
       <file href="images/smp81-s22-dp4.jpg"/>
@@ -82,6 +85,13 @@
       <file href="images/smp81-thumb-5.jpg"/>
       <file href="images/smp81-thumb-6.jpg"/>
       <file href="scorm.js"/>
+      <file href="video/smp81-s11-dp1a.mp4"/>
+      <file href="video/smp81-s13-dp1c.mp4"/>
+      <file href="video/smp81-s19-dp3a.mp4"/>
+      <file href="video/smp81-s20-dp3b.mp4"/>
+      <file href="video/smp81-s23-dp4a.mp4"/>
+      <file href="video/smp81-s24-dp4b.mp4"/>
+      <file href="video/smp81-s25-dp4c.mp4"/>
     </resource>
   </resources>
 </manifest>
