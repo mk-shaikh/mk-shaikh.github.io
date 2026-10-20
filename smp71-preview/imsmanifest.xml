@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp71ingressqueues" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>SMP 7.1 – Ingress &amp; Queue Management</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>SMP 7.1 – Ingress &amp; Queue Management</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp71-p-0-2.en.vtt"/>
+      <file href="captions/smp71-p-7-1.en.vtt"/>
+      <file href="captions/smp71-v1-build.en.vtt"/>
+      <file href="captions/smp71-v1-hook.en.vtt"/>
+      <file href="captions/smp71-v2-queue.en.vtt"/>
+      <file href="captions/smp71-v6-stem.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-ambulance.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-construction.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-eye.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-link.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stopwatch.png"/>
+      <file href="icons/fluent-3d-thermometer.png"/>
+      <file href="icons/fluent-3d-ticket.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-05.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp71-hero.jpg"/>
+      <file href="images/smp71-plan-dotplan.jpg"/>
+      <file href="images/smp71-plan-free.jpg"/>
+      <file href="images/smp71-plan-positions.jpg"/>
+      <file href="images/smp71-plan-priority.jpg"/>
+      <file href="images/smp71-plan-problems.jpg"/>
+      <file href="images/smp71-plan-single.jpg"/>
+      <file href="images/smp71-plan-zigzag.jpg"/>
+      <file href="images/smp71-s1-softcheck.jpg"/>
+      <file href="images/smp71-s3-relay.jpg"/>
+      <file href="incoming/smp71-v1-build.mp4"/>
+      <file href="incoming/smp71-v1-hook.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp71-p-0-2.mp4"/>
+      <file href="video/smp71-p-7-1.mp4"/>
+      <file href="video/smp71-v1-build.mp4"/>
+      <file href="video/smp71-v1-hook.mp4"/>
+      <file href="video/smp71-v2-queue.mp4"/>
+      <file href="video/smp71-v6-c1.mp4"/>
+      <file href="video/smp71-v6-c10.mp4"/>
+      <file href="video/smp71-v6-c11.mp4"/>
+      <file href="video/smp71-v6-c12.mp4"/>
+      <file href="video/smp71-v6-c2.mp4"/>
+      <file href="video/smp71-v6-c3.mp4"/>
+      <file href="video/smp71-v6-c4.mp4"/>
+      <file href="video/smp71-v6-c5.mp4"/>
+      <file href="video/smp71-v6-c6.mp4"/>
+      <file href="video/smp71-v6-c7.mp4"/>
+      <file href="video/smp71-v6-c8.mp4"/>
+      <file href="video/smp71-v6-c9.mp4"/>
+      <file href="video/smp71-v6-stem.mp4"/>
+    </resource>
+  </resources>
+</manifest>
