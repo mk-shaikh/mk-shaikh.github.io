@@ -58,6 +58,8 @@
       <file href="captions/smp13-p-1-2.en.vtt"/>
       <file href="captions/smp13-p-7-1.ar.vtt"/>
       <file href="captions/smp13-p-7-1.en.vtt"/>
+      <file href="captions/smp13-v1-hook.ar.vtt"/>
+      <file href="captions/smp13-v1-hook.en.vtt"/>
       <file href="captions/smp13-v2a-family.ar.vtt"/>
       <file href="captions/smp13-v2a-family.en.vtt"/>
       <file href="captions/smp13-v2b-good.ar.vtt"/>
@@ -128,10 +130,12 @@
       <file href="images/smp13-thumb-5.jpg"/>
       <file href="images/smp13-thumb-6.jpg"/>
       <file href="images/smp13-thumb-7.jpg"/>
+      <file href="incoming/smp13-v1-hook.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp13-p-1-1.mp4"/>
       <file href="video/smp13-p-1-2.mp4"/>
       <file href="video/smp13-p-7-1.mp4"/>
+      <file href="video/smp13-v1-hook.mp4"/>
       <file href="video/smp13-v2a-family.mp4"/>
       <file href="video/smp13-v2b-good.mp4"/>
       <file href="video/smp13-v2b-poor.mp4"/>
