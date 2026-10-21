@@ -32,6 +32,11 @@
       <file href="captions/smp22-v03-match-clock.en.vtt"/>
       <file href="captions/smp22-v04-noura-ready.en.vtt"/>
       <file href="captions/smp22-v05-noura-egress.en.vtt"/>
+      <file href="captions/smp22-v06-story-start.en.vtt"/>
+      <file href="captions/smp22-v07-dp1a.en.vtt"/>
+      <file href="captions/smp22-v09-dp1c.en.vtt"/>
+      <file href="captions/smp22-v11-dp2b.en.vtt"/>
+      <file href="captions/smp22-v12-dp2c.en.vtt"/>
       <file href="captions/smp22-v13-dp3a.en.vtt"/>
       <file href="captions/smp22-v14-dp3b.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
@@ -85,8 +90,12 @@
       <file href="images/smp22-s12-noura-ready.jpg"/>
       <file href="images/smp22-s13-majed-check.jpg"/>
       <file href="images/smp22-s14-majed-ready.jpg"/>
+      <file href="images/smp22-s15-dp1.jpg"/>
+      <file href="images/smp22-s16-dp2.jpg"/>
       <file href="images/smp22-s17-dp3.jpg"/>
       <file href="images/smp22-thumb-1.jpg"/>
+      <file href="images/smp22-thumb-4.jpg"/>
+      <file href="images/smp22-thumb-7.jpg"/>
       <file href="incoming/smp22-v01-hook.mp4"/>
       <file href="incoming/smp22-v03-match-clock.mp4"/>
       <file href="incoming/smp22-v04-noura-ready.mp4"/>
@@ -97,8 +106,16 @@
       <file href="video/smp22-v03-match-clock.mp4"/>
       <file href="video/smp22-v04-noura-ready.mp4"/>
       <file href="video/smp22-v05-noura-egress.mp4"/>
+      <file href="video/smp22-v06-story-start.mp4"/>
+      <file href="video/smp22-v07-dp1a.mp4"/>
+      <file href="video/smp22-v08-dp1b.mp4"/>
+      <file href="video/smp22-v09-dp1c.mp4"/>
+      <file href="video/smp22-v10-dp2a.mp4"/>
+      <file href="video/smp22-v11-dp2b.mp4"/>
+      <file href="video/smp22-v12-dp2c.mp4"/>
       <file href="video/smp22-v13-dp3a.mp4"/>
       <file href="video/smp22-v14-dp3b.mp4"/>
+      <file href="video/smp22-v15-dp3c.mp4"/>
     </resource>
   </resources>
 </manifest>
