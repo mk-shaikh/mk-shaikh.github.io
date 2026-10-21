@@ -1385,6 +1385,7 @@ img.simg.banner{width:100%;height:clamp(120px,22vw,190px);object-fit:cover;objec
 @media (min-width:1024px){.askchoices{max-width:680px}.askpagebar{align-items:flex-end}}
 /* queueSim E1 (2026-10-20): the expert layout shown after a moment */
 .qs-expert{margin:12px 0 4px}.qs-expert>b{display:block;margin-bottom:6px}.qs-expert .imgwrap img{width:100%;height:auto;border-radius:10px}
+.m-askeach .hz2.g-ok{pointer-events:none}   /* a found place never blocks a tap on a later question at the same place */
 
 /* ============ LAYOUT "corporate" — media-first: a solid dark bar, a white page, square-cornered controls, hairline rules.
    Colours come only from the theme variables (the client's palette): --navy = the bar, --orange = the action colour,
@@ -3977,6 +3978,8 @@ function hotspotAskEach(s,h){
   function tap(i){
     if(done_||inChoice)return;
     var P=pages[pi],t=P.tg[k];if(!t)return;fbHost.innerHTML='';
+    var o=i>=0?P.tg[i]:null;
+    if(o&&i!==k&&spot(o)&&spot(t)&&o.x===t.x&&o.y===t.y&&o.w===t.w&&o.h===t.h)i=k;   /* two questions on the same place (e.g. one grid square): a tap there answers the one asked */
     if(i===k){
       var b=btns[k];if(b){b.classList.remove('hz-show');b.classList.add('g-ok');b.disabled=true;b.appendChild(el('<span class="hzlabel">'+T(t.name)+'</span>'));}
       if(miss===0)awardXp(s.id+':t'+step,s.xp&&s.xp.perTarget);else allFirst=false;
@@ -4760,16 +4763,23 @@ function clHazard(host){
   var n=wrap.querySelectorAll('.hz2').length,img=wrap.querySelector('img');
   var ctl=el('<div class="cl-hzctl"><button type="button" class="btn ghost" aria-pressed="false">'+U('zoom')+'</button><button type="button" class="btn ghost">'+U('reset')+'</button><button type="button" class="btn ghost" aria-expanded="false">'+U('describeImage')+'</button></div>');
   var bz=ctl.children[0],br=ctl.children[1],bd=ctl.children[2];
-  var desc=el('<div class="cl-desc" hidden>'+(img&&img.alt?'<p>'+img.alt+'</p>':'')+'</div>');
+  var desc=el('<div class="cl-desc" hidden><p class="cl-alt"'+(img&&img.alt?'':' hidden')+'>'+(img&&img.alt?img.alt:'')+'</p></div>');
   if(list){list.classList.add('cl-spots');desc.appendChild(list);}
   bz.addEventListener('click',function(){var z=wrap.classList.toggle('cl-zoom');bz.setAttribute('aria-pressed',z?'true':'false');});
   br.addEventListener('click',function(){wrap.classList.remove('cl-zoom');bz.setAttribute('aria-pressed','false');wrap.scrollLeft=0;wrap.scrollTop=0;});
   bd.addEventListener('click',function(){desc.hidden=!desc.hidden;bd.setAttribute('aria-expanded',desc.hidden?'false':'true');});
   wrap.after(ctl);ctl.after(desc);
-  if(cnt){var sq=el('<div class="cl-found" aria-hidden="true">'+Array.apply(null,{length:n}).map(function(_,i){return '<i>'+(i+1)+'</i>';}).join('')+'</div>');
-    cnt.after(sq);var upd=function(){var f=wrap.querySelectorAll('.hz2.g-ok').length;sq.querySelectorAll('i').forEach(function(x,i){x.classList.toggle('on',i<f);});};
+  var sq=null,upd=function(){};
+  if(cnt){sq=el('<div class="cl-found" aria-hidden="true">'+Array.apply(null,{length:n}).map(function(_,i){return '<i>'+(i+1)+'</i>';}).join('')+'</div>');
+    cnt.after(sq);upd=function(){var f=wrap.querySelectorAll('.hz2.g-ok').length;sq.querySelectorAll('i').forEach(function(x,i){x.classList.toggle('on',i<f);});};
     new MutationObserver(upd).observe(cnt,{childList:true,characterData:true,subtree:true});upd();
     desc.after(cnt);cnt.after(sq);}
+  /* askEach pages (E1, 2026-10-20): the picture is replaced page by page - the description and the squares follow the page shown */
+  if(wrap.classList.contains('m-askeach'))new MutationObserver(function(){
+    var im=wrap.querySelector('img'),p=desc.querySelector('.cl-alt'),k=wrap.querySelectorAll('.hz2').length;
+    p.textContent=im&&im.alt?im.alt:'';p.hidden=!(im&&im.alt);
+    if(sq&&sq.children.length!==k)sq.innerHTML=Array.apply(null,{length:k}).map(function(_,i){return '<i>'+(i+1)+'</i>';}).join('');
+    upd();}).observe(wrap,{childList:true});
 }
 function clFillTranscript(box,sc){
   var ul=box.querySelector('.cl-tx');if(ul.dataset.done)return;ul.dataset.done='1';
