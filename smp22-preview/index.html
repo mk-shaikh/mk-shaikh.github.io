@@ -1391,6 +1391,32 @@ img.simg.banner{width:100%;height:clamp(120px,22vw,190px);object-fit:cover;objec
 .qs-expert{margin:12px 0 4px}.qs-expert>b{display:block;margin-bottom:6px}.qs-expert .imgwrap img{width:100%;height:auto;border-radius:10px}
 .m-askeach .hz2.g-ok{pointer-events:none}   /* a found place never blocks a tap on a later question at the same place */
 
+/* allocate (E1, 2026-10-21): people cards + role slots; every state has words and a symbol, never colour alone */
+.al{margin:6px 0 12px}.al-h{font-size:15px;margin:10px 0 6px;color:var(--navy)}
+.al-cards{display:flex;flex-wrap:wrap;gap:8px}
+.al-p{display:flex;gap:10px;align-items:center;text-align:start;border:2px solid var(--line-2);background:var(--surface);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit;color:var(--ink);min-height:48px;max-width:100%;flex:1 1 150px;touch-action:manipulation;user-select:none}
+.al-p .ico{width:34px;height:34px;flex:none;display:inline-flex}.al-p .ico img{width:100%;height:100%;object-fit:contain}
+.al-pt{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}.al-note{font-size:13px;color:var(--muted)}
+.al-tag{display:inline-block;align-self:flex-start;font-size:12px;font-weight:700;border:1px solid var(--blue);color:var(--blue);border-radius:999px;padding:1px 8px;margin-top:2px}
+.al-tag.spare{border-color:var(--line-2);color:var(--muted);font-weight:600}
+.al-p.on{border-color:var(--blue);background:var(--sky-tint);box-shadow:0 0 0 3px rgba(var(--blue-rgb),.25)}
+.al-p:disabled{opacity:.8;cursor:default}
+.al-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:8px}
+.al-slot{border:2px dashed var(--line-2);border-radius:12px;background:var(--surface-2);display:flex;flex-direction:column}
+.al-slot.filled{border-style:solid;border-color:var(--blue);background:var(--surface)}
+.al-slot.target{border-color:var(--blue)}.al-slot.over{background:var(--sky-tint);border-style:solid}
+.al-slot.ok{border-style:solid;border-color:var(--teal);background:var(--teal-tint)}
+.al-slot.no{border-style:solid;border-color:var(--red);background:var(--red-tint)}
+.al-s{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:start;width:100%;border:0;background:none;font:inherit;color:var(--ink);padding:10px 12px;cursor:pointer;min-height:56px;position:relative;touch-action:manipulation;overflow-wrap:anywhere}
+.al-s[aria-disabled=true]{cursor:default}
+.al-sl{font-size:13px;color:var(--muted);font-weight:700}.al-who{font-weight:700}.al-who i{font-weight:400;color:var(--muted)}
+.al-rm{font-size:12.5px;text-decoration:underline;color:var(--blue)}
+.al-mk{font-weight:800}.al-slot.ok .al-s .al-mk{position:absolute;top:8px;inset-inline-end:10px;color:var(--teal)}
+.al-fbl{margin:0;padding:0 12px 10px;font-size:13.5px;line-height:1.4}.al-fbl.ok .al-mk{color:var(--teal)}.al-fbl.no .al-mk{color:var(--red)}
+.al-ghost{position:fixed;z-index:999;pointer-events:none;transform:translate(-50%,-120%);background:var(--blue);color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;box-shadow:var(--shadow)}
+.al-p:focus-visible,.al-s:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+[dir=rtl] .al-s,[dir=rtl] .al-p{text-align:right}
+
 /* ============ LAYOUT "corporate" — media-first: a solid dark bar, a white page, square-cornered controls, hairline rules.
    Colours come only from the theme variables (the client's palette): --navy = the bar, --orange = the action colour,
    --sky = rules and progress (non-text), --muted = secondary text. Solid colours; no gradients in the interface. ============ */
@@ -4473,6 +4499,121 @@ Object.assign(UI,{
   firstTry:{en:'Right the first time: {a} of {b}'},listenLater:{en:'Play the ones you missed again before match day.'}
 });
 
+/* ---- allocate (engine E1, 2026-10-21): put people on roles. task; x_people[]{id, name, note, icon}; x_slots[]{id, group, label,
+   accepts[] (person ids that suit the slot), okFeedback, wrong{<personId>: line, default: line}}; feedbackCorrect, feedbackWrong,
+   media (a plan picture above), x_takeaway. Tap a person (selected), then tap a slot to place; tap a filled slot to send the person back
+   (mouse and pen users may also drag a person onto a slot). A person fills one slot; people left over are spare. When every slot is
+   filled, Check marks each slot suitable (tick) or not suitable (cross) with its own feedback line; crossed slots are emptied and their
+   people go back, ticked slots stay locked. Done when every slot is ticked. No timer; first-time XP only if the first Check had no cross.
+   Like the other practice screens it keeps no state across a reload. ---- */
+Object.assign(BUILD,{
+  allocate:function(s,h){
+    head(s,h);sit(s,h);task(s,h);
+    var P=X(s,'people')||[],SL=X(s,'slots')||[],pic=media(s)[0];
+    var place={},lock={},note={},sel=null,firstCheck=true,hadWrong=false,done=false,closed=false,fkey=null,drag=null;
+    function pById(id){for(var i=0;i<P.length;i++)if(P[i].id===id)return P[i];return null;}
+    function placedOf(id){for(var k in place)if(place[k]===id)return k;return null;}
+    function filled(){return SL.every(function(x){return place[x.id];});}
+    function esc(t){return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+    if(pic)h.appendChild(imgOrPh(sc2_assetFile(pic),assetAlt(sc2_assetFile(pic)),'simg'));
+    var hint=el('<p class="hint al-hint"></p>');h.appendChild(hint);
+    var live=el('<div class="vh" role="status" aria-live="polite"></div>');h.appendChild(live);
+    var body=el('<div class="al"></div>');h.appendChild(body);
+    var fh=el('<div aria-live="polite"></div>');h.appendChild(fh);
+    var act=actions(h);
+    var chk=contBtn(U('allocCheck'),check);chk.disabled=true;act.appendChild(chk);
+    var go=cont(s,h);go.hidden=true;go.style.display='none';
+    function say(t){live.textContent='';setTimeout(function(){live.textContent=t;},30);}
+    function hintTxt(){hint.textContent=done?'':sel?U('allocNow',{n:strip(pById(sel).name)}):U('allocHint');}
+    function select(id){sel=(sel===id)?null:id;if(sel)say(U('allocSelected',{n:strip(pById(id).name)}));else say(U('allocDeselected',{n:strip(pById(id).name)}));fkey='p:'+id;render();}
+    function put(sid){var cur=place[sid];if(lock[sid]||!sel)return;var pid=sel;
+      /* a filled slot takes the selected person; the old one goes back to the people */
+      place[sid]=pid;sel=null;delete note[sid];fkey='s:'+sid;
+      var slot=SL.filter(function(x){return x.id===sid;})[0];
+      say(U('allocPlaced',{n:strip(pById(pid).name),r:strip(slot.label)})+(filled()?' '+U('allocReady'):''));render();}
+    function back(sid){if(lock[sid]||!place[sid])return;var pid=place[sid];delete place[sid];fkey='p:'+pid;
+      say(U('allocReturned',{n:strip(pById(pid).name)}));render();}
+    function slotClick(sid){if(lock[sid])return;
+      if(sel){put(sid);}else if(place[sid]){back(sid);}else{say(U('allocPickFirst'));}}
+    function render(){
+      body.innerHTML='';
+      var spareOn=filled();
+      var pool=el('<div class="al-pool" role="group" aria-label="'+esc(U('allocPeople'))+'"><h3 class="al-h">'+U('allocPeople')+'</h3><div class="al-cards"></div></div>');
+      var cards=pool.querySelector('.al-cards'),any=false;
+      P.forEach(function(p){if(placedOf(p.id))return;any=true;
+        var on=sel===p.id,b=el('<button type="button" class="al-p'+(on?' on':'')+'" data-id="'+esc(p.id)+'" aria-pressed="'+(on?'true':'false')+'"></button>');
+        b.innerHTML=(p.icon?icon(p.icon):'')+'<span class="al-pt"><b>'+T(p.name)+'</b>'+(T(p.note)?'<span class="al-note">'+T(p.note)+'</span>':'')+
+          (on?'<span class="al-tag">'+U('allocSelectedTag')+'</span>':'')+(spareOn&&!on?'<span class="al-tag spare">'+U('allocSpare')+'</span>':'')+'</span>';
+        if(!done)b.addEventListener('click',function(){if(drag&&drag.moved){drag=null;return;}select(p.id);});
+        else{b.disabled=true;}
+        if(!done)b.addEventListener('pointerdown',function(e){dragStart(e,p,b);});
+        cards.appendChild(b);});
+      if(!any)cards.appendChild(el('<p class="hint al-none">'+U('allocNoneLeft')+'</p>'));
+      body.appendChild(pool);
+      var groups=[],gi={};SL.forEach(function(x){var g=T(x.group)||'';if(!(g in gi)){gi[g]=groups.length;groups.push({g:g,list:[]});}groups[gi[g]].list.push(x);});
+      var gwrap=el('<div class="al-groups"></div>');
+      groups.forEach(function(G){var sec=el('<section class="al-group"></section>');
+        if(G.g)sec.appendChild(el('<h3 class="al-h">'+G.g+'</h3>'));
+        var ul=el('<div class="al-slots"></div>');
+        G.list.forEach(function(x){var pid=place[x.id],p=pid&&pById(pid),lk=!!lock[x.id],nt=note[x.id];
+          var st=lk?'ok':(nt&&!pid?'no':'');
+          var wrap=el('<div class="al-slot'+(pid?' filled':'')+(st?' '+st:'')+(sel&&!pid&&!lk?' target':'')+'" data-slot="'+esc(x.id)+'"></div>');
+          var b=el('<button type="button" class="al-s" data-slot="'+esc(x.id)+'"'+(lk?' aria-disabled="true"':'')+'></button>');
+          b.innerHTML='<span class="al-sl">'+T(x.label)+'</span><span class="al-who">'+(p?T(p.name):'<i>'+U('allocEmpty')+'</i>')+'</span>'+
+            (lk?'<span class="al-mk" aria-hidden="true">✔</span><span class="vh">'+U('allocYes')+'</span>':'')+
+            (p&&!lk?'<span class="al-rm">'+U('allocReturn')+'</span>':'');
+          b.setAttribute('aria-label',strip(x.label)+': '+(p?strip(p.name):U('allocEmpty'))+(lk?'. '+U('allocYes'):p?'. '+U('allocReturnHint'):sel?'. '+U('allocPlaceHint'):''));
+          b.addEventListener('click',function(){slotClick(x.id);});
+          wrap.appendChild(b);
+          if(nt)wrap.appendChild(el('<p class="al-fbl '+nt.k+'"><span class="al-mk" aria-hidden="true">'+(nt.k==='ok'?'✔':'✖')+'</span> <b>'+(nt.k==='ok'?U('allocYes'):U('allocNo'))+'.</b> '+nt.t+'</p>'));
+          ul.appendChild(wrap);});
+        sec.appendChild(ul);gwrap.appendChild(sec);});
+      body.appendChild(gwrap);
+      chk.disabled=!filled()||done;chk.hidden=done;chk.style.display=done?'none':'';
+      hintTxt();
+      if(fkey){var q=fkey.charAt(0)==='p'?'.al-p[data-id="'+fkey.slice(2).replace(/"/g,'\\"')+'"]':'.al-s[data-slot="'+fkey.slice(2).replace(/"/g,'\\"')+'"]';
+        var f=body.querySelector(q)||body.querySelector('.al-p')||chk;try{if(f&&!f.disabled)f.focus({preventScroll:false});}catch(_){}fkey=null;}
+    }
+    function check(){
+      if(!filled()||done)return;var wrong=0,firstBad=null;
+      SL.forEach(function(x){if(lock[x.id])return;var pid=place[x.id],ok=(x.accepts||[]).indexOf(pid)>=0;
+        if(ok){lock[x.id]=1;note[x.id]={k:'ok',t:T(x.okFeedback)||''};}
+        else{wrong++;var w=x.wrong||{};note[x.id]={k:'no',t:T(w[pid]!==undefined?w[pid]:w['default'])||''};delete place[x.id];if(!firstBad)firstBad=x.id;}});
+      fh.innerHTML='';
+      if(wrong){hadWrong=true;firstCheck=false;
+        fh.appendChild(fb('tip',U('allocSome',{n:wrong}),T(s.feedbackWrong)||''));say(U('allocSome',{n:wrong}));fkey='s:'+firstBad;sel=null;render();svin(fh);}
+      else{done=true;sel=null;
+        fh.appendChild(fb('good',U('allocAll'),T(s.feedbackCorrect)||''));
+        if(!hadWrong)awardXp(s.id+':ftc',s.xp&&s.xp.firstTimeCorrect);
+        render();say(U('allocAll'));svin(fh);
+        if(!closed){closed=true;prTake(s,h);go.hidden=false;go.style.display='';try{go.focus();}catch(_){}}}
+    }
+    /* drag with the mouse or a pen (a bonus on top of tapping; touch users tap, so the page still scrolls) */
+    function dragStart(e,p,b){if(e.pointerType==='touch'||e.button>0||done)return;
+      drag={x:e.clientX,y:e.clientY,moved:false,ghost:null,id:p.id};
+      function mv(ev){if(!drag)return;if(!drag.moved&&Math.abs(ev.clientX-drag.x)+Math.abs(ev.clientY-drag.y)<8)return;
+        if(!drag.moved){drag.moved=true;sel=p.id;drag.ghost=el('<div class="al-ghost" aria-hidden="true">'+T(p.name)+'</div>');document.body.appendChild(drag.ghost);b.classList.add('on');}
+        drag.ghost.style.left=ev.clientX+'px';drag.ghost.style.top=ev.clientY+'px';
+        [].forEach.call(body.querySelectorAll('.al-slot.over'),function(n){n.classList.remove('over');});
+        var t=document.elementFromPoint(ev.clientX,ev.clientY),w=t&&t.closest&&t.closest('.al-slot');if(w&&!w.classList.contains('ok'))w.classList.add('over');}
+      function up(ev){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);
+        if(!drag)return;var d=drag;if(d.ghost)d.ghost.remove();
+        if(d.moved){var t=document.elementFromPoint(ev.clientX,ev.clientY),w=t&&t.closest&&t.closest('.al-slot');
+          if(w&&!lock[w.dataset.slot]){sel=d.id;put(w.dataset.slot);}else{sel=null;render();}
+          setTimeout(function(){drag=null;},0);}else drag=null;}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up);}
+    render();
+  }
+});
+Object.assign(UI,{
+  allocHint:{en:'Tap a person, then tap a role.'},allocNow:{en:'Now tap a role for {n}.'},allocPeople:{en:'People'},allocSpare:{en:'Spare'},
+  allocSelectedTag:{en:'Selected'},allocSelected:{en:'{n} selected. Now tap a role.'},allocDeselected:{en:'{n} not selected.'},
+  allocPlaced:{en:'{n} placed on {r}.'},allocReady:{en:'Every role is filled. You can check now.'},allocReturned:{en:'{n} sent back.'},
+  allocPickFirst:{en:'Tap a person first.'},allocEmpty:{en:'Empty'},allocReturn:{en:'Send back'},allocReturnHint:{en:'Tap to send back.'},
+  allocPlaceHint:{en:'Tap to place here.'},allocCheck:{en:'Check'},allocYes:{en:'Suitable'},allocNo:{en:'Not suitable'},
+  allocSome:{en:'{n} not right yet. Try those roles again.'},allocAll:{en:'Every role is right'},allocNoneLeft:{en:'Everyone is placed.'}
+});
+
 /* script.json refs */
 // scr('0.1')
 // scr('0.2')
@@ -4612,7 +4753,7 @@ var CL=(function(){
     var secs=m?(m.sections||[]).map(String):[n];
     if(m&&lessons.some(function(l){return l.ml===m;})){var L=lessons[lessons.length-1];L.idx.push(i+1);return;}
     var scs=screensOf(secs),types=scs.map(function(s){return s.type;});
-    var PR=['mcq','trueFalse','multiselect','sort','order','match','imageTiles','hotspot','chips','spotErrors','buildMessage','reportBuilder','walkthrough','chat','phoneChat'];
+    var PR=['mcq','trueFalse','multiselect','sort','order','match','imageTiles','hotspot','chips','spotErrors','buildMessage','reportBuilder','walkthrough','chat','phoneChat','allocate'];
     var kind=types.indexOf('moduleQuiz')>=0?'check':types.indexOf('branch')>=0?'scenario':types.some(function(t){return PR.indexOf(t)>=0;})?'practise':types.indexOf('video')>=0?'video':'learn';
     var pic=sec.thumb?sc2_assetFile(sec.thumb):null;   /* a section may name its own lesson-list picture (module.sections[].x_thumb) */
     if(!pic)scs.some(function(s){var md=Array.isArray(s.media)?s.media:(s.media?[s.media]:[]);
