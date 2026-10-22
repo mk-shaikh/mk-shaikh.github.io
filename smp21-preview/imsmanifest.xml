@@ -39,6 +39,8 @@
       <file href="captions/smp21-v5-c7.en.vtt"/>
       <file href="captions/smp21-v5-c9.en.vtt"/>
       <file href="captions/smp21-v5-stem.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/custom-wristband.svg"/>
       <file href="icons/fluent-3d-admission-tickets.png"/>
       <file href="icons/fluent-3d-ambulance.png"/>
@@ -92,6 +94,7 @@
       <file href="icons/fluent-3d-warning.png"/>
       <file href="icons/fluent-3d-waving-hand.png"/>
       <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
       <file href="images/cast/F-03.jpg"/>
       <file href="images/smp21-card-01.jpg"/>
       <file href="images/smp21-card-02.jpg"/>
