@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp23codeofconductpractice" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Code of Conduct in practice</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Code of Conduct in practice</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp23-v02-opening.en.vtt"/>
+      <file href="captions/smp23-v03-watch-the-fans.en.vtt"/>
+      <file href="captions/smp23-v04-rumour.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-admission-tickets.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-balance-scale.png"/>
+      <file href="icons/fluent-3d-bust-in-silhouette.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-camera-with-flash.png"/>
+      <file href="icons/fluent-3d-camera.png"/>
+      <file href="icons/fluent-3d-clipboard.png"/>
+      <file href="icons/fluent-3d-game-die.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-hot-beverage.png"/>
+      <file href="icons/fluent-3d-identification-card.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-locked.png"/>
+      <file href="icons/fluent-3d-mobile-phone-with-arrow.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-movie-camera.png"/>
+      <file href="icons/fluent-3d-muted-speaker.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-page-facing-up.png"/>
+      <file href="icons/fluent-3d-people-hugging.png"/>
+      <file href="icons/fluent-3d-person-raising-hand.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-smiling-face-with-smiling-eyes.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-studio-microphone.png"/>
+      <file href="icons/fluent-3d-telephone-receiver.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-wrapped-gift.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/cast/F-08.jpg"/>
+      <file href="images/smp23-s05-welcome.jpg"/>
+      <file href="images/smp23-s07-neutral.jpg"/>
+      <file href="images/smp23-s17-photo-dp2b.jpg"/>
+      <file href="images/smp23-s19-photo-dp3.jpg"/>
+      <file href="images/smp23-s20-photo-dp3a.jpg"/>
+      <file href="images/smp23-s21-photo-dp3b.jpg"/>
+      <file href="images/smp23-s22-photo-dp3c.jpg"/>
+      <file href="images/smp23-s23-complaint-dp1.jpg"/>
+      <file href="images/smp23-s24-complaint-dp2.jpg"/>
+      <file href="images/smp23-s25-complaint-dp2a.jpg"/>
+      <file href="images/smp23-s26-complaint-dp2b.jpg"/>
+      <file href="images/smp23-s27-complaint-dp2c.jpg"/>
+      <file href="images/smp23-s28-complaint-dp3.jpg"/>
+      <file href="images/smp23-s29-complaint-dp3a.jpg"/>
+      <file href="images/smp23-s30-complaint-dp3b.jpg"/>
+      <file href="images/smp23-s31-complaint-dp3c.jpg"/>
+      <file href="incoming/smp23-v02-opening.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp23-v02-opening.mp4"/>
+      <file href="video/smp23-v03-watch-the-fans.mp4"/>
+      <file href="video/smp23-v04-rumour.mp4"/>
+    </resource>
+  </resources>
+</manifest>
