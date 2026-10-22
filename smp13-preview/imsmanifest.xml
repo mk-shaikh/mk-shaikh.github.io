@@ -66,6 +66,8 @@
       <file href="captions/smp13-v2b-good.en.vtt"/>
       <file href="captions/smp13-v2b-poor.ar.vtt"/>
       <file href="captions/smp13-v2b-poor.en.vtt"/>
+      <file href="captions/smp13-v2c-exit.ar.vtt"/>
+      <file href="captions/smp13-v2c-exit.en.vtt"/>
       <file href="captions/smp13-v3-celebrate.ar.vtt"/>
       <file href="captions/smp13-v3-celebrate.en.vtt"/>
       <file href="captions/smp13-v5-stem.ar.vtt"/>
@@ -116,6 +118,7 @@
       <file href="images/cast/C-04.jpg"/>
       <file href="images/cast/C-06.jpg"/>
       <file href="images/smp13-hero.jpg"/>
+      <file href="images/smp13-ref-celebrate.jpg"/>
       <file href="images/smp13-ref-dp1.jpg"/>
       <file href="images/smp13-ref-dp2.jpg"/>
       <file href="images/smp13-ref-dp3.jpg"/>
@@ -131,6 +134,7 @@
       <file href="images/smp13-thumb-6.jpg"/>
       <file href="images/smp13-thumb-7.jpg"/>
       <file href="incoming/smp13-v1-hook.mp4"/>
+      <file href="incoming/smp13-v2c-exit.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp13-p-1-1.mp4"/>
       <file href="video/smp13-p-1-2.mp4"/>
@@ -139,6 +143,7 @@
       <file href="video/smp13-v2a-family.mp4"/>
       <file href="video/smp13-v2b-good.mp4"/>
       <file href="video/smp13-v2b-poor.mp4"/>
+      <file href="video/smp13-v2c-exit.mp4"/>
       <file href="video/smp13-v3-celebrate.mp4"/>
       <file href="video/smp13-v5-c1.mp4"/>
       <file href="video/smp13-v5-c3.mp4"/>
