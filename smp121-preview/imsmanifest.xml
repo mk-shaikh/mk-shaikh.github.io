@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp121disabilityassistingfans" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>SMP 12.1 - Disability Awareness &amp; Assisting Fans</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>SMP 12.1 - Disability Awareness &amp; Assisting Fans</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp121-v01-hook.en.vtt"/>
+      <file href="captions/smp121-v02-opening.en.vtt"/>
+      <file href="captions/smp121-v03-sighted-guide.en.vtt"/>
+      <file href="captions/smp121-v05-ramp-good.en.vtt"/>
+      <file href="captions/smp121-v06-gate-to-seat.en.vtt"/>
+      <file href="captions/smp121-v07-deaf-fan.en.vtt"/>
+      <file href="captions/smp121-v08-overwhelmed-child.en.vtt"/>
+      <file href="captions/smp121-v09-case1-start.en.vtt"/>
+      <file href="captions/smp121-v11-case2-start.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-adhesive-bandage.png"/>
+      <file href="icons/fluent-3d-admission-tickets.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-balance-scale.png"/>
+      <file href="icons/fluent-3d-beating-heart.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-chair.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-clockwise-vertical-arrows.png"/>
+      <file href="icons/fluent-3d-dizzy.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-droplet.png"/>
+      <file href="icons/fluent-3d-ear.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-glasses.png"/>
+      <file href="icons/fluent-3d-globe-with-meridians.png"/>
+      <file href="icons/fluent-3d-handbag.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-hourglass-not-done.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-left-right-arrow.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-memo.png"/>
+      <file href="icons/fluent-3d-muted-speaker.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-open-book.png"/>
+      <file href="icons/fluent-3d-people-hugging.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-running.png"/>
+      <file href="icons/fluent-3d-person-standing.png"/>
+      <file href="icons/fluent-3d-person-with-white-cane.png"/>
+      <file href="icons/fluent-3d-puzzle-piece.png"/>
+      <file href="icons/fluent-3d-radio.png"/>
+      <file href="icons/fluent-3d-raised-back-of-hand.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-raising-hands.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-relieved-face.png"/>
+      <file href="icons/fluent-3d-repeat-button.png"/>
+      <file href="icons/fluent-3d-speaker-high-volume.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-thought-balloon.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-waving-hand.png"/>
+      <file href="icons/fluent-3d-white-cane.png"/>
+      <file href="icons/fluent-3d-woman-with-headscarf.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="icons/fluent-3d-worried-face.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/cast/F-02.jpg"/>
+      <file href="images/cast/F-07.jpg"/>
+      <file href="images/smp121-c-case1-dp1.jpg"/>
+      <file href="images/smp121-c-case1-dp1a.jpg"/>
+      <file href="images/smp121-c-case1-dp1b.jpg"/>
+      <file href="images/smp121-c-case1-dp1c.jpg"/>
+      <file href="images/smp121-c-case1-dp2.jpg"/>
+      <file href="images/smp121-c-case1-dp2a.jpg"/>
+      <file href="images/smp121-c-case1-dp2b.jpg"/>
+      <file href="images/smp121-c-case1-dp2c.jpg"/>
+      <file href="images/smp121-c-case1-dp3.jpg"/>
+      <file href="images/smp121-c-case1-dp3a.jpg"/>
+      <file href="images/smp121-c-case1-dp3c.jpg"/>
+      <file href="images/smp121-c-case1-dp4.jpg"/>
+      <file href="images/smp121-c-case1-dp4a.jpg"/>
+      <file href="images/smp121-c-case1-dp4b.jpg"/>
+      <file href="images/smp121-c-case1-dp4c.jpg"/>
+      <file href="images/smp121-c-case2-dp1.jpg"/>
+      <file href="images/smp121-c-case2-dp1a.jpg"/>
+      <file href="images/smp121-c-case2-dp1b.jpg"/>
+      <file href="images/smp121-c-case2-dp1c.jpg"/>
+      <file href="images/smp121-c-case2-dp2.jpg"/>
+      <file href="images/smp121-c-case2-dp2a.jpg"/>
+      <file href="images/smp121-c-case2-dp2b.jpg"/>
+      <file href="images/smp121-c-case2-dp2c.jpg"/>
+      <file href="images/smp121-c-case2-dp3.jpg"/>
+      <file href="images/smp121-c-case2-dp3c.jpg"/>
+      <file href="images/smp121-hero.jpg"/>
+      <file href="images/smp121-s01-fans.jpg"/>
+      <file href="images/smp121-s02-hidden.jpg"/>
+      <file href="images/smp121-s03-offer.jpg"/>
+      <file href="images/smp121-s04-eye-level.jpg"/>
+      <file href="images/smp121-s05-services.jpg"/>
+      <file href="images/smp121-s06-guide-dog.jpg"/>
+      <file href="images/smp121-s07-deaf-fan.jpg"/>
+      <file href="images/smp121-s08-noisy-queue.jpg"/>
+      <file href="images/smp121-thumb-5.jpg"/>
+      <file href="images/smp121-thumb-6.jpg"/>
+      <file href="images/smp121-thumb-8.jpg"/>
+      <file href="incoming/smp121-v01-hook.mp4"/>
+      <file href="incoming/smp121-v03-sighted-guide.mp4"/>
+      <file href="incoming/smp121-v06-gate-to-seat.mp4"/>
+      <file href="incoming/smp121-v08-overwhelmed-child.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp121-v01-hook.mp4"/>
+      <file href="video/smp121-v02-opening.mp4"/>
+      <file href="video/smp121-v03-sighted-guide.mp4"/>
+      <file href="video/smp121-v04-ramp-poor.mp4"/>
+      <file href="video/smp121-v05-ramp-good.mp4"/>
+      <file href="video/smp121-v06-gate-to-seat.mp4"/>
+      <file href="video/smp121-v07-deaf-fan.mp4"/>
+      <file href="video/smp121-v08-overwhelmed-child.mp4"/>
+      <file href="video/smp121-v09-case1-start.mp4"/>
+      <file href="video/smp121-v10-missed-step.mp4"/>
+      <file href="video/smp121-v11-case2-start.mp4"/>
+      <file href="video/smp121-v12-left-behind.mp4"/>
+      <file href="video/smp121-v13-shown-the-exit.mp4"/>
+    </resource>
+  </resources>
+</manifest>
