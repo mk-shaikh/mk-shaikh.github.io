@@ -40,6 +40,7 @@
       <file href="captions/smp101-v15-recap.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
       <file href="icons/fluent-3d-backpack.png"/>
       <file href="icons/fluent-3d-bust-in-silhouette.png"/>
       <file href="icons/fluent-3d-chair.png"/>
@@ -53,7 +54,6 @@
       <file href="icons/fluent-3d-package.png"/>
       <file href="icons/fluent-3d-person-walking.png"/>
       <file href="icons/fluent-3d-police-officer.png"/>
-      <file href="icons/fluent-3d-radio.png"/>
       <file href="icons/fluent-3d-raised-hand.png"/>
       <file href="icons/fluent-3d-relieved-face.png"/>
       <file href="icons/fluent-3d-round-pushpin.png"/>
