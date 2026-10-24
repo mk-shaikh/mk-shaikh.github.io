@@ -74,6 +74,7 @@
       <file href="captions/smp13-v5-stem.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
       <file href="icons/fluent-3d-baby.png"/>
       <file href="icons/fluent-3d-backhand-index-pointing-right.png"/>
       <file href="icons/fluent-3d-check-mark-button.png"/>
@@ -97,7 +98,6 @@
       <file href="icons/fluent-3d-people-hugging.png"/>
       <file href="icons/fluent-3d-person-raising-hand.png"/>
       <file href="icons/fluent-3d-person-walking.png"/>
-      <file href="icons/fluent-3d-radio.png"/>
       <file href="icons/fluent-3d-raised-hand.png"/>
       <file href="icons/fluent-3d-red-question-mark.png"/>
       <file href="icons/fluent-3d-safety-vest.png"/>

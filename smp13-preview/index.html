@@ -1825,6 +1825,8 @@ textarea.rv-in{resize:vertical;min-height:84px}
   .rv-n:not(:empty){position:absolute;top:-6px;right:-6px}}   /* a phone: a round chat button (its name stays for screen readers); review.js keeps it clear of the course */
 @media print{.rv-tab,.rv-panel,.rv-tip{display:none!important}}
 
+.rv-skip{margin:14px 0 4px;text-align:center}.rv-skip .btn{font-size:.85em;opacity:.85}
+
 </style>
 <style>
 @font-face{font-family:'Twemoji Country Flags';unicode-range:U+1F1E6-1F1FF,U+1F3F4,U+E0062-E0063,U+E0065,U+E0067,U+E006C,U+E006E,U+E0073-E0074,U+E0077,U+E007F;font-display:swap;src:url(fonts/TwemojiCountryFlags.woff2) format('woff2')}
@@ -2341,7 +2343,13 @@ function vidSlot(host,name,opts){
   var anchor=opts.before?host.querySelector(opts.before):host.firstChild;
   host.insertBefore(w,anchor);
   /* missing clip + no still to fall back on → show a labelled placeholder so reviewers see the slot */
-  if(opts.placeholder&&!opts.hide){
+  if(opts.placeholder&&!opts.hide&&COURSE.videoStraight){
+    /* course.json "videoStraight": true — the player shows at once (16:9 frame until the clip says its size); the card appears only if the clip fails (2026-10-24) */
+    w.hidden=false;v.style.aspectRatio='16/9';
+    v.addEventListener('error',function(){w.hidden=true;host.insertBefore(el('<div class="mediaph missing"><span class="mpi">▶</span><b>'+T(opts.placeholder)+'</b>'+phPath('video/'+name+'.mp4')+'</div>'),w);});
+    if(opts.onReady)v.addEventListener('loadeddata',opts.onReady);
+    if(opts.onMissing)v.addEventListener('error',opts.onMissing);
+  }else if(opts.placeholder&&!opts.hide){
     var ph=el('<div class="mediaph"><span class="mpi">▶</span><b>'+T(opts.placeholder)+'</b>'+phPath('video/'+name+'.mp4')+(COURSE.preview&&opts.names&&opts.names.length?'<span class="mpf">'+opts.names.join('<br>')+'</span>':'')+'</div>');   /* a preview build names the clips to make (x_previewNames; never in a release) */
     host.insertBefore(ph,w);
     /* the placeholder goes the moment the browser knows the clip exists (metadata), not only once frames arrive */
@@ -2572,13 +2580,14 @@ var BUILD={
     function markWatched(){if(!st.vw)st.vw={};if(!st.vw[s.id]){st.vw[s.id]=1;if(typeof scormSave==='function')scormSave(s.id);}showCont();}
     vidSlot(h,name,{before:'.actions',placeholder:s.x_placeholderNote||UI.videoSoon,names:s.x_previewNames,
       onMissing:function(){btn.disabled=false;showCont();},onReady:function(){},onEnded:markWatched});
-    (function(){var v=h.querySelector('.vidwrap video');if(!v||watched)return;var maxT=0;   /* no skipping ahead in a clip not yet watched (user, 2026-10-14) */
+    (function(){var v=h.querySelector('.vidwrap video');if(!v||watched||COURSE.reviewFree)return;var maxT=0;   /* no skipping ahead in a clip not yet watched (user, 2026-10-14) */
       v.addEventListener('timeupdate',function(){if(!v.seeking&&v.currentTime>maxT)maxT=v.currentTime;});
       v.addEventListener('seeking',function(){if(!(st.vw&&st.vw[s.id])&&v.currentTime>maxT+1)v.currentTime=maxT;});})();
     if(qa){var vw0=h.querySelector('.vidwrap')||h.querySelector('.mediaph');if(vw0)vw0.after(qa);else h.insertBefore(qa,h.querySelector('.actions'));}   /* the question sits right under the clip */
     if(tk){var tk0=qa||h.querySelector('.vidwrap')||h.querySelector('.mediaph');if(tk0)tk0.after(tk);else h.insertBefore(tk,h.querySelector('.actions'));}   /* the learning point under the question, shown with Continue (user, 2026-10-12) */
     later(function(){var v=h.querySelector('.vidwrap video');if(!v||v.networkState===3)showCont();},6000);   // no clip at all (no source) → do not trap the learner
     if(s.afterText)h.insertBefore(el('<p class="lead">'+T(s.afterText)+'</p>'),h.querySelector('.actions'));
+    if(COURSE.reviewFree){btn.disabled=false;btn.hidden=false;btn.style.display='';}   /* review build: no watching required (build.py sets COURSE.reviewFree only for --preview and review.html) */
   },
   teach:function(s,h){
     head(s,h);
@@ -2637,7 +2646,7 @@ var BUILD={
       refresh();
     }
     function refresh(){var n=Object.keys(read).length;[].slice.call(a.children).forEach(function(x){if(!x.classList.contains('cl-back'))x.remove();});   /* keep the layout's Back button */
-      if(flip){var need=Math.min(s.x_minRead===0?0:(s.x_minRead||cards.length),cards.length);   /* x_minRead 0: browsing is optional, Continue shows at once (user, 2026-10-14) */if(n>=need){cont(s,h);}else{var g=contBtn(need<cards.length?U('openedMin',{a:n,b:cards.length,k:need}):(n?U('readN',{a:n,b:cards.length}):U('readAll',{n:cards.length})),function(){});g.disabled=true;a.appendChild(g);}return;}
+      if(flip){var need=COURSE.reviewFree?0:Math.min(s.x_minRead===0?0:(s.x_minRead||cards.length),cards.length);   /* x_minRead 0: browsing is optional, Continue shows at once (user, 2026-10-14) */if(n>=need){cont(s,h);}else{var g=contBtn(need<cards.length?U('openedMin',{a:n,b:cards.length,k:need}):(n?U('readN',{a:n,b:cards.length}):U('readAll',{n:cards.length})),function(){});g.disabled=true;a.appendChild(g);}return;}
       if(seenAll)cont(s,h);
       else a.appendChild(contBtn(U('next'),function(){i++;show();svin(box);}));
     }
@@ -2719,7 +2728,7 @@ function buildFromScript(){
    A video counts once it was watched to the end (st.vw). A clip that is not there yet (build.py sets x_mediaMissing) never blocks. */
 var QA_FREE=/[?&]qa=1(&|$)/.test(location.search);   /* the test robot (?qa=1, never a learner) cannot watch clips: the watch-first rules are off for it */
 function vidBlockBefore(i){
-  if(QA_FREE)return -1;
+  if(QA_FREE||COURSE.reviewFree)return -1;
   var byId={};(SCRIPT.screens||[]).forEach(function(x){byId[x.id]=x;});
   for(var j=0;j<i&&j<S.length;j++){var x=byId[S[j].id];
     if(x&&x.type==='video'&&media(x).length&&x.x_mediaMissing!==true&&!(st.vw&&st.vw[x.id]))return j;}
@@ -2729,8 +2738,18 @@ var _renderFree=render;
 render=function(i){
   var b=(i>cur)?vidBlockBefore(i):-1,held=b>=0&&b<i;
   _renderFree(held?b:i);
+  reviewSkip();
   if(held){var sc=g('stage').querySelector('.screen');if(sc){var n=fb('tip','',U('watchFirst'));n.classList.add('watchfirst');sc.insertBefore(n,sc.firstChild);}}
 };
+
+/* ---- review builds only (COURSE.reviewFree, set by build.py for --preview and review.html; never in a SCORM zip): reviewers move on freely ----
+   Video, card and map screens show Continue at once (edits above); every other activity gets this 'Next screen' button, so nothing needs to be finished to go on. */
+function reviewSkip(){
+  if(!COURSE.reviewFree||cur>=S.length-1)return;
+  var sc=g('stage').querySelector('.screen');if(!sc||sc.querySelector('.rv-skip'))return;
+  var w=el('<div class="rv-skip"></div>');
+  w.appendChild(contBtn('Next screen (review) &rsaquo;',function(){render(cur+1);},'ghost'));sc.appendChild(w);
+}
 
 /* ============ SCRIPT TYPES (part 2) ============
    Orientation / gamification / diagnostic screen types (m00 and later). Loaded after script-runtime.js.
@@ -3069,7 +3088,7 @@ Object.assign(BUILD,{
       head(s,h);media(s).forEach(function(f){h.appendChild(imgOrPh(f,U('scene')+': '+strip(s.heading)));});   /* a picture on the quiz intro (optional media) */
       /* the quiz opens after the lessons (module.quiz.lockUntilSectionsDone, default true) */
       var mq=(SCRIPT.module&&SCRIPT.module.quiz)||{},own=secIdx(s.section),missing=[];
-      if(mq.lockUntilSectionsDone!==false&&!Q.passed)COURSE.sections.forEach(function(sec,ix){var k=ix+1;if(k!==own&&!done[k])missing.push({k:k,t:sec.title||sec.name||(U('section')+' '+k),start:sec.start});});
+      if(mq.lockUntilSectionsDone!==false&&!Q.passed&&!COURSE.reviewFree)COURSE.sections.forEach(function(sec,ix){var k=ix+1;if(k!==own&&!done[k])missing.push({k:k,t:sec.title||sec.name||(U('section')+' '+k),start:sec.start});});
       var bq='<div class="bq">'+(s.lines||[]).map(function(l){return '<p>'+T(l)+'</p>';}).join('')+
         ((s.lines&&s.lines.some(function(l){return String(strip(l)||'').trim();}))?'':'<p><b>'+U(s.safetyMustPass?'quizRulesSafety':'quizRules',{n:count,k:need,p:pass})+'</b></p>')+(Q.passed?'<p>'+U('quizPassedBefore',{b:Math.round((Q.best||0)*count/100),n:count})+'</p>':(Q.attempt?'<p>'+U('attemptN',{a:Q.attempt+1})+'</p>':''))+'</div>';
       h.appendChild(el(bq));
@@ -4316,7 +4335,7 @@ Object.assign(BUILD,{
     var lst=el('<div class="mx-list"><button type="button" class="mx-lt" aria-expanded="false">'+U('showAsList')+'</button><ol hidden></ol></div>');
     P.forEach(function(p,i){lst.querySelector('ol').appendChild(el('<li><button type="button" data-i="'+i+'">'+(i+1)+'. '+T(p.title)+'</button></li>'));});h.appendChild(lst);
     lst.querySelector('.mx-lt').addEventListener('click',function(){var o=lst.querySelector('ol'),open=o.hidden;o.hidden=!open;this.setAttribute('aria-expanded',open?'true':'false');});
-    var btn=cont(s,h);btn.disabled=true;
+    var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
     function needTxt(){prog.querySelector('.mx-need').textContent=n>=need?(n===P.length?U('allOpened'):U('canContinue')):U('openMore',{n:need-n});}needTxt();
     function open(i){var p=P[i];[].forEach.call(wrap.querySelectorAll('.mx-hs'),function(g){g.classList.toggle('on',+g.dataset.i===i);});
       det.innerHTML=(p.media?'<img class="mx-pic" src="images/'+sc2_assetFile(p.media)+'" alt="'+strip(p.title).replace(/"/g,'&quot;')+'" onerror="this.remove()">':'')+'<div class="mx-row">'+icon(p.icon)+'<div><b><span class="mx-num">'+(i+1)+'</span>'+T(p.title)+'</b>'+T(p.text)+'</div></div>';
@@ -4337,7 +4356,7 @@ Object.assign(BUILD,{
       '<button type="button" class="btn mm-mark">⚑ '+U('markMoment')+'</button><span class="mm-t">0:00</span></div>');h.appendChild(ctl);
     var list=el('<div class="mm-found"></div>');M.forEach(function(m,i){list.appendChild(el('<div class="mm-row" data-i="'+i+'"><span class="mm-num">'+(i+1)+'</span><span>'+U('momentNotFound',{n:i+1})+'</span></div>'));});h.appendChild(list);
     var fbHost=el('<div aria-live="polite"></div>');h.appendChild(fbHost);
-    var btn=cont(s,h);btn.disabled=true;
+    var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
     var missing=function(){ctl.querySelector('.mm-mark').disabled=true;ctl.querySelector('.mm-pp').disabled=true;btn.disabled=false;};
     vidSlot(slot,name,{placeholder:s.x_placeholderNote||UI.videoSoon,onMissing:function(){missing();}});
     var v=slot.querySelector('video');if(v){v.autoplay=false;v.removeAttribute('autoplay');}
@@ -4731,7 +4750,7 @@ IC["palm up hand"]="<img src=\"icons/fluent-3d-palm-up-hand.png\" alt=\"\" dragg
 IC["people hugging"]="<img src=\"icons/fluent-3d-people-hugging.png\" alt=\"\" draggable=\"false\">";
 IC["person raising hand"]="<img src=\"icons/fluent-3d-person-raising-hand.png\" alt=\"\" draggable=\"false\">";
 IC["person walking"]="<img src=\"icons/fluent-3d-person-walking.png\" alt=\"\" draggable=\"false\">";
-IC["radio"]="<img src=\"icons/fluent-3d-radio.png\" alt=\"\" draggable=\"false\">";
+IC["radio"]="<img src=\"icons/custom-walkie-talkie.svg\" alt=\"\" draggable=\"false\">";
 IC["raised hand"]="<img src=\"icons/fluent-3d-raised-hand.png\" alt=\"\" draggable=\"false\">";
 IC["red question mark"]="<img src=\"icons/fluent-3d-red-question-mark.png\" alt=\"\" draggable=\"false\">";
 IC["safety vest"]="<img src=\"icons/fluent-3d-safety-vest.png\" alt=\"\" draggable=\"false\">";
@@ -4809,7 +4828,9 @@ function clStart(k){var L=CL.lessons[k];if(!L)return;
 function clHome(h){
   h.classList.add('cl-page');
   var L0=CL.lessons,nx=CL.next(),nd=L0.filter(CL.done).length,code=(SCRIPT.module&&SCRIPT.module.code)||'';
-  var hero=null;(SCRIPT.screens||[]).some(function(s){var md=Array.isArray(s.media)?s.media:[];return md.some(function(f){if(/\.(jpg|jpeg|png|webp)$/i.test(f)){hero=f;return true;}return false;});});
+  /* the main-menu picture: module.x_hero (an asset id) when the course names one (2026-10-24), else the first picture on any screen */
+  var hero=(SCRIPT.module&&SCRIPT.module.x_hero)?sc2_assetFile(SCRIPT.module.x_hero):null;
+  if(!hero)(SCRIPT.screens||[]).some(function(s){var md=Array.isArray(s.media)?s.media:[];return md.some(function(f){if(/\.(jpg|jpeg|png|webp)$/i.test(f)){hero=f;return true;}return false;});});
   /* the hero still may have a short motion version (video/<still>-motion.mp4): played once, muted, it stops on its last frame */
   var clip=hero&&(COURSE.stillMotion||{})[hero.replace(/\.[^.]+$/,'')];
   h.innerHTML='<div class="cl-hero"><span class="cl-ph" aria-hidden="true"><i></i></span>'+(hero?'<img src="images/'+hero+'" alt="" onerror="this.remove()">':'')+
@@ -5016,6 +5037,7 @@ window.addEventListener('resize',clBarH);window.addEventListener('load',clBarH);
 
 
 COURSE.reviewSheet="https://script.google.com/macros/s/AKfycbx5ytdUHl8PepmGOV02BoWL37g7uhVUnxN7YMKvlL85H3Ashe8Sx98be2LI5gApxkDK/exec";
+COURSE.reviewFree=true;
 /* ---- Review comments (user, 2026-10-17): a comment box on every screen of a course under review ----
    Built in ONLY by build.py: in a --preview build (index.html) and in review.html beside a release build. Never in index.html of a
    release, never in the SCORM zip. Runs inside the engine's closure (S, cur, render, COURSE, LANG, T).
