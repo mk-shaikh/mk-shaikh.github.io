@@ -41,6 +41,7 @@
       <file href="captions/smp21-v5-stem.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
       <file href="icons/custom-wristband.svg"/>
       <file href="icons/fluent-3d-admission-tickets.png"/>
       <file href="icons/fluent-3d-ambulance.png"/>
@@ -77,7 +78,6 @@
       <file href="icons/fluent-3d-person-running.png"/>
       <file href="icons/fluent-3d-police-car-light.png"/>
       <file href="icons/fluent-3d-police-officer.png"/>
-      <file href="icons/fluent-3d-radio.png"/>
       <file href="icons/fluent-3d-raised-fist.png"/>
       <file href="icons/fluent-3d-raised-hand.png"/>
       <file href="icons/fluent-3d-repeat-button.png"/>
