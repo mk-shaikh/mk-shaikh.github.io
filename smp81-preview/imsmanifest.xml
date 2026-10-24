@@ -41,6 +41,7 @@
       <file href="captions/smp81-v2-redirect.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
       <file href="icons/fluent-3d-ambulance.png"/>
       <file href="icons/fluent-3d-broom.png"/>
       <file href="icons/fluent-3d-busts-in-silhouette.png"/>
@@ -57,7 +58,6 @@
       <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
       <file href="icons/fluent-3d-person-standing.png"/>
       <file href="icons/fluent-3d-person-walking.png"/>
-      <file href="icons/fluent-3d-radio.png"/>
       <file href="icons/fluent-3d-raised-hand.png"/>
       <file href="icons/fluent-3d-safety-vest.png"/>
       <file href="icons/fluent-3d-scroll.png"/>
