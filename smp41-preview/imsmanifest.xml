@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp41communicatingwithcrowds" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Communicating with crowds: voice, body language, hand signals &amp; megaphone</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Communicating with crowds: voice, body language, hand signals &amp; megaphone</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp41-v01-hook.ar.vtt"/>
+      <file href="captions/smp41-v01-hook.en.vtt"/>
+      <file href="captions/smp41-v02-signals.ar.vtt"/>
+      <file href="captions/smp41-v02-signals.en.vtt"/>
+      <file href="captions/smp41-v03-queue-signals.ar.vtt"/>
+      <file href="captions/smp41-v03-queue-signals.en.vtt"/>
+      <file href="captions/smp41-v04-megaphone-poor.ar.vtt"/>
+      <file href="captions/smp41-v04-megaphone-poor.en.vtt"/>
+      <file href="captions/smp41-v05-megaphone-good.ar.vtt"/>
+      <file href="captions/smp41-v05-megaphone-good.en.vtt"/>
+      <file href="captions/smp41-v06-crossing.ar.vtt"/>
+      <file href="captions/smp41-v06-crossing.en.vtt"/>
+      <file href="captions/smp41-v07-story-start.ar.vtt"/>
+      <file href="captions/smp41-v07-story-start.en.vtt"/>
+      <file href="captions/smp41-v08-dp2-hold.ar.vtt"/>
+      <file href="captions/smp41-v08-dp2-hold.en.vtt"/>
+      <file href="captions/smp41-v09-dp2-rumour.ar.vtt"/>
+      <file href="captions/smp41-v09-dp2-rumour.en.vtt"/>
+      <file href="captions/smp41-v11-dp3-release.ar.vtt"/>
+      <file href="captions/smp41-v11-dp3-release.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-angry-face.png"/>
+      <file href="icons/fluent-3d-battery.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-clipboard.png"/>
+      <file href="icons/fluent-3d-downcast-face-with-sweat.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-flexed-biceps.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-left-arrow.png"/>
+      <file href="icons/fluent-3d-light-bulb.png"/>
+      <file href="icons/fluent-3d-locked.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-palms-up-together.png"/>
+      <file href="icons/fluent-3d-person-standing.png"/>
+      <file href="icons/fluent-3d-police-car-light.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-relieved-face.png"/>
+      <file href="icons/fluent-3d-repeat-button.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-slightly-smiling-face.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-studio-microphone.png"/>
+      <file href="icons/fluent-3d-toolbox.png"/>
+      <file href="icons/fluent-3d-turtle.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp41-a1.jpg"/>
+      <file href="images/smp41-a2.jpg"/>
+      <file href="images/smp41-a3.jpg"/>
+      <file href="images/smp41-a5.jpg"/>
+      <file href="images/smp41-a6.jpg"/>
+      <file href="images/smp41-b1.jpg"/>
+      <file href="images/smp41-b2.jpg"/>
+      <file href="images/smp41-b3.jpg"/>
+      <file href="images/smp41-b4.jpg"/>
+      <file href="images/smp41-b5.jpg"/>
+      <file href="images/smp41-b6.jpg"/>
+      <file href="images/smp41-c1a.jpg"/>
+      <file href="images/smp41-c1b.jpg"/>
+      <file href="images/smp41-c1c.jpg"/>
+      <file href="images/smp41-c2b.jpg"/>
+      <file href="images/smp41-c3c.jpg"/>
+      <file href="images/smp41-d1.jpg"/>
+      <file href="images/smp41-d2.jpg"/>
+      <file href="images/smp41-d3.jpg"/>
+      <file href="images/smp41-g-signals.jpg"/>
+      <file href="images/smp41-hero.jpg"/>
+      <file href="images/smp41-s00-hook-end.jpg"/>
+      <file href="images/smp41-s01-be-seen.jpg"/>
+      <file href="images/smp41-s02-megaphone.jpg"/>
+      <file href="images/smp41-s03-mirror.jpg"/>
+      <file href="incoming/smp41-v01-hook.mp4"/>
+      <file href="incoming/smp41-v03-queue-signals.mp4"/>
+      <file href="incoming/smp41-v05-megaphone-good.mp4"/>
+      <file href="incoming/smp41-v06-crossing.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp41-v01-hook.mp4"/>
+      <file href="video/smp41-v02-signals.mp4"/>
+      <file href="video/smp41-v03-queue-signals.mp4"/>
+      <file href="video/smp41-v04-megaphone-poor.mp4"/>
+      <file href="video/smp41-v05-megaphone-good.mp4"/>
+      <file href="video/smp41-v06-crossing.mp4"/>
+      <file href="video/smp41-v07-story-start.mp4"/>
+      <file href="video/smp41-v08-dp2-hold.mp4"/>
+      <file href="video/smp41-v09-dp2-rumour.mp4"/>
+      <file href="video/smp41-v11-dp3-release.mp4"/>
+    </resource>
+  </resources>
+</manifest>
