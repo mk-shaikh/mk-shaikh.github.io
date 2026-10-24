@@ -2341,7 +2341,13 @@ function vidSlot(host,name,opts){
   var anchor=opts.before?host.querySelector(opts.before):host.firstChild;
   host.insertBefore(w,anchor);
   /* missing clip + no still to fall back on → show a labelled placeholder so reviewers see the slot */
-  if(opts.placeholder&&!opts.hide){
+  if(opts.placeholder&&!opts.hide&&COURSE.videoStraight){
+    /* course.json "videoStraight": true — the player shows at once (16:9 frame until the clip says its size); the card appears only if the clip fails (SMP 2.2, 2026-10-24) */
+    w.hidden=false;v.style.aspectRatio='16/9';
+    v.addEventListener('error',function(){w.hidden=true;host.insertBefore(el('<div class="mediaph missing"><span class="mpi">▶</span><b>'+T(opts.placeholder)+'</b>'+phPath('video/'+name+'.mp4')+'</div>'),w);});
+    if(opts.onReady)v.addEventListener('loadeddata',opts.onReady);
+    if(opts.onMissing)v.addEventListener('error',opts.onMissing);
+  }else if(opts.placeholder&&!opts.hide){
     var ph=el('<div class="mediaph"><span class="mpi">▶</span><b>'+T(opts.placeholder)+'</b>'+phPath('video/'+name+'.mp4')+(COURSE.preview&&opts.names&&opts.names.length?'<span class="mpf">'+opts.names.join('<br>')+'</span>':'')+'</div>');   /* a preview build names the clips to make (x_previewNames; never in a release) */
     host.insertBefore(ph,w);
     /* the placeholder goes the moment the browser knows the clip exists (metadata), not only once frames arrive */
