@@ -27,12 +27,24 @@
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
       <file href="brand/jam-training-primary.png"/>
       <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp23-v01-hook.ar.vtt"/>
+      <file href="captions/smp23-v01-hook.en.vtt"/>
       <file href="captions/smp23-v02-opening.ar.vtt"/>
       <file href="captions/smp23-v02-opening.en.vtt"/>
       <file href="captions/smp23-v03-watch-the-fans.ar.vtt"/>
       <file href="captions/smp23-v03-watch-the-fans.en.vtt"/>
       <file href="captions/smp23-v04-rumour.ar.vtt"/>
       <file href="captions/smp23-v04-rumour.en.vtt"/>
+      <file href="captions/smp23-v05-journalist-poor.ar.vtt"/>
+      <file href="captions/smp23-v05-journalist-poor.en.vtt"/>
+      <file href="captions/smp23-v06-journalist-good.ar.vtt"/>
+      <file href="captions/smp23-v06-journalist-good.en.vtt"/>
+      <file href="captions/smp23-v07-mistake-poor.ar.vtt"/>
+      <file href="captions/smp23-v07-mistake-poor.en.vtt"/>
+      <file href="captions/smp23-v08-mistake-good.ar.vtt"/>
+      <file href="captions/smp23-v08-mistake-good.en.vtt"/>
+      <file href="captions/smp23-v09-photo-start.ar.vtt"/>
+      <file href="captions/smp23-v09-photo-start.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/custom-walkie-talkie.svg"/>
@@ -72,9 +84,17 @@
       <file href="images/cast/C-04.jpg"/>
       <file href="images/cast/C-06.jpg"/>
       <file href="images/cast/F-08.jpg"/>
+      <file href="images/smp23-hero.jpg"/>
       <file href="images/smp23-s05-welcome.jpg"/>
       <file href="images/smp23-s07-neutral.jpg"/>
+      <file href="images/smp23-s11-photo-dp1.jpg"/>
+      <file href="images/smp23-s12-photo-dp1a.jpg"/>
+      <file href="images/smp23-s13-photo-dp1b.jpg"/>
+      <file href="images/smp23-s14-photo-dp1c.jpg"/>
+      <file href="images/smp23-s15-photo-dp2.jpg"/>
+      <file href="images/smp23-s16-photo-dp2a.jpg"/>
       <file href="images/smp23-s17-photo-dp2b.jpg"/>
+      <file href="images/smp23-s18-photo-dp2c.jpg"/>
       <file href="images/smp23-s19-photo-dp3.jpg"/>
       <file href="images/smp23-s20-photo-dp3a.jpg"/>
       <file href="images/smp23-s21-photo-dp3b.jpg"/>
@@ -93,11 +113,18 @@
       <file href="images/smp23-thumb-s5-handled-well.jpg"/>
       <file href="images/smp23-thumb-s6-breach-or-ok.jpg"/>
       <file href="images/smp23-thumb-s8-ready-for-duty.jpg"/>
+      <file href="incoming/smp23-v01-hook.mp4"/>
       <file href="incoming/smp23-v02-opening.mp4"/>
       <file href="scorm.js"/>
+      <file href="video/smp23-v01-hook.mp4"/>
       <file href="video/smp23-v02-opening.mp4"/>
       <file href="video/smp23-v03-watch-the-fans.mp4"/>
       <file href="video/smp23-v04-rumour.mp4"/>
+      <file href="video/smp23-v05-journalist-poor.mp4"/>
+      <file href="video/smp23-v06-journalist-good.mp4"/>
+      <file href="video/smp23-v07-mistake-poor.mp4"/>
+      <file href="video/smp23-v08-mistake-good.mp4"/>
+      <file href="video/smp23-v09-photo-start.mp4"/>
     </resource>
   </resources>
 </manifest>
