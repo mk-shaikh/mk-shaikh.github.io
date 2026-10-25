@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp102evacuationsignalsexitgates" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Evacuation, emergency signals &amp; opening exit gates</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Evacuation, emergency signals &amp; opening exit gates</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp102-v01-hook.en.vtt"/>
+      <file href="captions/smp102-v02-who-decides.en.vtt"/>
+      <file href="captions/smp102-v03-messages.en.vtt"/>
+      <file href="captions/smp102-v04-gate.en.vtt"/>
+      <file href="captions/smp102-v05-moving.en.vtt"/>
+      <file href="captions/smp102-v06-faisal-gate.en.vtt"/>
+      <file href="captions/smp102-v07-stairs.en.vtt"/>
+      <file href="captions/smp102-v08-no-going-back.en.vtt"/>
+      <file href="captions/smp102-v09-assistance.en.vtt"/>
+      <file href="captions/smp102-v10-sweep.en.vtt"/>
+      <file href="captions/smp102-v11-story-start.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
+      <file href="icons/fluent-3d-ambulance.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-back-arrow.png"/>
+      <file href="icons/fluent-3d-bell.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-classical-building.png"/>
+      <file href="icons/fluent-3d-clipboard.png"/>
+      <file href="icons/fluent-3d-cloud-with-rain.png"/>
+      <file href="icons/fluent-3d-compass.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-ear.png"/>
+      <file href="icons/fluent-3d-elevator.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-fire-extinguisher.png"/>
+      <file href="icons/fluent-3d-fire.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-hospital.png"/>
+      <file href="icons/fluent-3d-hourglass-done.png"/>
+      <file href="icons/fluent-3d-house.png"/>
+      <file href="icons/fluent-3d-left-right-arrow.png"/>
+      <file href="icons/fluent-3d-locked-with-key.png"/>
+      <file href="icons/fluent-3d-locked.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-standing.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-police-officer.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-relieved-face.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stopwatch.png"/>
+      <file href="icons/fluent-3d-toilet.png"/>
+      <file href="icons/fluent-3d-unlocked.png"/>
+      <file href="icons/fluent-3d-up-arrow.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-womens-room.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/cast/F-03.jpg"/>
+      <file href="images/smp102-d1.jpg"/>
+      <file href="images/smp102-d2.jpg"/>
+      <file href="images/smp102-d3.jpg"/>
+      <file href="images/smp102-d4.jpg"/>
+      <file href="images/smp102-d5.jpg"/>
+      <file href="images/smp102-d6.jpg"/>
+      <file href="images/smp102-d7.jpg"/>
+      <file href="images/smp102-d8.jpg"/>
+      <file href="images/smp102-hero.jpg"/>
+      <file href="images/smp102-m1.jpg"/>
+      <file href="images/smp102-m2.jpg"/>
+      <file href="images/smp102-m3.jpg"/>
+      <file href="images/smp102-m4.jpg"/>
+      <file href="images/smp102-p1-poll.jpg"/>
+      <file href="images/smp102-r1.jpg"/>
+      <file href="images/smp102-r2.jpg"/>
+      <file href="images/smp102-r3.jpg"/>
+      <file href="images/smp102-r4.jpg"/>
+      <file href="images/smp102-r5.jpg"/>
+      <file href="images/smp102-r6.jpg"/>
+      <file href="images/smp102-s1-concourse.jpg"/>
+      <file href="images/smp102-s2-levels.jpg"/>
+      <file href="images/smp102-s3-gate-check.jpg"/>
+      <file href="images/smp102-s4-smoke.jpg"/>
+      <file href="images/smp102-s5-locked.jpg"/>
+      <file href="images/smp102-s6-vomitory.jpg"/>
+      <file href="images/smp102-s7-help.jpg"/>
+      <file href="images/smp102-s8-sweep.jpg"/>
+      <file href="images/smp102-s9-assembly.jpg"/>
+      <file href="images/smp102-w1.jpg"/>
+      <file href="images/smp102-w2.jpg"/>
+      <file href="images/smp102-w3.jpg"/>
+      <file href="images/smp102-w4.jpg"/>
+      <file href="incoming/smp102-v01-hook.mp4"/>
+      <file href="incoming/smp102-v02-who-decides.mp4"/>
+      <file href="incoming/smp102-v03-messages.mp4"/>
+      <file href="incoming/smp102-v04-gate.mp4"/>
+      <file href="incoming/smp102-v05-moving.mp4"/>
+      <file href="incoming/smp102-v06-faisal-gate.mp4"/>
+      <file href="incoming/smp102-v10-sweep.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp102-v01-hook.mp4"/>
+      <file href="video/smp102-v02-who-decides.mp4"/>
+      <file href="video/smp102-v03-messages.mp4"/>
+      <file href="video/smp102-v04-gate.mp4"/>
+      <file href="video/smp102-v05-moving.mp4"/>
+      <file href="video/smp102-v06-faisal-gate.mp4"/>
+      <file href="video/smp102-v07-stairs.mp4"/>
+      <file href="video/smp102-v08-no-going-back.mp4"/>
+      <file href="video/smp102-v09-assistance.mp4"/>
+      <file href="video/smp102-v10-sweep.mp4"/>
+      <file href="video/smp102-v11-story-start.mp4"/>
+    </resource>
+  </resources>
+</manifest>
