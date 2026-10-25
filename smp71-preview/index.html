@@ -1228,6 +1228,8 @@ details.transcript p{margin:6px 0;line-height:1.55}
 .mm-row.ok{border-color:var(--teal);background:var(--teal-tint)}
 .mm-num{width:26px;height:26px;border-radius:50%;background:var(--line);text-align:center;line-height:26px;font-weight:700;flex:none}.mm-row.ok .mm-num{background:var(--teal);color:#fff}
 .mm-ask{border:2px solid var(--orange);border-radius:12px;padding:14px;margin-top:12px}
+.mm-ask.mm-nudge{animation:hpulse .5s ease 3}   /* Play pressed while a question is open (2026-10-25) */
+@media (prefers-reduced-motion: reduce){.mm-ask.mm-nudge{animation:none;outline:3px solid var(--orange)}}
 .mm-opts{display:grid;gap:8px;margin-top:8px}
 .mm-opt{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;cursor:pointer;min-height:52px;font:inherit}
 .mm-opt .ico{width:34px;height:34px;flex:none}.mm-opt.no{border-color:var(--red);background:var(--red-tint)}.mm-x{margin-left:auto;color:var(--red);font-weight:700}
@@ -1952,6 +1954,16 @@ var UI={
 };
 if(COURSE.ui)Object.keys(COURSE.ui).forEach(function(k){UI[k]=COURSE.ui[k];});
 function U(k,v){var t=T(UI[k]);if(v)Object.keys(v).forEach(function(x){t=t.split('{'+x+'}').join(v[x]);});return t;}
+/* attributes take plain text: aria-label, title and alt never keep the <bdi> marks T() adds in Arabic.
+   plainAttr() for one value; watchAttrs() cleans every attribute path, now and later (2026-10-25) */
+function plainAttr(s){return String(s==null?'':s).replace(/<\/?[A-Za-z][^>]*>/g,'');}
+var ATTRS_PLAIN=['aria-label','title','alt'];
+function cleanAttrs(root){if(!root||!root.querySelectorAll)return;var q='[aria-label*="<"],[title*="<"],[alt*="<"]';
+  var els=[].slice.call(root.querySelectorAll(q));if(root.matches&&root.matches(q))els.push(root);
+  els.forEach(function(e){ATTRS_PLAIN.forEach(function(a){var v=e.getAttribute(a);if(v&&v.indexOf('<')>=0){var c=plainAttr(v);if(c!==v)e.setAttribute(a,c);}});});}
+function watchAttrs(){cleanAttrs(document.body);if(!window.MutationObserver)return;
+  new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='attributes')cleanAttrs(m.target);else [].forEach.call(m.addedNodes,function(n){if(n.nodeType===1)cleanAttrs(n);});});})
+    .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:ATTRS_PLAIN});}
 function applyLang(){
   document.documentElement.lang=LANG;document.documentElement.dir=RTL[LANG]?'rtl':'ltr';
   try{localStorage.setItem('ck-lang',LANG);localStorage.setItem('ck-lang-'+COURSE.id,LANG);}catch(e){}
@@ -2370,7 +2382,8 @@ function vidSlot(host,name,opts){
   var mb=w.querySelector('.mute');
   function syncMuteBtn(){mb.setAttribute('aria-pressed',String(!v.muted));mb.textContent=(v.muted?'🔇 ':'🔊 ')+U('sound');}
   syncMuteBtn();
-  v.autoplay=!reduced; if(!reduced)v.setAttribute('autoplay','');
+  var manual=!!opts.manual;   /* opts.manual (2026-10-25): the screen starts the clip itself (mark the moment) - no autoplay, no tap-to-resume */
+  v.autoplay=!reduced&&!manual; if(!reduced&&!manual)v.setAttribute('autoplay','');
   v.addEventListener('loadedmetadata',function(){ // size the frame to the clip: portrait screen-recordings stay big and readable
     if(v.videoWidth&&v.videoHeight){var ar=v.videoWidth/v.videoHeight;v.style.aspectRatio=ar;w.classList.toggle('portrait',ar<1);}
   });
@@ -2379,7 +2392,7 @@ function vidSlot(host,name,opts){
     if(!v.isConnected)return; // user already navigated away
     w.hidden=false;
     try{if(v.textTracks[0])v.textTracks[0].mode='showing';}catch(_){}
-    if(reduced)return;
+    if(reduced||manual)return;
     /* sound-first: try unmuted autoplay; if the browser/LMS blocks it,
        play muted but show an unmissable "tap for sound" pill */
     v.muted=false;syncMuteBtn();
@@ -2400,7 +2413,7 @@ function vidSlot(host,name,opts){
   /* any first tap on the page also resumes a stalled video */
   document.addEventListener('pointerdown',function once(){
     document.removeEventListener('pointerdown',once,true);
-    if(!reduced&&v.isConnected&&v.paused&&!v.ended){v.play().catch(function(){});}
+    if(!reduced&&!manual&&v.isConnected&&v.paused&&!v.ended){v.play().catch(function(){});}
   },true);
   v.addEventListener('error',function(){if(fallbackEl)fallbackEl.style.display='';w.remove();});
   /* when a (non-looping) clip finishes, bring the buttons/choices into view */
@@ -2429,6 +2442,7 @@ function vidSlot(host,name,opts){
   return w;
 }
 function boot(){
+  watchAttrs();
   /* one-lesson courses: COURSE.sectionNoun 'part' → the sections are parts and the quiz is the lesson check; every key_part label replaces key (user, 2026-10-14) */
   if(COURSE.sectionNoun==='part')Object.keys(UI).forEach(function(k){var b=k.replace(/_part$/,'');if(b!==k&&!(COURSE.ui&&COURSE.ui[b]))UI[b]=UI[k];});
   var hadLang=!!storedLang(); // read BEFORE applyLang stores a default
@@ -4324,7 +4338,7 @@ function addAudio(s,h){
 function cardAudio(c){
   var L=Array.isArray(c.x_audio)?c.x_audio:[];if(!L.length)return '';
   return '<span class="fcaudio">'+L.map(function(x){var src=audioFile(x.media),lb=T(x.label)||U('listen');
-    return '<button type="button" class="btn sm ghost play"'+(src?'':' disabled')+' aria-label="'+U('listen')+': '+strip_(lb)+'">&#9654; '+lb+'</button>'+(src?'<audio preload="none" src="'+src+'"></audio>':'');}).join('')+'</span>';
+    return '<button type="button" class="btn sm ghost play"'+(src?'':' disabled')+' aria-label="'+U('listen')+': '+strip_(lb)+(src?'':' - '+U('audioMissing'))+'">&#9654; '+lb+(src?'':' - '+U('audioMissing'))+'</button>'+(src?'<audio preload="none" src="'+src+'"></audio>':'');}).join('')+'</span>';   /* a sound not delivered yet says so (review 2026-10-25), never a dead button */
 }
 function wireCardAudio(box){
   box.querySelectorAll('.fcaudio .play').forEach(function(b){var au=b.nextElementSibling;if(!au||au.tagName!=='AUDIO')return;
@@ -4443,16 +4457,16 @@ Object.assign(BUILD,{
     var tl=el('<div class="mm-tl" aria-hidden="true"><div class="mm-played"></div></div>');h.appendChild(tl);
     var ctl=el('<div class="mm-ctl"><button type="button" class="btn ghost mm-pp">▶ '+U('play')+'</button><button type="button" class="btn ghost mm-back">↺ 5 s</button>'+
       '<button type="button" class="btn mm-mark">⚑ '+U('markMoment')+'</button><span class="mm-t">0:00</span></div>');h.appendChild(ctl);
+    var fbHost=el('<div aria-live="polite"></div>');h.appendChild(fbHost);   /* the question and feedback sit right under the controls, in sight (review 2026-10-25: below the list it read as a frozen clip) */
     var list=el('<div class="mm-found"></div>');M.forEach(function(m,i){list.appendChild(el('<div class="mm-row" data-i="'+i+'"><span class="mm-num">'+(i+1)+'</span><span>'+U('momentNotFound',{n:i+1})+'</span></div>'));});h.appendChild(list);
-    var fbHost=el('<div aria-live="polite"></div>');h.appendChild(fbHost);
     var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
     var missing=function(){ctl.querySelector('.mm-mark').disabled=true;ctl.querySelector('.mm-pp').disabled=true;btn.disabled=false;};
-    vidSlot(slot,name,{placeholder:s.x_placeholderNote||UI.videoSoon,onMissing:function(){missing();}});
-    var v=slot.querySelector('video');if(v){v.autoplay=false;v.removeAttribute('autoplay');}
+    vidSlot(slot,name,{manual:true,placeholder:s.x_placeholderNote||UI.videoSoon,onMissing:function(){missing();}});   /* manual: the learner presses Play (the clip never starts by itself) */
+    var v=slot.querySelector('video');
     function dur(){return (v&&v.duration)||1;}
     function fmt(t){t=Math.max(0,t||0);return Math.floor(t/60)+':'+('0'+Math.floor(t%60)).slice(-2);}
     if(!v)return;
-    function pp(){if(asking)return;if(v.paused){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else v.pause();}
+    function pp(){if(asking){var q=fbHost.querySelector('.mm-ask');if(q){q.classList.remove('mm-nudge');void q.offsetWidth;q.classList.add('mm-nudge');svin(q);}return;}if(v.paused){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else v.pause();}
     v.addEventListener('play',function(){ctl.querySelector('.mm-pp').textContent='❚❚ '+U('pause');});
     v.addEventListener('pause',function(){ctl.querySelector('.mm-pp').textContent='▶ '+U('play');});
     v.addEventListener('timeupdate',function(){tl.querySelector('.mm-played').style.width=(v.currentTime/dur()*100)+'%';ctl.querySelector('.mm-t').textContent=fmt(v.currentTime)+' / '+fmt(v.duration);});
@@ -4955,7 +4969,7 @@ function clListInto(h,curK){
       var li=el('<li><button type="button" class="cl-lesson'+(hl?' next':'')+(dn?' done':'')+'">'+clThumb(L)+
         '<span class="cl-lt"><b>'+T(L.title)+'</b><span>'+stt+'</span></span><span class="cl-st" aria-hidden="true"></span></button></li>');
       var b=li.querySelector('button');
-      b.setAttribute('aria-label',U('lessonOf',{a:k+1,b:L0.length})+': '+T(L.title)+' — '+(dn?U('statusDone'):isNext?U('upNext'):U('statusNotStarted'))+(L.minutes?' — '+U('minutes',{m:L.minutes}):''));
+      b.setAttribute('aria-label',plainAttr(U('lessonOf',{a:k+1,b:L0.length})+': '+T(L.title)+' — '+(dn?U('statusDone'):isNext?U('upNext'):U('statusNotStarted'))+(L.minutes?' — '+U('minutes',{m:L.minutes}):'')));
       if(k===curK)b.setAttribute('aria-current','page');
       b.addEventListener('click',function(){clStart(k);});grp.querySelector('ol').appendChild(li);});
     h.appendChild(grp);
