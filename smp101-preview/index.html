@@ -4333,7 +4333,7 @@ function addAudio(s,h){
     var row=el('<div class="phrase">'+(txt?'<span class="ptext">'+txt+'</span>':'')+'</div>');
     if(src){
       var au=new Audio(src),b=el('<button type="button" class="btn sm ghost play" aria-label="'+U('listen')+(txt?': '+strip_(txt):'')+'">▶ '+U('listen')+'</button>');
-      (function(au,b){b.addEventListener('click',function(){try{au.currentTime=0;au.play();}catch(_){}});
+      (function(au,b){b.addEventListener('click',function(){try{au.currentTime=0;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){});}catch(_){}});
         au.addEventListener('error',function(){b.disabled=true;b.textContent=U('audioMissing');});})(au,b);
       row.appendChild(b);
     }
@@ -4351,7 +4351,7 @@ function cardAudio(c){
 function wireCardAudio(box){
   box.querySelectorAll('.fcaudio .play').forEach(function(b){var au=b.nextElementSibling;if(!au||au.tagName!=='AUDIO')return;
     au.addEventListener('error',function(){b.disabled=true;b.textContent=U('audioMissing');});
-    b.addEventListener('click',function(e){e.stopPropagation();box.querySelectorAll('audio').forEach(function(x){if(x!==au)try{x.pause();}catch(_){}});try{au.currentTime=0;au.play();}catch(_){}});
+    b.addEventListener('click',function(e){e.stopPropagation();box.querySelectorAll('audio').forEach(function(x){if(x!==au)try{x.pause();}catch(_){}});try{au.currentTime=0;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){});}catch(_){}});
     b.addEventListener('keydown',function(e){e.stopPropagation();});});
 }
 function strip_(html){var d=document.createElement('div');d.innerHTML=html;return (d.textContent||'').replace(/"/g,'');}
@@ -4620,7 +4620,7 @@ Object.assign(BUILD,{
       var p=el('<div class="lc-play"><button type="button" class="btn lc-btn"'+(src?'':' disabled')+'>&#9654; '+U('playPhrase')+'</button>'+(src?'<audio preload="auto" src="'+src+'"></audio>':'')+'</div>');
       body.appendChild(p);var pb=p.querySelector('button'),au=p.querySelector('audio');
       if(au){au.addEventListener('error',function(){pb.disabled=true;pb.textContent=U('audioMissing');});
-        pb.addEventListener('click',function(){try{au.currentTime=0;au.play();}catch(_){}});}
+        pb.addEventListener('click',function(){try{au.currentTime=0;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){});}catch(_){}});}
       if(r.words)body.appendChild(el('<details class="lc-words"><summary>'+U('showWords')+'</summary><p dir="auto">'+T(r.words)+'</p></details>'));
       body.appendChild(el('<p class="q">'+U('whatMeans')+'</p>'));
       var ops=(r.options||[]).slice();for(var i=ops.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=ops[i];ops[i]=ops[j];ops[j]=t;}
