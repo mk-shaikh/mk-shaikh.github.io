@@ -22,6 +22,24 @@
   <resources>
     <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
+      <file href="audio/smp41-au1-1-good.m4a"/>
+      <file href="audio/smp41-au1-1-poor.m4a"/>
+      <file href="audio/smp41-au1-2-good.m4a"/>
+      <file href="audio/smp41-au1-2-poor.m4a"/>
+      <file href="audio/smp41-au1-3-good.m4a"/>
+      <file href="audio/smp41-au1-3-poor.m4a"/>
+      <file href="audio/smp41-au1-4-good.m4a"/>
+      <file href="audio/smp41-au1-4-poor.m4a"/>
+      <file href="audio/smp41-au2-s1-f.m4a"/>
+      <file href="audio/smp41-au2-s1-m.m4a"/>
+      <file href="audio/smp41-au2-s2-f.m4a"/>
+      <file href="audio/smp41-au2-s2-m.m4a"/>
+      <file href="audio/smp41-au2-s3-f.m4a"/>
+      <file href="audio/smp41-au2-s3-m.m4a"/>
+      <file href="audio/smp41-au2-s4-f.m4a"/>
+      <file href="audio/smp41-au2-s4-m.m4a"/>
+      <file href="audio/smp41-au2-s5-f.m4a"/>
+      <file href="audio/smp41-au2-s5-m.m4a"/>
       <file href="brand/afc27-start-picture.jpg"/>
       <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
