@@ -52,6 +52,8 @@
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
       <file href="brand/jam-training-primary.png"/>
       <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp13-p-0-2.ar.vtt"/>
+      <file href="captions/smp13-p-0-2.en.vtt"/>
       <file href="captions/smp13-p-1-1.ar.vtt"/>
       <file href="captions/smp13-p-1-1.en.vtt"/>
       <file href="captions/smp13-p-1-2.ar.vtt"/>
@@ -134,6 +136,7 @@
       <file href="images/smp13-thumb-6.jpg"/>
       <file href="images/smp13-thumb-7.jpg"/>
       <file href="scorm.js"/>
+      <file href="video/smp13-p-0-2.mp4"/>
       <file href="video/smp13-p-1-1.mp4"/>
       <file href="video/smp13-p-1-2.mp4"/>
       <file href="video/smp13-p-7-1.mp4"/>
