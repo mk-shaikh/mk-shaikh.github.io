@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp42crowdpsychologyfootball" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Crowd psychology at football</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Crowd psychology at football</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp42-v01-hook.en.vtt"/>
+      <file href="captions/smp42-v02-ripple.en.vtt"/>
+      <file href="captions/smp42-v04-mood-change.en.vtt"/>
+      <file href="captions/smp42-v10-not-a-mob.en.vtt"/>
+      <file href="captions/smp42-v13-recap.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-angry-face.png"/>
+      <file href="icons/fluent-3d-balance-scale.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-fearful-face.png"/>
+      <file href="icons/fluent-3d-green-circle.png"/>
+      <file href="icons/fluent-3d-grinning-face.png"/>
+      <file href="icons/fluent-3d-hourglass-done.png"/>
+      <file href="icons/fluent-3d-level-slider.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-memo.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-orange-circle.png"/>
+      <file href="icons/fluent-3d-party-popper.png"/>
+      <file href="icons/fluent-3d-person-running.png"/>
+      <file href="icons/fluent-3d-red-circle.png"/>
+      <file href="icons/fluent-3d-scarf.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stopwatch.png"/>
+      <file href="icons/fluent-3d-thermometer.png"/>
+      <file href="icons/fluent-3d-trophy.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-water-wave.png"/>
+      <file href="icons/fluent-3d-yellow-circle.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/smp42-c1a.jpg"/>
+      <file href="images/smp42-c1b.jpg"/>
+      <file href="images/smp42-c1c.jpg"/>
+      <file href="images/smp42-c2b.jpg"/>
+      <file href="images/smp42-c2c.jpg"/>
+      <file href="images/smp42-c3a.jpg"/>
+      <file href="images/smp42-c3b.jpg"/>
+      <file href="images/smp42-c3c.jpg"/>
+      <file href="images/smp42-d2.jpg"/>
+      <file href="images/smp42-d3.jpg"/>
+      <file href="images/smp42-hero.jpg"/>
+      <file href="images/smp42-m1.jpg"/>
+      <file href="images/smp42-m2.jpg"/>
+      <file href="images/smp42-m4.jpg"/>
+      <file href="images/smp42-m5.jpg"/>
+      <file href="images/smp42-s1-crowd.jpg"/>
+      <file href="images/smp42-s2-home-end.jpg"/>
+      <file href="images/smp42-s3-scanning.jpg"/>
+      <file href="images/smp42-s4-radio.jpg"/>
+      <file href="images/smp42-s5-moments.jpg"/>
+      <file href="incoming/smp42-v01-hook.mp4"/>
+      <file href="incoming/smp42-v02-ripple.mp4"/>
+      <file href="incoming/smp42-v04-mood-change.mp4"/>
+      <file href="incoming/smp42-v07-stage1.mp4"/>
+      <file href="incoming/smp42-v09-stage3.mp4"/>
+      <file href="incoming/smp42-v10-not-a-mob.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp42-v01-hook.mp4"/>
+      <file href="video/smp42-v02-ripple.mp4"/>
+      <file href="video/smp42-v04-mood-change.mp4"/>
+      <file href="video/smp42-v09-stage3.mp4"/>
+      <file href="video/smp42-v10-not-a-mob.mp4"/>
+      <file href="video/smp42-v13-recap.mp4"/>
+    </resource>
+  </resources>
+</manifest>
