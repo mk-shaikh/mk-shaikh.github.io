@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp32customerservicewayfinding" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Customer service &amp; wayfinding</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Customer service &amp; wayfinding</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp32-v02-journey.en.vtt"/>
+      <file href="captions/smp32-v03-route.en.vtt"/>
+      <file href="captions/smp32-v05-majed-gate.en.vtt"/>
+      <file href="captions/smp32-v06-faisal-gate.en.vtt"/>
+      <file href="captions/smp32-v07-noura-step-free.en.vtt"/>
+      <file href="captions/smp32-v09-faisal-metro.en.vtt"/>
+      <file href="captions/smp32-v10-story.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-admission-tickets.png"/>
+      <file href="icons/fluent-3d-alarm-clock.png"/>
+      <file href="icons/fluent-3d-bus.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-chair.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-compass.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-elevator.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-hospital.png"/>
+      <file href="icons/fluent-3d-index-pointing-up.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-left-arrow.png"/>
+      <file href="icons/fluent-3d-light-bulb.png"/>
+      <file href="icons/fluent-3d-magnifying-glass-tilted-left.png"/>
+      <file href="icons/fluent-3d-metro.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-palms-up-together.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-running.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-place-of-worship.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-spiral-calendar.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-straight-ruler.png"/>
+      <file href="icons/fluent-3d-toilet.png"/>
+      <file href="icons/fluent-3d-waving-hand.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp32-c1a.jpg"/>
+      <file href="images/smp32-c2c.jpg"/>
+      <file href="images/smp32-cutaway.jpg"/>
+      <file href="images/smp32-d1.jpg"/>
+      <file href="images/smp32-d3.jpg"/>
+      <file href="images/smp32-hero.jpg"/>
+      <file href="images/smp32-k0-hook-end.jpg"/>
+      <file href="images/smp32-map-dp2.jpg"/>
+      <file href="images/smp32-map.jpg"/>
+      <file href="images/smp32-t1.svg"/>
+      <file href="images/smp32-t2.svg"/>
+      <file href="images/smp32-t3.svg"/>
+      <file href="images/smp32-t4.svg"/>
+      <file href="images/smp32-t5.svg"/>
+      <file href="images/smp32-th4.jpg"/>
+      <file href="incoming/smp32-v02-journey.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp32-v02-journey.mp4"/>
+      <file href="video/smp32-v03-route.mp4"/>
+      <file href="video/smp32-v05-majed-gate.mp4"/>
+      <file href="video/smp32-v06-faisal-gate.mp4"/>
+      <file href="video/smp32-v07-noura-step-free.mp4"/>
+      <file href="video/smp32-v08-majed-metro.mp4"/>
+      <file href="video/smp32-v09-faisal-metro.mp4"/>
+      <file href="video/smp32-v10-story.mp4"/>
+      <file href="video/smp32-v11-dp1-b.mp4"/>
+      <file href="video/smp32-v12-dp1-c.mp4"/>
+      <file href="video/smp32-v13-dp2-a.mp4"/>
+    </resource>
+  </resources>
+</manifest>

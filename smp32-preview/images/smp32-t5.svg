@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560">
+<rect x="8" y="8" width="984" height="544" rx="34" fill="#ffffff" stroke="#1d4f91" stroke-width="6"/>
+<rect x="8" y="8" width="984" height="96" rx="34" fill="#1d4f91"/><rect x="8" y="70" width="984" height="34" fill="#1d4f91"/>
+<text x="44" y="70" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#fff">AFC27 · Training stadium</text>
+<text x="956" y="70" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#fff" text-anchor="start" direction="rtl">الملعب التدريبي</text>
+<rect x="44" y="130" width="213" height="200" rx="18" fill="#eef3fa" stroke="#9fb3cf" stroke-width="3"/>
+<text x="150.5" y="174" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="30" font-weight="700" fill="#1d4f91" text-anchor="middle">Gate</text>
+<text x="150.5" y="212" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="28" fill="#1d4f91" text-anchor="middle" direction="rtl">البوابة</text>
+<text x="150.5" y="298" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="72" font-weight="700" fill="#1b1b1b" text-anchor="middle">9</text>
+<rect x="44" y="360" width="912" height="70" rx="16" fill="#fff4d6" stroke="#d39e00" stroke-width="3"/>
+<text x="70" y="407" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#5b4300">Hospitality Lounge 3</text>
+<text x="930" y="407" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#5b4300" text-anchor="start" direction="rtl">صالة الضيافة 3</text>
+<text x="44" y="500" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="40" font-weight="700" fill="#1b1b1b">Today 19:00</text>
+<text x="956" y="500" font-family="Arial, Tahoma, 'Segoe UI', sans-serif" font-size="38" font-weight="700" fill="#1b1b1b" text-anchor="start" direction="rtl">اليوم 19:00</text>
+</svg>
