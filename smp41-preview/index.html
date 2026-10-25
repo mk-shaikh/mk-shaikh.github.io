@@ -900,6 +900,9 @@
   .srrow{display:block;margin:0;padding:10px 14px;border-radius:12px;background:var(--sky-tint);color:var(--navy);font-size:15px;line-height:1.5;border-inline-start:4px solid var(--teal);overflow-wrap:anywhere;word-break:normal;min-width:0}
   .srrow>b,.srrow>span{display:block}.srlabel{margin-bottom:2px}.srpick{font-weight:600}.srline{margin-top:4px}
   .srrow.srnone{background:var(--surface-2);border-inline-start-color:var(--line-2);color:var(--ink)}.srnone .srpick{font-weight:400;font-style:italic}
+  /* E1 baseline: confidence question after the first pick; confidence and the "confident but wrong" flag in the recap */
+  .confask{margin:14px 0 0}.confopts{display:flex;flex-wrap:wrap;gap:8px}.confopt{min-height:44px}
+  .srconf{margin-top:4px}.srrow.srflag{border-inline-start-color:var(--orange)}.srflagline{margin-top:4px;font-weight:700}
   .streak{display:inline-block;margin-inline-start:8px;padding:2px 9px;border-radius:12px;background:var(--teal-tint);color:var(--teal);letter-spacing:0;font-size:11.5px;text-transform:none}
   .jlist{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
   .jitem{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--line-2);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
@@ -1225,6 +1228,8 @@ details.transcript p{margin:6px 0;line-height:1.55}
 .mm-row.ok{border-color:var(--teal);background:var(--teal-tint)}
 .mm-num{width:26px;height:26px;border-radius:50%;background:var(--line);text-align:center;line-height:26px;font-weight:700;flex:none}.mm-row.ok .mm-num{background:var(--teal);color:#fff}
 .mm-ask{border:2px solid var(--orange);border-radius:12px;padding:14px;margin-top:12px}
+.mm-ask.mm-nudge{animation:hpulse .5s ease 3}   /* Play pressed while a question is open (2026-10-25) */
+@media (prefers-reduced-motion: reduce){.mm-ask.mm-nudge{animation:none;outline:3px solid var(--orange)}}
 .mm-opts{display:grid;gap:8px;margin-top:8px}
 .mm-opt{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;cursor:pointer;min-height:52px;font:inherit}
 .mm-opt .ico{width:34px;height:34px;flex:none}.mm-opt.no{border-color:var(--red);background:var(--red-tint)}.mm-x{margin-left:auto;color:var(--red);font-weight:700}
@@ -1949,6 +1954,16 @@ var UI={
 };
 if(COURSE.ui)Object.keys(COURSE.ui).forEach(function(k){UI[k]=COURSE.ui[k];});
 function U(k,v){var t=T(UI[k]);if(v)Object.keys(v).forEach(function(x){t=t.split('{'+x+'}').join(v[x]);});return t;}
+/* attributes take plain text: aria-label, title and alt never keep the <bdi> marks T() adds in Arabic.
+   plainAttr() for one value; watchAttrs() cleans every attribute path, now and later (2026-10-25) */
+function plainAttr(s){return String(s==null?'':s).replace(/<\/?[A-Za-z][^>]*>/g,'');}
+var ATTRS_PLAIN=['aria-label','title','alt'];
+function cleanAttrs(root){if(!root||!root.querySelectorAll)return;var q='[aria-label*="<"],[title*="<"],[alt*="<"]';
+  var els=[].slice.call(root.querySelectorAll(q));if(root.matches&&root.matches(q))els.push(root);
+  els.forEach(function(e){ATTRS_PLAIN.forEach(function(a){var v=e.getAttribute(a);if(v&&v.indexOf('<')>=0){var c=plainAttr(v);if(c!==v)e.setAttribute(a,c);}});});}
+function watchAttrs(){cleanAttrs(document.body);if(!window.MutationObserver)return;
+  new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='attributes')cleanAttrs(m.target);else [].forEach.call(m.addedNodes,function(n){if(n.nodeType===1)cleanAttrs(n);});});})
+    .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:ATTRS_PLAIN});}
 function applyLang(){
   document.documentElement.lang=LANG;document.documentElement.dir=RTL[LANG]?'rtl':'ltr';
   try{localStorage.setItem('ck-lang',LANG);localStorage.setItem('ck-lang-'+COURSE.id,LANG);}catch(e){}
@@ -2367,7 +2382,8 @@ function vidSlot(host,name,opts){
   var mb=w.querySelector('.mute');
   function syncMuteBtn(){mb.setAttribute('aria-pressed',String(!v.muted));mb.textContent=(v.muted?'🔇 ':'🔊 ')+U('sound');}
   syncMuteBtn();
-  v.autoplay=!reduced; if(!reduced)v.setAttribute('autoplay','');
+  var manual=!!opts.manual;   /* opts.manual (2026-10-25): the screen starts the clip itself (mark the moment) - no autoplay, no tap-to-resume */
+  v.autoplay=!reduced&&!manual; if(!reduced&&!manual)v.setAttribute('autoplay','');
   v.addEventListener('loadedmetadata',function(){ // size the frame to the clip: portrait screen-recordings stay big and readable
     if(v.videoWidth&&v.videoHeight){var ar=v.videoWidth/v.videoHeight;v.style.aspectRatio=ar;w.classList.toggle('portrait',ar<1);}
   });
@@ -2376,7 +2392,7 @@ function vidSlot(host,name,opts){
     if(!v.isConnected)return; // user already navigated away
     w.hidden=false;
     try{if(v.textTracks[0])v.textTracks[0].mode='showing';}catch(_){}
-    if(reduced)return;
+    if(reduced||manual)return;
     /* sound-first: try unmuted autoplay; if the browser/LMS blocks it,
        play muted but show an unmissable "tap for sound" pill */
     v.muted=false;syncMuteBtn();
@@ -2397,7 +2413,7 @@ function vidSlot(host,name,opts){
   /* any first tap on the page also resumes a stalled video */
   document.addEventListener('pointerdown',function once(){
     document.removeEventListener('pointerdown',once,true);
-    if(!reduced&&v.isConnected&&v.paused&&!v.ended){v.play().catch(function(){});}
+    if(!reduced&&!manual&&v.isConnected&&v.paused&&!v.ended){v.play().catch(function(){});}
   },true);
   v.addEventListener('error',function(){if(fallbackEl)fallbackEl.style.display='';w.remove();});
   /* when a (non-looping) clip finishes, bring the buttons/choices into view */
@@ -2426,6 +2442,7 @@ function vidSlot(host,name,opts){
   return w;
 }
 function boot(){
+  watchAttrs();
   /* one-lesson courses: COURSE.sectionNoun 'part' → the sections are parts and the quiz is the lesson check; every key_part label replaces key (user, 2026-10-14) */
   if(COURSE.sectionNoun==='part')Object.keys(UI).forEach(function(k){var b=k.replace(/_part$/,'');if(b!==k&&!(COURSE.ui&&COURSE.ui[b]))UI[b]=UI[k];});
   var hadLang=!!storedLang(); // read BEFORE applyLang stores a default
@@ -3051,9 +3068,12 @@ function seededShuffle(arr,seed){var a=arr.slice(),s=seed>>>0;for(var i=a.length
 /* Draw the quiz for one attempt (indexes into pool):
    every objective at least once (perObjective → that many from every objective), then fill up to count from the rest;
    variantGroup → at most one item of a group per attempt; randomise false → keep the pool's order. */
-function quizDraw(pool,count,attempt,s){
+function quizDraw(pool,count,attempt,s,seen){
   var seed=attempt*7919+pool.length*31,used={},picked=[];
   var idx=s.randomise===false?pool.map(function(_,i){return i;}):seededShuffle(pool.map(function(_,i){return i;}),seed);
+  /* E2 (2026-10-25): x_formFirst → attempt 1 is the items marked x_form (the client's own form); a later attempt takes items not shown before first */
+  if(s.x_formFirst&&attempt===1){var fa=idx.filter(function(i){return pool[i].x_form;});if(fa.length)return s.randomise===false?fa.sort(function(a,b){return a-b;}):fa;}
+  if(seen&&seen.length)idx=idx.filter(function(i){return seen.indexOf(i)<0;}).concat(idx.filter(function(i){return seen.indexOf(i)>=0;}));
   function take(i){var g=pool[i].variantGroup;if(picked.indexOf(i)>=0||(g&&used[g]))return false;picked.push(i);if(g)used[g]=1;return true;}
   function lo(q){var l=q.lo;l=Array.isArray(l)?l:[l];for(var k=0;k<l.length;k++)if(typeof l[k]==='number')return l[k];return null;}
   /* HARD RULE (user, 2026-10-14): every objective in the pool is drawn at least once whenever count allows; perObjective raises the minimum */
@@ -3088,7 +3108,7 @@ Object.assign(BUILD,{
       head(s,h);media(s).forEach(function(f){h.appendChild(imgOrPh(f,U('scene')+': '+strip(s.heading)));});   /* a picture on the quiz intro (optional media) */
       /* the quiz opens after the lessons (module.quiz.lockUntilSectionsDone, default true) */
       var mq=(SCRIPT.module&&SCRIPT.module.quiz)||{},own=secIdx(s.section),missing=[];
-      if(mq.lockUntilSectionsDone!==false&&!Q.passed&&!COURSE.reviewFree)COURSE.sections.forEach(function(sec,ix){var k=ix+1;if(k!==own&&!done[k])missing.push({k:k,t:sec.title||sec.name||(U('section')+' '+k),start:sec.start});});
+      if(mq.lockUntilSectionsDone!==false&&!Q.passed&&!COURSE.reviewFree)COURSE.sections.forEach(function(sec,ix){var k=ix+1;if(k!==own&&!done[k]&&!(mq.lockOnlyBefore&&k>own))missing.push({k:k,t:sec.title||sec.name||(U('section')+' '+k),start:sec.start});});
       var bq='<div class="bq">'+(s.lines||[]).map(function(l){return '<p>'+T(l)+'</p>';}).join('')+
         ((s.lines&&s.lines.some(function(l){return String(strip(l)||'').trim();}))?'':'<p><b>'+U(s.safetyMustPass?'quizRulesSafety':'quizRules',{n:count,k:need,p:pass})+'</b></p>')+(Q.passed?'<p>'+U('quizPassedBefore',{b:Math.round((Q.best||0)*count/100),n:count})+'</p>':(Q.attempt?'<p>'+U('attemptN',{a:Q.attempt+1})+'</p>':''))+'</div>';
       h.appendChild(el(bq));
@@ -3103,7 +3123,8 @@ Object.assign(BUILD,{
     function start(resume){
       /* an attempt in progress survives a language switch or a reload: it lives in Q.run (saved in suspend_data) */
       if(st.review&&st.review.q===s.id)delete st.review;   /* a new attempt ends the review route */
-      if(!resume||!Q.run){Q.attempt++;Q.run={order:quizDraw(pool,count,Q.attempt,s),i:0,right:0,results:[]};saveNow();}
+      if(!resume||!Q.run){Q.attempt++;Q.run={order:quizDraw(pool,count,Q.attempt,s,s.x_formFirst?Q.sn:null),i:0,right:0,results:[]};
+        if(s.x_formFirst){Q.sn=(Q.sn||[]);Q.run.order.forEach(function(k){if(Q.sn.indexOf(k)<0)Q.sn.push(k);});}saveNow();}
       var order=Q.run.order;count=order.length;
       var i=Q.run.i,right=Q.run.right,results=Q.run.results;
       function item(){
@@ -3152,7 +3173,9 @@ Object.assign(BUILD,{
           var r=s.retries,canRetry=(r===undefined||r===null||r==='unlimited'||Q.attempt<=Number(r));   // retries = re-attempts allowed
           var missed=results.filter(function(r){return !r.correct;}).map(function(r){return r.id;}),los={},qsec={};
           pool.forEach(function(q){if(missed.indexOf(q.id)>=0){(Array.isArray(q.lo)?q.lo:[q.lo]).forEach(function(l){if(l!==undefined&&l!==null)los[String(l)]=1;});if(q.section!==undefined)qsec[String(q.section)]=1;}});   /* an item's section, else its objectives' sections */
-          var secs=((SCRIPT.module&&SCRIPT.module.sections)||[]).filter(function(sc){return String(sc.n)!==String(s.section)&&(qsec[String(sc.n)]||(sc.lo||[]).some(function(l){return los[String(l)];}));})
+          if(s.x_reviewLines){var rl=[];results.forEach(function(r){if(r.correct)return;var q=pool.filter(function(x){return (x.id||'')===r.id;})[0];var t=q&&q.x_review?T(q.x_review):'';if(t&&rl.indexOf(t)<0)rl.push(t);});
+            if(rl.length)h.appendChild(el('<div class="rvroute"><p><b>'+T(s.x_reviewLines)+'</b></p><ul>'+rl.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>'));}
+          var secs=s.x_reviewLines?[]:((SCRIPT.module&&SCRIPT.module.sections)||[]).filter(function(sc){return String(sc.n)!==String(s.section)&&(qsec[String(sc.n)]||(sc.lo||[]).some(function(l){return los[String(l)];}));})
             .map(function(sc){return (COURSE.sections||[]).filter(function(cs){return String(cs.n)===String(sc.n);})[0];}).filter(Boolean);
           /* review route: only the parts with a wrong answer, in course order; the end of each goes to the next, the last straight back to the check (user, 2026-10-14) */
           var rk=secs.map(function(cs){return COURSE.sections.indexOf(cs)+1;}).filter(function(k){return k>0&&S.some(function(x){return x.sec===k;});});
@@ -3163,7 +3186,7 @@ Object.assign(BUILD,{
           }else{
             var a=actions(h);
             if(canRetry)a.appendChild(contBtn('↻ '+U('tryAgain'),function(){start(false);}));
-            if(!secs.length)a.appendChild(contBtn(U('reviewSection'),function(){goTo(SCRIPT.screens[0].id);},canRetry?'ghost':undefined));
+            if(!secs.length&&!s.x_reviewLines)a.appendChild(contBtn(U('reviewSection'),function(){goTo(SCRIPT.screens[0].id);},canRetry?'ghost':undefined));
             else secs.forEach(function(cs){a.appendChild(contBtn(U('review')+': '+T(cs.title),function(){goTo(cs.start);},'ghost'));});
             if(!canRetry)a.appendChild(contBtn(T(s['continue'])||U('cont'),next,'ghost'));
           }
@@ -3785,6 +3808,86 @@ openJobAids=function(){
   pb.classList.add('jprint');body.insertBefore(pb,wrap);
 };
 
+/* ---- 5. baseline decisions (E1, 2026-10-25): confidence after the first pick, baseline points, LMS record ----
+   branch.x_confidence  {id:"B1", prompt:{…}, labels:[{…}×n]} → on the FIRST pick the choices stay, the question and n buttons show,
+                        the learner rates how sure they are, then the consequence opens. Kept in st.pickFirst['<branch>:conf'] (1…n).
+                        In an LMS: two interactions — '<id>' (the option letter; correct = best, neutral = acceptable, wrong = other)
+                        and '<id>-confidence' (likert, 1…n).
+   x_storyScore.points  [best, acceptable, other] e.g. [3,1,0] → the score line counts these points (a baseline out of 15)
+   x_storyScore.perOk   n XP for every branch whose FIRST choice was acceptable (score 1)
+   x_recapConfidence    {label:{…}, flag:{…}} on a screen with x_storyRecap → each row adds '<label> <n> - <the label of n>' and,
+                        when the first pick was not the best but the learner was sure (the top half of the scale), the flag line. */
+function confLabels(b){return (b&&b.x_confidence&&b.x_confidence.labels)||[];}
+function optScore(o){return typeof o.score==='number'?o.score:(o.rating==='best'?2:o.rating==='ok'?1:0);}
+function reportBaseline(b,oi,n){
+  if(!(window.SCORM&&SCORM.present))return;
+  var c=b.x_confidence,o=b.options[oi],sc=optScore(o),base=parseInt(SCORM.get('cmi.interactions._count'),10);if(isNaN(base))base=0;
+  var id=String(c.id||b.id).replace(/[^A-Za-z0-9_-]/g,'_');
+  SCORM.set('cmi.interactions.'+base+'.id',id);SCORM.set('cmi.interactions.'+base+'.type','choice');
+  SCORM.set('cmi.interactions.'+base+'.student_response',optLetter(oi));SCORM.set('cmi.interactions.'+base+'.result',sc===2?'correct':sc===1?'neutral':'wrong');
+  SCORM.set('cmi.interactions.'+(base+1)+'.id',id+'-confidence');SCORM.set('cmi.interactions.'+(base+1)+'.type','likert');
+  SCORM.set('cmi.interactions.'+(base+1)+'.student_response',String(n));SCORM.set('cmi.interactions.'+(base+1)+'.result','neutral');
+  SCORM.commit();
+}
+var _branch5=BUILD.branch;
+BUILD.branch=function(s,h){
+  _branch5(s,h);
+  var c=s.x_confidence;if(!c||!c.labels||!c.labels.length)return;
+  var asked=false;
+  h.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.opt');if(!b||!h.contains(b)||asked)return;
+    if(st.pickFirst&&st.pickFirst[s.id]!==undefined&&st.pickFirst[s.id+':conf']!==undefined)return;   /* a second try goes straight on */
+    e.stopPropagation();e.preventDefault();asked=true;
+    var all=[].slice.call(h.querySelectorAll('.opt')),oi=b.dataset.oi!==undefined?+b.dataset.oi:all.indexOf(b),o=s.options[oi];
+    st.pick[s.id]=oi;if(!st.pickFirst)st.pickFirst={};if(st.pickFirst[s.id]===undefined)st.pickFirst[s.id]=oi;
+    awardXp(s.id,s.xp&&s.xp.complete);
+    all.forEach(function(x){x.disabled=true;});b.classList.add('g-pick');
+    var box=el('<div class="confask" role="group"><p class="q">'+T(c.prompt)+'</p><div class="confopts"></div></div>'),row=box.querySelector('.confopts');
+    c.labels.forEach(function(l,i){
+      var cb=el('<button type="button" class="btn sm ghost confopt">'+(i+1)+' · '+T(l)+'</button>');
+      cb.addEventListener('click',function(){
+        st.pickFirst[s.id+':conf']=i+1;reportBaseline(s,oi,i+1);
+        if(typeof scormSave==='function')scormSave(s.id);
+        var go=o.goTo||o.goto;go?goTo(go):next();
+      });
+      row.appendChild(cb);
+    });
+    h.appendChild(box);svin(box);
+  },true);
+};
+var _storyScore5=storyScore;
+storyScore=function(cfg){
+  if(!cfg.points)return _storyScore5(cfg);
+  var P=cfg.points,got=0,max=0;
+  (cfg.branches||[]).forEach(function(id){
+    var r=_storyScore5({branches:[id]});if(!r.max)return;
+    max+=P[0];if(st.pickFirst&&st.pickFirst[id]===undefined&&st.pick[id]===undefined)return;
+    var b=SCRIPT.screens.filter(function(x){return x.id===id;})[0],p=(st.pickFirst&&st.pickFirst[id]!==undefined)?st.pickFirst[id]:st.pick[id];
+    if(p===undefined||!b.options[p])return;var v=optScore(b.options[p]);got+=v===2?P[0]:v===1?P[1]:P[2];
+  });
+  return {got:got,max:max};
+};
+var _storyScoreLine5=storyScoreLine;
+storyScoreLine=function(s,h){
+  _storyScoreLine5(s,h);
+  var cfg=s.x_storyScore;if(!cfg||!cfg.perOk)return;
+  (cfg.branches||[]).forEach(function(id){if(_storyScore5({branches:[id]}).got===1)awardXp(id+':firstOk',cfg.perOk);});
+};
+var _storyRecapBlock5=storyRecapBlock;
+storyRecapBlock=function(s,h){
+  _storyRecapBlock5(s,h);
+  var rc=s.x_recapConfidence;if(!rc||!s.x_storyRecap)return;
+  var rows=h.querySelectorAll('.srecap .srrow');
+  s.x_storyRecap.forEach(function(r,i){
+    var li=rows[i];if(!li||li.classList.contains('srnone'))return;
+    var b=SCRIPT.screens.filter(function(x){return x.id===r.branch;})[0],L=confLabels(b),n=st.pickFirst&&st.pickFirst[r.branch+':conf'];
+    if(!n||!L.length)return;
+    li.appendChild(el('<span class="srconf">'+T(rc.label)+' '+n+' · '+T(L[n-1])+'</span>'));
+    var p=st.pickFirst[r.branch];
+    if(p!==undefined&&optScore(b.options[p])<2&&n>L.length/2){li.classList.add('srflag');li.appendChild(el('<span class="srflagline">'+T(rc.flag)+'</span>'));}
+  });
+};
+
 /* ============ SCRIPT MECHANICS (part 6): many ways to play the same activity ============
    The same content (script.json) can be played with different mechanics, so a module never feels like
    "the same sort again". A screen picks one with `x_mechanic`; when it does not, the engine rotates through
@@ -4041,7 +4144,7 @@ function hotspotAskEach(s,h){
   }
   function show(){
     var t=pages[pi].tg[k];if(!t)return;
-    cnt.textContent=U('askProgress',{a:step+1,b:total});
+    cnt.innerHTML=U('askProgress',{a:step+1,b:total});
     ask.innerHTML='<b>'+(T(t.x_ask)||T(t.name))+'</b>';
     if(!spot(t))choices(t);
   }
@@ -4087,7 +4190,7 @@ function hotspotAskEach(s,h){
     if(pi<pages.length-1){ask.innerHTML='';
       var n=el('<button type="button" class="btn primary askgo">'+(P.nxt||U('next'))+'</button>');
       n.addEventListener('click',function(){pi++;fbHost.innerHTML='';page();});pgBar.appendChild(n);return;}
-    done_=true;cnt.textContent=U('found',{a:total,b:total});ask.innerHTML='';
+    done_=true;cnt.innerHTML=U('found',{a:total,b:total});ask.innerHTML='';
     if(T(s.feedbackCorrect)){var box=fb('good',U('spotOn'),T(s.feedbackCorrect));fbHost.appendChild(box);}
     mechDone(s,h,allFirst);var a=h.querySelector('.actions')||actions(h);a.appendChild(contBtn(T(s['continue'])||U('cont'),next));
   }
@@ -4106,7 +4209,7 @@ BUILD.hotspot=function(s,h){
   (s.targets||[]).forEach(function(t){var b=el('<button type="button" class="hz2" style="left:'+t.x+'%;top:'+t.y+'%;width:'+t.w+'%;height:'+t.h+'%" aria-label="'+T(t.name)+'"></button>');
     b.addEventListener('click',function(){if(b.disabled)return;fbHost.innerHTML='';
       if(t.correct===false){first=false;fbHost.appendChild(fb('bad',U('notQuite'),T(t.action)||T(s.feedbackWrong)||U('pickAgain')));svin(fbHost);return;}
-      b.disabled=true;b.classList.add('g-ok');found++;cnt.textContent=U('found',{a:found,b:tg.length});
+      b.disabled=true;b.classList.add('g-ok');found++;cnt.innerHTML=U('found',{a:found,b:tg.length});
       if(T(t.action)&&found<tg.length){var fx=fb('good',T(t.name),T(t.action));fbHost.appendChild(fx);svin(fx);}   /* each found spot shows its own line (what it is, why, what to do) */
       if(found===tg.length){if(T(t.action))fbHost.appendChild(fb('good',T(t.name),T(t.action)));var box=fb('good',U('spotOn'),T(s.feedbackCorrect)||'');fbHost.appendChild(box);svin(box);mechDone(s,h,first);
         var a=h.querySelector('.actions')||actions(h);a.appendChild(contBtn(T(s['continue'])||U('cont'),next));}});
@@ -4235,7 +4338,7 @@ function addAudio(s,h){
 function cardAudio(c){
   var L=Array.isArray(c.x_audio)?c.x_audio:[];if(!L.length)return '';
   return '<span class="fcaudio">'+L.map(function(x){var src=audioFile(x.media),lb=T(x.label)||U('listen');
-    return '<button type="button" class="btn sm ghost play"'+(src?'':' disabled')+' aria-label="'+U('listen')+': '+strip_(lb)+'">&#9654; '+lb+'</button>'+(src?'<audio preload="none" src="'+src+'"></audio>':'');}).join('')+'</span>';
+    return '<button type="button" class="btn sm ghost play"'+(src?'':' disabled')+' aria-label="'+U('listen')+': '+strip_(lb)+(src?'':' - '+U('audioMissing'))+'">&#9654; '+lb+(src?'':' - '+U('audioMissing'))+'</button>'+(src?'<audio preload="none" src="'+src+'"></audio>':'');}).join('')+'</span>';   /* a sound not delivered yet says so (review 2026-10-25), never a dead button */
 }
 function wireCardAudio(box){
   box.querySelectorAll('.fcaudio .play').forEach(function(b){var au=b.nextElementSibling;if(!au||au.tagName!=='AUDIO')return;
@@ -4354,16 +4457,16 @@ Object.assign(BUILD,{
     var tl=el('<div class="mm-tl" aria-hidden="true"><div class="mm-played"></div></div>');h.appendChild(tl);
     var ctl=el('<div class="mm-ctl"><button type="button" class="btn ghost mm-pp">▶ '+U('play')+'</button><button type="button" class="btn ghost mm-back">↺ 5 s</button>'+
       '<button type="button" class="btn mm-mark">⚑ '+U('markMoment')+'</button><span class="mm-t">0:00</span></div>');h.appendChild(ctl);
+    var fbHost=el('<div aria-live="polite"></div>');h.appendChild(fbHost);   /* the question and feedback sit right under the controls, in sight (review 2026-10-25: below the list it read as a frozen clip) */
     var list=el('<div class="mm-found"></div>');M.forEach(function(m,i){list.appendChild(el('<div class="mm-row" data-i="'+i+'"><span class="mm-num">'+(i+1)+'</span><span>'+U('momentNotFound',{n:i+1})+'</span></div>'));});h.appendChild(list);
-    var fbHost=el('<div aria-live="polite"></div>');h.appendChild(fbHost);
     var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
     var missing=function(){ctl.querySelector('.mm-mark').disabled=true;ctl.querySelector('.mm-pp').disabled=true;btn.disabled=false;};
-    vidSlot(slot,name,{placeholder:s.x_placeholderNote||UI.videoSoon,onMissing:function(){missing();}});
-    var v=slot.querySelector('video');if(v){v.autoplay=false;v.removeAttribute('autoplay');}
+    vidSlot(slot,name,{manual:true,placeholder:s.x_placeholderNote||UI.videoSoon,onMissing:function(){missing();}});   /* manual: the learner presses Play (the clip never starts by itself) */
+    var v=slot.querySelector('video');
     function dur(){return (v&&v.duration)||1;}
     function fmt(t){t=Math.max(0,t||0);return Math.floor(t/60)+':'+('0'+Math.floor(t%60)).slice(-2);}
     if(!v)return;
-    function pp(){if(asking)return;if(v.paused){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else v.pause();}
+    function pp(){if(asking){var q=fbHost.querySelector('.mm-ask');if(q){q.classList.remove('mm-nudge');void q.offsetWidth;q.classList.add('mm-nudge');svin(q);}return;}if(v.paused){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else v.pause();}
     v.addEventListener('play',function(){ctl.querySelector('.mm-pp').textContent='❚❚ '+U('pause');});
     v.addEventListener('pause',function(){ctl.querySelector('.mm-pp').textContent='▶ '+U('play');});
     v.addEventListener('timeupdate',function(){tl.querySelector('.mm-played').style.width=(v.currentTime/dur()*100)+'%';ctl.querySelector('.mm-t').textContent=fmt(v.currentTime)+' / '+fmt(v.duration);});
@@ -4877,7 +4980,7 @@ function clListInto(h,curK){
       var li=el('<li><button type="button" class="cl-lesson'+(hl?' next':'')+(dn?' done':'')+'">'+clThumb(L)+
         '<span class="cl-lt"><b>'+T(L.title)+'</b><span>'+stt+'</span></span><span class="cl-st" aria-hidden="true"></span></button></li>');
       var b=li.querySelector('button');
-      b.setAttribute('aria-label',U('lessonOf',{a:k+1,b:L0.length})+': '+T(L.title)+' — '+(dn?U('statusDone'):isNext?U('upNext'):U('statusNotStarted'))+(L.minutes?' — '+U('minutes',{m:L.minutes}):''));
+      b.setAttribute('aria-label',plainAttr(U('lessonOf',{a:k+1,b:L0.length})+': '+T(L.title)+' — '+(dn?U('statusDone'):isNext?U('upNext'):U('statusNotStarted'))+(L.minutes?' — '+U('minutes',{m:L.minutes}):'')));
       if(k===curK)b.setAttribute('aria-current','page');
       b.addEventListener('click',function(){clStart(k);});grp.querySelector('ol').appendChild(li);});
     h.appendChild(grp);
