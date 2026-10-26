@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp111medicalemergenciescpr" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Medical emergencies, recovery position &amp; CPR/AED awareness</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Medical emergencies, recovery position &amp; CPR/AED awareness</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp111-v01-hook.en.vtt"/>
+      <file href="captions/smp111-v02-space.en.vtt"/>
+      <file href="captions/smp111-v05-story-start.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
+      <file href="icons/fluent-3d-ambulance.png"/>
+      <file href="icons/fluent-3d-anatomical-heart.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-droplet.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-face-with-thermometer.png"/>
+      <file href="icons/fluent-3d-heart-hands.png"/>
+      <file href="icons/fluent-3d-high-voltage.png"/>
+      <file href="icons/fluent-3d-hot-face.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-page-facing-up.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-pill.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-woman.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/smp111-c1a.jpg"/>
+      <file href="images/smp111-c1b.jpg"/>
+      <file href="images/smp111-c1c.jpg"/>
+      <file href="images/smp111-c2a.jpg"/>
+      <file href="images/smp111-c2b.jpg"/>
+      <file href="images/smp111-c3b.jpg"/>
+      <file href="images/smp111-c3c.jpg"/>
+      <file href="images/smp111-d1.jpg"/>
+      <file href="images/smp111-d2.jpg"/>
+      <file href="images/smp111-d3.jpg"/>
+      <file href="images/smp111-hero.jpg"/>
+      <file href="images/smp111-k-kiosk.jpg"/>
+      <file href="images/smp111-r1.jpg"/>
+      <file href="images/smp111-r2.jpg"/>
+      <file href="images/smp111-r3.jpg"/>
+      <file href="images/smp111-r4.jpg"/>
+      <file href="images/smp111-r5.jpg"/>
+      <file href="images/smp111-r6.jpg"/>
+      <file href="images/smp111-r7.jpg"/>
+      <file href="images/smp111-r8.jpg"/>
+      <file href="images/smp111-s01-first-aid-point.jpg"/>
+      <file href="images/smp111-s02-shade.jpg"/>
+      <file href="images/smp111-s04-aed-cabinet.jpg"/>
+      <file href="images/smp111-s05-radio-call.jpg"/>
+      <file href="incoming/smp111-v01-hook.mp4"/>
+      <file href="incoming/smp111-v02-space.mp4"/>
+      <file href="incoming/smp111-v07-dp3-medics.mp4"/>
+      <file href="scorm.js"/>
+      <file href="video/smp111-v01-hook.mp4"/>
+      <file href="video/smp111-v02-space.mp4"/>
+      <file href="video/smp111-v05-story-start.mp4"/>
+      <file href="video/smp111-v06-dp2-shout.mp4"/>
+      <file href="video/smp111-v07-dp3-medics.mp4"/>
+    </resource>
+  </resources>
+</manifest>
