@@ -30,6 +30,8 @@
       <file href="captions/smp42-v01-hook.en.vtt"/>
       <file href="captions/smp42-v02-ripple.en.vtt"/>
       <file href="captions/smp42-v04-mood-change.en.vtt"/>
+      <file href="captions/smp42-v05-equaliser.en.vtt"/>
+      <file href="captions/smp42-v07-stage1.en.vtt"/>
       <file href="captions/smp42-v10-not-a-mob.en.vtt"/>
       <file href="captions/smp42-v13-recap.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
@@ -86,13 +88,18 @@
       <file href="incoming/smp42-v01-hook.mp4"/>
       <file href="incoming/smp42-v02-ripple.mp4"/>
       <file href="incoming/smp42-v04-mood-change.mp4"/>
+      <file href="incoming/smp42-v05-equaliser.mp4"/>
       <file href="incoming/smp42-v07-stage1.mp4"/>
+      <file href="incoming/smp42-v08-stage2.mp4"/>
       <file href="incoming/smp42-v09-stage3.mp4"/>
       <file href="incoming/smp42-v10-not-a-mob.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp42-v01-hook.mp4"/>
       <file href="video/smp42-v02-ripple.mp4"/>
       <file href="video/smp42-v04-mood-change.mp4"/>
+      <file href="video/smp42-v05-equaliser.mp4"/>
+      <file href="video/smp42-v07-stage1.mp4"/>
+      <file href="video/smp42-v08-stage2.mp4"/>
       <file href="video/smp42-v09-stage3.mp4"/>
       <file href="video/smp42-v10-not-a-mob.mp4"/>
       <file href="video/smp42-v13-recap.mp4"/>
