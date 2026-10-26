@@ -4328,6 +4328,7 @@ function applyFallback(s,h){
 function transcriptLines(s){
   if(s.x_transcript)return [T(s.x_transcript)];
   if(!(s.a11y&&s.a11y.transcriptFrom==='captions'))return null;
+  if(s.type==='video')return null;   /* a video screen's clip has its own transcript (engine.js vidTranscript): what you see + what you hear, the same caption lines (review comment, 2026-10-26) */
   var lines=[];(Array.isArray(s.media)?s.media:[]).forEach(function(m){
     var t=(COURSE.transcripts||{})[m];if(!t)return;var l=t[LANG]||t.en||[];lines=lines.concat(l);});
   return lines.length?lines:null;
@@ -4986,9 +4987,9 @@ function clHome(h){
   /* an objective kept as plain English in meta shows in the learner's language when a screen carries the same line (the objective cards) */
   var clObj=function(t){if(typeof t!=='string')return T(t)||'';var hit=null;(function walk(n){if(hit||!n||typeof n!=='object')return;
     if(n.sid&&n.en===t){hit=n;return;}for(var k in n)if(Object.prototype.hasOwnProperty.call(n,k))walk(n[k]);})(SCRIPT.screens);if(hit)return T(hit);
-    /* a card that groups several objectives (SMP 12.1: card 2 = objectives 2+3): the objective is one sentence of the card's line, so take
+    /* a card that groups several objectives (e.g. card 2 = objectives 2+3): the objective is one sentence of the card's line, so take
        the same sentence of its translation when both have as many sentences; a leading «و» that only joins it to the sentence before
-       goes («وكيّفوا» → «كيّفوا» when «كيّفوا» opens an earlier sentence) (Fayez's review comment, 26 Oct) */
+       goes («وكيّفوا» → «كيّفوا» when «كيّفوا» opens an earlier sentence) (review comment, 2026-10-26: English objectives on the Arabic home) */
     var cut=function(x){return (String(x).match(/[^.!?؟]+(?:[.!?؟]+|$)/g)||[]).map(function(q){return q.trim();}).filter(Boolean);},part=null;
     (function walk(n){if(part!==null||!n||typeof n!=='object')return;
       if(n.sid&&typeof n.en==='string'&&n.en!==t&&n.en.indexOf(t)>=0){var en=cut(n.en),i=en.indexOf(t),tr=T(n);
@@ -5087,8 +5088,8 @@ render=function(i){
   if(d.id.charAt(0)!=='H'&&d.id!=='0.0'){
     st.clLast=d.id;
     var host=g('stage').querySelector('.screen'),k=CL.of(d.sec);
-    /* a course whose section "0" is itself a lesson (listed as lesson 1, e.g. SMP 12.1 'Welcome'): its screens get the lesson line and
-       Back too, so a question can go back to the clip before it (Fayez's review comment, 26 Oct); the language choice stays bare */
+    /* a course whose section "0" is itself a lesson (listed as lesson 1, e.g. a 'Welcome' lesson): its screens get the lesson line and
+       Back too, so a question can go back to the clip before it (review comment, 2026-10-26); the language choice stays bare */
     if(k<0&&d.sec===0){var i0=-1;COURSE.sections.forEach(function(x,i){if(i0<0&&String(x.n)==='0')i0=i;});
       var sc0=(SCRIPT.screens||[]).filter(function(x){return x.id===d.id;})[0];if(i0>=0&&!(sc0&&sc0.type==='languageSelect'))k=CL.of(i0+1);}
     if(host&&k>=0){var L=CL.lessons[k];
