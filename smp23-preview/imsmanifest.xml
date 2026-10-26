@@ -45,6 +45,12 @@
       <file href="captions/smp23-v08-mistake-good.en.vtt"/>
       <file href="captions/smp23-v09-photo-start.ar.vtt"/>
       <file href="captions/smp23-v09-photo-start.en.vtt"/>
+      <file href="captions/smp23-v10-complaint-start.ar.vtt"/>
+      <file href="captions/smp23-v10-complaint-start.en.vtt"/>
+      <file href="captions/smp23-v12-complaint-dp1b.ar.vtt"/>
+      <file href="captions/smp23-v12-complaint-dp1b.en.vtt"/>
+      <file href="captions/smp23-v13-complaint-dp1c.ar.vtt"/>
+      <file href="captions/smp23-v13-complaint-dp1c.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/custom-walkie-talkie.svg"/>
@@ -125,6 +131,10 @@
       <file href="video/smp23-v07-mistake-poor.mp4"/>
       <file href="video/smp23-v08-mistake-good.mp4"/>
       <file href="video/smp23-v09-photo-start.mp4"/>
+      <file href="video/smp23-v10-complaint-start.mp4"/>
+      <file href="video/smp23-v11-complaint-dp1a.mp4"/>
+      <file href="video/smp23-v12-complaint-dp1b.mp4"/>
+      <file href="video/smp23-v13-complaint-dp1c.mp4"/>
     </resource>
   </resources>
 </manifest>
