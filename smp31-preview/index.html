@@ -2869,7 +2869,10 @@ Object.assign(BUILD,{
         if(!seenG[gi]){seenG[gi]=1;nG++;gg.children[gi].classList.add('seen');if(cbG&&GR.requireAll)gate(cbG,nG,gs.length,U('opened'));}}
       gw.appendChild(gp);gw.appendChild(gg);var acG=h.querySelector('.callout')||h.querySelector('.actions');acG.parentNode.insertBefore(gw,acG);
       var cbG=h.querySelector('.actions .btn.primary');if(cbG){cbG.dataset.label=cbG.textContent;}showG(0);}
-    if(s.x_ladder){var ol=el('<ol class="ladder"></ol>');(s.x_ladder||[]).forEach(function(l,i){ol.appendChild(el('<li><span class="rung">'+(i+1)+'</span><span>'+T(l)+'</span></li>'));});var ac2=h.querySelector('.actions');h.insertBefore(ol,ac2);}
+    if(s.x_ladder){var ol=el('<ol class="ladder"></ol>');(s.x_ladder||[]).forEach(function(l,i){
+        /* a rung is a string, or {title, text} (2026-10-27: a rung written as title + text showed only its number) */
+        var rt=(l&&typeof l==='object'&&!('en' in l)&&(l.title||l.text))?((l.title?'<b>'+T(l.title)+'</b> ':'')+(l.text?T(l.text):'')):T(l);
+        ol.appendChild(el('<li><span class="rung">'+(i+1)+'</span><span>'+rt+'</span></li>'));});var ac2=h.querySelector('.actions');h.insertBefore(ol,ac2);}
     if(s.x_download){var dl=el('<a class="btn primary dl" download href="'+s.x_download+'">⬇ '+(T(s.x_downloadLabel)||U('download'))+'</a>');var ac3=h.querySelector('.actions');h.insertBefore(dl,ac3);}
     if(s.x_fields){st.fields=st.fields||{};var fw=el('<div class="fields"></div>');
       (s.x_fields||[]).forEach(function(f){var id='fld-'+f.key,v=st.fields[f.key]||'';var row=el('<label class="frow" for="'+id+'"><span>'+T(f.label)+'</span><input id="'+id+'" type="text" autocomplete="off" maxlength="60" value=""></label>');
