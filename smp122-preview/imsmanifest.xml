@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp122accessibleroutesinclusion" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>SMP 12.2 - Accessible Routes, Vulnerable Fans &amp; Inclusion</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>SMP 12.2 - Accessible Routes, Vulnerable Fans &amp; Inclusion</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp122-v01-hook.en.vtt"/>
+      <file href="captions/smp122-v02-right-route.en.vtt"/>
+      <file href="captions/smp122-v03-evacuation.en.vtt"/>
+      <file href="captions/smp122-v04-story-start.en.vtt"/>
+      <file href="captions/smp122-v05-dp1a-stairs.en.vtt"/>
+      <file href="captions/smp122-v06-dp1b-golf-cart.en.vtt"/>
+      <file href="captions/smp122-v07-dp2b-staffed-gate.en.vtt"/>
+      <file href="captions/smp122-v09-dp3b-priority.en.vtt"/>
+      <file href="captions/smp122-v10-dp4a-walk-away.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-adhesive-bandage.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-baby.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-chair.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-elevator.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-face-with-thermometer.png"/>
+      <file href="icons/fluent-3d-fast-forward-button.png"/>
+      <file href="icons/fluent-3d-fire-engine.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-people-hugging.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-restroom.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-shushing-face.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-woman-with-headscarf.png"/>
+      <file href="icons/fluent-3d-world-map.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/cast/F-12.jpg"/>
+      <file href="images/smp122-c-dp1c.jpg"/>
+      <file href="images/smp122-c-dp2a.jpg"/>
+      <file href="images/smp122-c-dp2c.jpg"/>
+      <file href="images/smp122-c-dp3c.jpg"/>
+      <file href="images/smp122-d1-decision.jpg"/>
+      <file href="images/smp122-d2-decision.jpg"/>
+      <file href="images/smp122-d3-decision.jpg"/>
+      <file href="images/smp122-d4-decision.jpg"/>
+      <file href="images/smp122-f1-fan.jpg"/>
+      <file href="images/smp122-f2-fan.jpg"/>
+      <file href="images/smp122-f3-fan.jpg"/>
+      <file href="images/smp122-f4-fan.jpg"/>
+      <file href="images/smp122-f5-fan.jpg"/>
+      <file href="images/smp122-f6-fan.jpg"/>
+      <file href="images/smp122-f7-fan.jpg"/>
+      <file href="images/smp122-f8-fan.jpg"/>
+      <file href="images/smp122-hero.jpg"/>
+      <file href="images/smp122-m1-venue-map.jpg"/>
+      <file href="images/smp122-m2-two-routes.jpg"/>
+      <file href="images/smp122-s00-family.jpg"/>
+      <file href="images/smp122-s1-blocked-ramp.jpg"/>
+      <file href="images/smp122-s2-lift.jpg"/>
+      <file href="images/smp122-s3-priority-lane.jpg"/>
+      <file href="images/smp122-s4-who-can-benefit.jpg"/>
+      <file href="images/smp122-s5-evacuation.jpg"/>
+      <file href="images/smp122-s6-no-lift.jpg"/>
+      <file href="images/smp122-thumb-7.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp122-v01-hook.mp4"/>
+      <file href="video/smp122-v02-right-route.mp4"/>
+      <file href="video/smp122-v03-evacuation.mp4"/>
+      <file href="video/smp122-v04-story-start.mp4"/>
+      <file href="video/smp122-v05-dp1a-stairs.mp4"/>
+      <file href="video/smp122-v06-dp1b-golf-cart.mp4"/>
+      <file href="video/smp122-v07-dp2b-staffed-gate.mp4"/>
+      <file href="video/smp122-v08-dp3a-squeeze.mp4"/>
+      <file href="video/smp122-v09-dp3b-priority.mp4"/>
+      <file href="video/smp122-v10-dp4a-walk-away.mp4"/>
+      <file href="video/smp122-v11-dp4b-help-sara.mp4"/>
+      <file href="video/smp122-v12-dp4c-told-abdullah.mp4"/>
+      <file href="aids/smp122-accessible-routes-inclusion-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
