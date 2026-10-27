@@ -71,8 +71,6 @@
       <file href="images/smp111-r1.jpg"/>
       <file href="images/smp111-r2.jpg"/>
       <file href="images/smp111-r3.jpg"/>
-      <file href="images/smp111-r4.jpg"/>
-      <file href="images/smp111-r5.jpg"/>
       <file href="images/smp111-r6.jpg"/>
       <file href="images/smp111-r7.jpg"/>
       <file href="images/smp111-r8.jpg"/>
@@ -80,15 +78,13 @@
       <file href="images/smp111-s02-shade.jpg"/>
       <file href="images/smp111-s04-aed-cabinet.jpg"/>
       <file href="images/smp111-s05-radio-call.jpg"/>
-      <file href="incoming/smp111-v01-hook.mp4"/>
-      <file href="incoming/smp111-v02-space.mp4"/>
-      <file href="incoming/smp111-v07-dp3-medics.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp111-v01-hook.mp4"/>
       <file href="video/smp111-v02-space.mp4"/>
       <file href="video/smp111-v05-story-start.mp4"/>
       <file href="video/smp111-v06-dp2-shout.mp4"/>
       <file href="video/smp111-v07-dp3-medics.mp4"/>
+      <file href="aids/smp111-medical-emergencies-cpr-job-aids.pdf"/>
     </resource>
   </resources>
 </manifest>
