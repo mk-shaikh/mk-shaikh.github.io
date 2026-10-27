@@ -29,10 +29,13 @@
       <file href="brand/jam-training-white.png"/>
       <file href="captions/smp42-v01-hook.en.vtt"/>
       <file href="captions/smp42-v02-ripple.en.vtt"/>
+      <file href="captions/smp42-v03-moments.en.vtt"/>
       <file href="captions/smp42-v04-mood-change.en.vtt"/>
       <file href="captions/smp42-v05-equaliser.en.vtt"/>
       <file href="captions/smp42-v07-stage1.en.vtt"/>
       <file href="captions/smp42-v10-not-a-mob.en.vtt"/>
+      <file href="captions/smp42-v11-rumours.en.vtt"/>
+      <file href="captions/smp42-v12-report.en.vtt"/>
       <file href="captions/smp42-v13-recap.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
@@ -68,16 +71,19 @@
       <file href="images/smp42-c1a.jpg"/>
       <file href="images/smp42-c1b.jpg"/>
       <file href="images/smp42-c1c.jpg"/>
+      <file href="images/smp42-c2a.jpg"/>
       <file href="images/smp42-c2b.jpg"/>
       <file href="images/smp42-c2c.jpg"/>
       <file href="images/smp42-c3a.jpg"/>
       <file href="images/smp42-c3b.jpg"/>
       <file href="images/smp42-c3c.jpg"/>
+      <file href="images/smp42-d1.jpg"/>
       <file href="images/smp42-d2.jpg"/>
       <file href="images/smp42-d3.jpg"/>
       <file href="images/smp42-hero.jpg"/>
       <file href="images/smp42-m1.jpg"/>
       <file href="images/smp42-m2.jpg"/>
+      <file href="images/smp42-m3.jpg"/>
       <file href="images/smp42-m4.jpg"/>
       <file href="images/smp42-m5.jpg"/>
       <file href="images/smp42-s1-crowd.jpg"/>
@@ -85,24 +91,21 @@
       <file href="images/smp42-s3-scanning.jpg"/>
       <file href="images/smp42-s4-radio.jpg"/>
       <file href="images/smp42-s5-moments.jpg"/>
-      <file href="incoming/smp42-v01-hook.mp4"/>
-      <file href="incoming/smp42-v02-ripple.mp4"/>
-      <file href="incoming/smp42-v04-mood-change.mp4"/>
-      <file href="incoming/smp42-v05-equaliser.mp4"/>
-      <file href="incoming/smp42-v07-stage1.mp4"/>
-      <file href="incoming/smp42-v08-stage2.mp4"/>
-      <file href="incoming/smp42-v09-stage3.mp4"/>
-      <file href="incoming/smp42-v10-not-a-mob.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp42-v01-hook.mp4"/>
       <file href="video/smp42-v02-ripple.mp4"/>
+      <file href="video/smp42-v03-moments.mp4"/>
       <file href="video/smp42-v04-mood-change.mp4"/>
       <file href="video/smp42-v05-equaliser.mp4"/>
+      <file href="video/smp42-v06-mood-reader.mp4"/>
       <file href="video/smp42-v07-stage1.mp4"/>
       <file href="video/smp42-v08-stage2.mp4"/>
       <file href="video/smp42-v09-stage3.mp4"/>
       <file href="video/smp42-v10-not-a-mob.mp4"/>
+      <file href="video/smp42-v11-rumours.mp4"/>
+      <file href="video/smp42-v12-report.mp4"/>
       <file href="video/smp42-v13-recap.mp4"/>
+      <file href="aids/smp42-crowd-psychology-football-job-aids.pdf"/>
     </resource>
   </resources>
 </manifest>
