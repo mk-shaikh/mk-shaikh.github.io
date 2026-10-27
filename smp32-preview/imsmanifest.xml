@@ -27,8 +27,10 @@
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
       <file href="brand/jam-training-primary.png"/>
       <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp32-v01-hook.en.vtt"/>
       <file href="captions/smp32-v02-journey.en.vtt"/>
       <file href="captions/smp32-v03-route.en.vtt"/>
+      <file href="captions/smp32-v04-tips.en.vtt"/>
       <file href="captions/smp32-v05-majed-gate.en.vtt"/>
       <file href="captions/smp32-v06-faisal-gate.en.vtt"/>
       <file href="captions/smp32-v07-noura-step-free.en.vtt"/>
@@ -88,10 +90,11 @@
       <file href="images/smp32-t5.svg"/>
       <file href="images/smp32-th1.jpg"/>
       <file href="images/smp32-th4.jpg"/>
-      <file href="incoming/smp32-v02-journey.mp4"/>
       <file href="scorm.js"/>
+      <file href="video/smp32-v01-hook.mp4"/>
       <file href="video/smp32-v02-journey.mp4"/>
       <file href="video/smp32-v03-route.mp4"/>
+      <file href="video/smp32-v04-tips.mp4"/>
       <file href="video/smp32-v05-majed-gate.mp4"/>
       <file href="video/smp32-v06-faisal-gate.mp4"/>
       <file href="video/smp32-v07-noura-step-free.mp4"/>
@@ -101,6 +104,8 @@
       <file href="video/smp32-v11-dp1-b.mp4"/>
       <file href="video/smp32-v12-dp1-c.mp4"/>
       <file href="video/smp32-v13-dp2-a.mp4"/>
+      <file href="video/smp32-v14-dp2-b.mp4"/>
+      <file href="aids/smp32-customer-service-wayfinding-job-aids.pdf"/>
     </resource>
   </resources>
 </manifest>
