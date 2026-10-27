@@ -22,6 +22,11 @@
   <resources>
     <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
+      <file href="audio/smp102-au1-standby.m4a"/>
+      <file href="audio/smp102-au3-remain.m4a"/>
+      <file href="audio/smp102-au4-open-gates.m4a"/>
+      <file href="audio/smp102-au5-all-clear.m4a"/>
+      <file href="audio/smp102-au6-incident-white.m4a"/>
       <file href="brand/afc27-start-picture.jpg"/>
       <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
@@ -38,6 +43,7 @@
       <file href="captions/smp102-v09-assistance.en.vtt"/>
       <file href="captions/smp102-v10-sweep.en.vtt"/>
       <file href="captions/smp102-v11-story-start.en.vtt"/>
+      <file href="captions/smp102-v13-part2.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/custom-walkie-talkie.svg"/>
@@ -119,13 +125,6 @@
       <file href="images/smp102-w2.jpg"/>
       <file href="images/smp102-w3.jpg"/>
       <file href="images/smp102-w4.jpg"/>
-      <file href="incoming/smp102-v01-hook.mp4"/>
-      <file href="incoming/smp102-v02-who-decides.mp4"/>
-      <file href="incoming/smp102-v03-messages.mp4"/>
-      <file href="incoming/smp102-v04-gate.mp4"/>
-      <file href="incoming/smp102-v05-moving.mp4"/>
-      <file href="incoming/smp102-v06-faisal-gate.mp4"/>
-      <file href="incoming/smp102-v10-sweep.mp4"/>
       <file href="scorm.js"/>
       <file href="video/smp102-v01-hook.mp4"/>
       <file href="video/smp102-v02-who-decides.mp4"/>
@@ -138,6 +137,11 @@
       <file href="video/smp102-v09-assistance.mp4"/>
       <file href="video/smp102-v10-sweep.mp4"/>
       <file href="video/smp102-v11-story-start.mp4"/>
+      <file href="video/smp102-v12-dp1-fire.mp4"/>
+      <file href="video/smp102-v13-part2.mp4"/>
+      <file href="video/smp102-v14-dp4-overfill.mp4"/>
+      <file href="video/smp102-v15-dp5-lift.mp4"/>
+      <file href="aids/smp102-evacuation-signals-exit-gates-job-aids.pdf"/>
     </resource>
   </resources>
 </manifest>
