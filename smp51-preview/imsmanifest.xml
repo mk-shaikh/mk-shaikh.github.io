@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp51moicivildefencebriefing" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>SMP 5.1 · MOI &amp; Civil Defence briefing</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>SMP 5.1 · MOI &amp; Civil Defence briefing</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp51-v01-hook.ar.vtt"/>
+      <file href="captions/smp51-v01-hook.en.vtt"/>
+      <file href="captions/smp51-v02-opening.ar.vtt"/>
+      <file href="captions/smp51-v02-opening.en.vtt"/>
+      <file href="captions/smp51-v03-police.ar.vtt"/>
+      <file href="captions/smp51-v03-police.en.vtt"/>
+      <file href="captions/smp51-v06-warning-signs.ar.vtt"/>
+      <file href="captions/smp51-v06-warning-signs.en.vtt"/>
+      <file href="captions/smp51-v07-threat.ar.vtt"/>
+      <file href="captions/smp51-v07-threat.en.vtt"/>
+      <file href="captions/smp51-v08-steps.ar.vtt"/>
+      <file href="captions/smp51-v08-steps.en.vtt"/>
+      <file href="captions/smp51-v10-story-start.ar.vtt"/>
+      <file href="captions/smp51-v10-story-start.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-building-construction.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-compass.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-fire-engine.png"/>
+      <file href="icons/fluent-3d-fire.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-high-voltage.png"/>
+      <file href="icons/fluent-3d-hospital.png"/>
+      <file href="icons/fluent-3d-house.png"/>
+      <file href="icons/fluent-3d-link.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-magnifying-glass-tilted-left.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-people-hugging.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-police-officer.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-thinking-face.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/smp51-d2.jpg"/>
+      <file href="images/smp51-hero.jpg"/>
+      <file href="images/smp51-s0-freeze.jpg"/>
+      <file href="images/smp51-s1-roles.jpg"/>
+      <file href="images/smp51-s2-describe.jpg"/>
+      <file href="images/smp51-s4-guide.jpg"/>
+      <file href="images/smp51-s5-report.jpg"/>
+      <file href="images/smp51-s6-noura.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp51-v01-hook.mp4"/>
+      <file href="video/smp51-v02-opening.mp4"/>
+      <file href="video/smp51-v03-police.mp4"/>
+      <file href="video/smp51-v06-warning-signs.mp4"/>
+      <file href="video/smp51-v07-threat.mp4"/>
+      <file href="video/smp51-v08-steps.mp4"/>
+      <file href="video/smp51-v10-story-start.mp4"/>
+      <file href="video/smp51-v11-dp1-best.mp4"/>
+      <file href="video/smp51-v15-dp2-leave.mp4"/>
+      <file href="aids/smp51-moi-civil-defence-briefing-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
