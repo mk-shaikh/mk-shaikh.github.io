@@ -4470,7 +4470,7 @@ Object.assign(BUILD,{
     P.forEach(function(p,i){lst.querySelector('ol').appendChild(el('<li><button type="button" data-i="'+i+'">'+(i+1)+'. '+T(p.title)+'</button></li>'));});h.appendChild(lst);
     lst.querySelector('.mx-lt').addEventListener('click',function(){var o=lst.querySelector('ol'),open=o.hidden;o.hidden=!open;this.setAttribute('aria-expanded',open?'true':'false');});
     var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
-    function needTxt(){prog.querySelector('.mx-need').textContent=n>=need?(n===P.length?U('allOpened'):U('canContinue')):U('openMore',{n:need-n});}needTxt();
+    function needTxt(){prog.querySelector('.mx-need').innerHTML=n>=need?(n===P.length?U('allOpened'):U('canContinue')):U('openMore',{n:need-n});}needTxt();
     function open(i){var p=P[i];[].forEach.call(wrap.querySelectorAll('.mx-hs'),function(g){g.classList.toggle('on',+g.dataset.i===i);});
       det.innerHTML=(p.media?'<img class="mx-pic" src="images/'+sc2_assetFile(p.media)+'" alt="'+strip(p.title).replace(/"/g,'&quot;')+'" onerror="this.remove()">':'')+'<div class="mx-row">'+icon(p.icon)+'<div><b><span class="mx-num">'+(i+1)+'</span>'+T(p.title)+'</b>'+T(p.text)+'</div></div>';
       if(!seen[i]){seen[i]=1;n++;wrap.querySelector('.mx-hs[data-i="'+i+'"]').classList.add('seen');lst.querySelector('button[data-i="'+i+'"]').classList.add('seen');
