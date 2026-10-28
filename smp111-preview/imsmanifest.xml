@@ -29,6 +29,8 @@
       <file href="brand/jam-training-white.png"/>
       <file href="captions/smp111-v01-hook.en.vtt"/>
       <file href="captions/smp111-v02-space.en.vtt"/>
+      <file href="captions/smp111-v03-demo-recovery.en.vtt"/>
+      <file href="captions/smp111-v04-demo-cpr-aed.en.vtt"/>
       <file href="captions/smp111-v05-story-start.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
@@ -81,6 +83,8 @@
       <file href="scorm.js"/>
       <file href="video/smp111-v01-hook.mp4"/>
       <file href="video/smp111-v02-space.mp4"/>
+      <file href="video/smp111-v03-demo-recovery.mp4"/>
+      <file href="video/smp111-v04-demo-cpr-aed.mp4"/>
       <file href="video/smp111-v05-story-start.mp4"/>
       <file href="video/smp111-v06-dp2-shout.mp4"/>
       <file href="video/smp111-v07-dp3-medics.mp4"/>
