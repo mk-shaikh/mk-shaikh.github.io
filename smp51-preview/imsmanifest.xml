@@ -49,6 +49,7 @@
       <file href="captions/smp51-v10-story-start.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-red-crescent.svg"/>
       <file href="icons/fluent-3d-building-construction.png"/>
       <file href="icons/fluent-3d-check-mark-button.png"/>
       <file href="icons/fluent-3d-compass.png"/>
@@ -58,7 +59,6 @@
       <file href="icons/fluent-3d-fire.png"/>
       <file href="icons/fluent-3d-handshake.png"/>
       <file href="icons/fluent-3d-high-voltage.png"/>
-      <file href="icons/fluent-3d-hospital.png"/>
       <file href="icons/fluent-3d-house.png"/>
       <file href="icons/fluent-3d-link.png"/>
       <file href="icons/fluent-3d-loudspeaker.png"/>
