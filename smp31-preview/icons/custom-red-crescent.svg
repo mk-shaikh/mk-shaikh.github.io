@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Red crescent (the emblem of the Red Crescent medical service), on a white rounded tile, drawn in the Fluent Emoji 3D style (soft
+       gradients, glossy highlight). Custom: the Fluent set has only red-cross medical icons (hospital, ambulance). No text. -->
+  <defs>
+    <linearGradient id="rcTile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6e9ef"/>
+    </linearGradient>
+    <linearGradient id="rcRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5a5f"/><stop offset=".55" stop-color="#e0262e"/><stop offset="1" stop-color="#b3141c"/>
+    </linearGradient>
+    <radialGradient id="rcShine" cx=".35" cy=".3" r=".5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="rcCut">
+      <rect width="256" height="256" fill="#fff"/>
+      <circle cx="152" cy="118" r="62" fill="#000"/>
+    </mask>
+  </defs>
+  <rect x="20" y="24" width="216" height="216" rx="44" fill="#c9ced8"/>
+  <rect x="20" y="16" width="216" height="216" rx="44" fill="url(#rcTile)"/>
+  <g mask="url(#rcCut)">
+    <circle cx="122" cy="126" r="76" fill="url(#rcRed)"/>
+    <circle cx="122" cy="126" r="76" fill="url(#rcShine)"/>
+  </g>
+</svg>
