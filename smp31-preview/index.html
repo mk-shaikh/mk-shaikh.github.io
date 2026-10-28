@@ -2801,7 +2801,8 @@ function reviewSkip(){
    Orientation / gamification / diagnostic screen types (m00 and later). Loaded after script-runtime.js.
    Builder signature: (s, h) — s = screen object from script.json, h = host element. */
 
-function gate(btn,count,total,word){btn.disabled=count<total;btn.textContent=count<total?(count===0?U(word===U('ticked')?'tickAll':'openAll',{n:total}):(word+' '+count+' / '+total)):btn.dataset.label;
+function gate(btn,count,total,word){btn.disabled=count<total;var gl=count<total?(count===0?U(word===U('ticked')?'tickAll':'openAll',{n:total}):(word+' '+count+' / '+total)):btn.dataset.label;
+  btn.innerHTML=/<bdi>/.test(gl)?'<span>'+gl+'</span>':gl;   /* the label may carry <bdi> number marks (Arabic): written as text they showed as 'bdi'; one span keeps it one line (2026-10-28) */
   var scr=btn.closest&&btn.closest('.screen'),cl=scr&&scr.querySelector('.completeline');if(cl)cl.hidden=count<total;}  /* the "you finished" line waits for the last card */
 /* revealCards x_mechanic "scene" (user, 2026-10-08): a scene of glass cards. Each card has 4 layers — the background
    (the screen's picture, or a floor in the theme colours), a panel that turns left-right from frosted glass to a solid
@@ -4621,7 +4622,8 @@ Object.assign(BUILD,{
 Object.assign(UI,{
   planLabel:{en:'Plan with numbered spots'},tapANumber:{en:'Tap a number on the plan.'},openedOf:{en:'Opened {a} of {b}'},showAsList:{en:'Prefer a list? Show them as a list'},
   allOpened:{en:'All opened'},canContinue:{en:'You can continue'},openMore:{en:'Open {n} more'},
-  play:{en:'Play'},pause:{en:'Pause'},markMoment:{en:'Mark the moment'},momentNotFound:{en:'Moment {n}: not found yet'},clipEnded:{en:'The clip has ended'},
+  pause:{en:'Pause'},   /* 'play' is the shared engine label (it has the approved translations); redefining it here hid them, 2026-10-28 */
+  markMoment:{en:'Mark the moment'},momentNotFound:{en:'Moment {n}: not found yet'},clipEnded:{en:'The clip has ended'},
   foundSoFar:{en:'You found {a} of {b}. Press Play to watch again and look for the rest.'},notThisMoment:{en:'Not this moment'},
   keepWatching:{en:'Nothing has gone wrong yet at {t}. Keep watching, then mark again.'},markedAt:{en:'Moment marked at {t}.'},momentAt:{en:'Moment {n} at {t}:'},
   queueLabel:{en:'The queue seen from above'},queueSafety:{en:'Queue safety'},fanMood:{en:'Fan mood'},goodCall:{en:'Good call'},worksBut:{en:'It works, but'},
