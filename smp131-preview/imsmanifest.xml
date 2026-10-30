@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp131trafficcrossingsparking" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Traffic operations: crossings, parking &amp; vehicle signals</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Traffic operations: crossings, parking &amp; vehicle signals</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp131-v01-hook.en.vtt"/>
+      <file href="captions/smp131-v02-signals.en.vtt"/>
+      <file href="captions/smp131-v04-crossing.en.vtt"/>
+      <file href="captions/smp131-v05-parking.en.vtt"/>
+      <file href="captions/smp131-v06-story-start.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-angry-face.png"/>
+      <file href="icons/fluent-3d-automobile.png"/>
+      <file href="icons/fluent-3d-bus.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-construction.png"/>
+      <file href="icons/fluent-3d-counterclockwise-arrows-button.png"/>
+      <file href="icons/fluent-3d-crescent-moon.png"/>
+      <file href="icons/fluent-3d-droplet.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-hourglass-done.png"/>
+      <file href="icons/fluent-3d-key.png"/>
+      <file href="icons/fluent-3d-left-right-arrow.png"/>
+      <file href="icons/fluent-3d-left-speech-bubble.png"/>
+      <file href="icons/fluent-3d-light-bulb.png"/>
+      <file href="icons/fluent-3d-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-medical-symbol.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-memo.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-motorway.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-person-raising-hand.png"/>
+      <file href="icons/fluent-3d-person-running.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-police-car-light.png"/>
+      <file href="icons/fluent-3d-police-officer.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-right-arrow-curving-left.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-running-shoe.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-sun.png"/>
+      <file href="icons/fluent-3d-trophy.png"/>
+      <file href="icons/fluent-3d-vertical-traffic-light.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-wheelchair-symbol.png"/>
+      <file href="icons/fluent-3d-wind-face.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp131-ca1a.jpg"/>
+      <file href="images/smp131-ca1b.jpg"/>
+      <file href="images/smp131-ca1c.jpg"/>
+      <file href="images/smp131-ca2a.jpg"/>
+      <file href="images/smp131-ca2b.jpg"/>
+      <file href="images/smp131-ca2c.jpg"/>
+      <file href="images/smp131-ca3a.jpg"/>
+      <file href="images/smp131-ca3b.jpg"/>
+      <file href="images/smp131-ca3c.jpg"/>
+      <file href="images/smp131-cb1a.jpg"/>
+      <file href="images/smp131-cb1b.jpg"/>
+      <file href="images/smp131-cb1c.jpg"/>
+      <file href="images/smp131-cb2a.jpg"/>
+      <file href="images/smp131-cb2b.jpg"/>
+      <file href="images/smp131-cb2c.jpg"/>
+      <file href="images/smp131-cb3a.jpg"/>
+      <file href="images/smp131-cb3b.jpg"/>
+      <file href="images/smp131-cb3c.jpg"/>
+      <file href="images/smp131-cb4a.jpg"/>
+      <file href="images/smp131-cb4b.jpg"/>
+      <file href="images/smp131-cb4c.jpg"/>
+      <file href="images/smp131-cb5b.jpg"/>
+      <file href="images/smp131-cb5c.jpg"/>
+      <file href="images/smp131-d0-car-park-b.jpg"/>
+      <file href="images/smp131-da1.jpg"/>
+      <file href="images/smp131-da2.jpg"/>
+      <file href="images/smp131-da3.jpg"/>
+      <file href="images/smp131-db1.jpg"/>
+      <file href="images/smp131-db2.jpg"/>
+      <file href="images/smp131-db3.jpg"/>
+      <file href="images/smp131-db4.jpg"/>
+      <file href="images/smp131-db5.jpg"/>
+      <file href="images/smp131-hero.jpg"/>
+      <file href="images/smp131-k0-freeze.jpg"/>
+      <file href="images/smp131-k1.jpg"/>
+      <file href="images/smp131-k2.jpg"/>
+      <file href="images/smp131-k3.jpg"/>
+      <file href="images/smp131-k4.jpg"/>
+      <file href="images/smp131-m1-last-mile.jpg"/>
+      <file href="images/smp131-m2-emergency-route.jpg"/>
+      <file href="images/smp131-p1-car-park-sunset.jpg"/>
+      <file href="images/smp131-p2-crossing-night.jpg"/>
+      <file href="images/smp131-r1.jpg"/>
+      <file href="images/smp131-r2.jpg"/>
+      <file href="images/smp131-r3.jpg"/>
+      <file href="images/smp131-r4.jpg"/>
+      <file href="images/smp131-r5.jpg"/>
+      <file href="images/smp131-r6.jpg"/>
+      <file href="images/smp131-s1-step-back.jpg"/>
+      <file href="images/smp131-s2-busy-car-park.jpg"/>
+      <file href="images/smp131-s3c-dust.jpg"/>
+      <file href="images/smp131-s4-drivers-eye.jpg"/>
+      <file href="images/smp131-s5-crossing-3.jpg"/>
+      <file href="images/smp131-s6-fans-crossing.jpg"/>
+      <file href="images/smp131-s7-noura-driver.jpg"/>
+      <file href="images/smp131-s8-accessible-bays.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp131-q1.mp4"/>
+      <file href="video/smp131-q2.mp4"/>
+      <file href="video/smp131-q3.mp4"/>
+      <file href="video/smp131-q4.mp4"/>
+      <file href="video/smp131-q5.mp4"/>
+      <file href="video/smp131-q6.mp4"/>
+      <file href="video/smp131-q7.mp4"/>
+      <file href="video/smp131-q8.mp4"/>
+      <file href="video/smp131-v01-hook.mp4"/>
+      <file href="video/smp131-v02-signals.mp4"/>
+      <file href="video/smp131-v03-buildup.mp4"/>
+      <file href="video/smp131-v04-crossing.mp4"/>
+      <file href="video/smp131-v05-parking.mp4"/>
+      <file href="video/smp131-v06-story-start.mp4"/>
+      <file href="video/smp131-v07-ambulance.mp4"/>
+      <file href="aids/smp131-traffic-crossings-parking-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
