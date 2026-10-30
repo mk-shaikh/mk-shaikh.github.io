@@ -46,8 +46,8 @@
       <file href="captions/smp102-v13-part2.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-red-crescent.svg"/>
       <file href="icons/custom-walkie-talkie.svg"/>
-      <file href="icons/fluent-3d-ambulance.png"/>
       <file href="icons/fluent-3d-automobile.png"/>
       <file href="icons/fluent-3d-back-arrow.png"/>
       <file href="icons/fluent-3d-bell.png"/>
@@ -64,13 +64,13 @@
       <file href="icons/fluent-3d-fire-extinguisher.png"/>
       <file href="icons/fluent-3d-fire.png"/>
       <file href="icons/fluent-3d-handshake.png"/>
-      <file href="icons/fluent-3d-hospital.png"/>
       <file href="icons/fluent-3d-hourglass-done.png"/>
       <file href="icons/fluent-3d-house.png"/>
       <file href="icons/fluent-3d-left-right-arrow.png"/>
       <file href="icons/fluent-3d-locked-with-key.png"/>
       <file href="icons/fluent-3d-locked.png"/>
       <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-medical-symbol.png"/>
       <file href="icons/fluent-3d-megaphone.png"/>
       <file href="icons/fluent-3d-no-entry.png"/>
       <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
