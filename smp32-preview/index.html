@@ -1911,8 +1911,9 @@ function TL(x,lang){if(x===null||x===undefined)return '';if(typeof x==='string')
 /* option letters follow the language: A B C in English, أ ب ج in Arabic (2026-10-14) */
 function optLetter(i){return (typeof RTL!=='undefined'&&RTL[LANG])?'أبجدهوزح'.charAt(i)||String(i+1):String.fromCharCode(65+i);}
 function T(x){var s=TL(x,LANG);if(typeof s!=='string')return s;
-  /* RTL: isolate Latin codes/acronyms/variables (MK3, XP, {n}) so they do not flip inside Arabic */
-  if(RTL[LANG]&&/[\u0600-\u06FF]/.test(s)&&/[A-Za-z]/.test(s))s=s.replace(/(<[^>]*>)|(\{[^}]+\}|\b[A-Za-z][A-Za-z0-9]*\d*[A-Za-z0-9]*\b)/g,function(m,tag,tok){return tag?tag:'<bdi>'+tok+'</bdi>';});
+  /* RTL: isolate Latin codes/acronyms/variables (MK3, XP, {n}) so they do not flip inside Arabic.
+     A dotted or dashed acronym (P.A.S.S., E-X-I-T-S, 5-YES) is one left-to-right unit: one mark per letter showed it reversed (SSAP, 2026-10-31) */
+  if(RTL[LANG]&&/[\u0600-\u06FF]/.test(s)&&/[A-Za-z]/.test(s))s=s.replace(/(<[^>]*>)|(\{[^}]+\}|\b\d+[\-\u2010-\u2013][A-Za-z]+\b|\b[A-Za-z](?:[.\-\u2010-\u2013][A-Za-z])+\b\.?|\b[A-Za-z][A-Za-z0-9]*\d*[A-Za-z0-9]*\b)/g,function(m,tag,tok){return tag?tag:'<bdi>'+tok+'</bdi>';});
   return s;}
 /* engine UI strings — English only. Translations come from the project pack (projects/<name>/ui-strings.csv → COURSE.uiText). COURSE.ui overrides per module. */
 var UI={
@@ -2594,6 +2595,24 @@ function rejoin(s){
   for(var j=i+1;j<SCRIPT.screens.length;j++)if(SCRIPT.screens[j].type!=='consequence')return SCRIPT.screens[j].id;
   return null;
 }
+/* a video screen whose media is a picture: the picture full width, then the screen's own question, learning point and Continue */
+function videoAsPicture(s,h,f){
+  h.appendChild(imgOrPh(f,assetAlt(f)||strip(s.heading),'simg'));
+  if(s.afterText)h.appendChild(el('<p class="lead">'+T(s.afterText)+'</p>'));
+  var btn=cont(s,h),q=s.x_question,tk=s.x_takeaway?el('<div class="vtake" hidden><b>'+U('learningPoint')+'</b><p>'+T(s.x_takeaway)+'</p></div>'):null;
+  if(q){btn.hidden=true;btn.style.display='none';
+    var qa=el('<div class="vq"><p class="vq-s">'+T(q.statement)+'</p><div class="vq-fb" role="status"></div></div>'),qrow=tfRow(q.yesLabel?T(q.yesLabel):null,q.noLabel?T(q.noLabel):null,'vq-row'),firstTry=true;
+    qa.insertBefore(qrow,qa.querySelector('.vq-fb'));
+    function pick(val){var ok=q.poll?true:(val===!!q.answer),fbh=qa.querySelector('.vq-fb');fbh.innerHTML='';tfPick(qrow,val);
+      fbh.appendChild(q.poll?fb('tip','',T(val?q.feedbackTrue:q.feedbackFalse)||''):fb(ok?'good':'bad',ok?U('right'):U('notThisTry'),T(val?q.feedbackTrue:q.feedbackFalse)||''));svin(fbh);
+      if(ok){[].forEach.call(qrow.querySelectorAll('button'),function(b){b.disabled=true;});if(firstTry&&!q.poll)awardXp(s.id+':q',s.xp&&s.xp.firstTimeCorrect);if(tk)tk.hidden=false;btn.hidden=false;btn.style.display='';}
+      else firstTry=false;}
+    qrow.querySelector('.tf-t').addEventListener('click',function(){pick(true);});qrow.querySelector('.tf-f').addEventListener('click',function(){pick(false);});
+    h.insertBefore(qa,h.querySelector('.actions'));}
+  else if(tk)tk.hidden=false;
+  if(tk)h.insertBefore(tk,h.querySelector('.actions'));
+  if(COURSE.reviewFree){btn.hidden=false;btn.style.display='';}
+}
 
 var BUILD={
   _wip:function(s,h){
@@ -2604,6 +2623,7 @@ var BUILD={
   video:function(s,h){
     head(s,h);
     var m=media(s),name=m.length>1?('hook-'+s.id.replace(/\./g,'-')):(m[0]||'').replace(/\.mp4$/,'');
+    if(m.length===1&&/\.(jpe?g|png|webp)$/i.test(m[0])){videoAsPicture(s,h,m[0]);return;}   /* the client swapped the clip for a still (2026-10-31) */
     var mark=el('<div></div>');h.appendChild(mark);
     var btn=cont(s,h);
     var skip=s.x_skipAfter;
@@ -5118,7 +5138,7 @@ render=function(i){
 /* a video lesson, media first: the clip (or its placeholder / text version) at the top, the lesson line and the title,
    then Overview (the screen's own text) · Transcript (the caption file, else the text version) · Resources (job aids) */
 function clVideo(host,sc,meta){
-  var media=host.querySelector(':scope > .vidwrap')||host.querySelector(':scope > .mediaph')||host.querySelector(':scope > .fallback');
+  var media=host.querySelector(':scope > .vidwrap')||host.querySelector(':scope > .mediaph')||host.querySelector(':scope > .fallback')||host.querySelector(':scope > .imgwrap');   /* .imgwrap: a still in place of the clip (videoAsPicture) */
   var mph=host.querySelector(':scope > .mediaph');
   if(media){host.insertBefore(media,host.firstChild);if(mph&&mph!==media)host.insertBefore(mph,media);
     var act=host.querySelector(':scope > .actions'),vq=host.querySelector(':scope > .vq'),vt=host.querySelector(':scope > .vtake');
