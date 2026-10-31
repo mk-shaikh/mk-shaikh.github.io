@@ -4254,7 +4254,9 @@ function hotspotAskEach(s,h){
 var _hotspotBuild=BUILD.hotspot;
 BUILD.hotspot=function(s,h){
   var tg=(s.targets||[]).filter(function(t){return t.correct!==false;});
-  if((s.x_mechanic||s.mechanic)==='askEach'&&((s.x_pages&&s.x_pages.length)||(tg.length&&tg.some(function(t){return t.x!==undefined;})&&media(s).length)))return hotspotAskEach(s,h);
+  /* askEach also when the cards are choices-only (x_noSpot + x_choices, each with its own picture): they fell through to an empty
+     "coming soon" box (SMP 5.2 'Pick the right extinguisher', 2026-10-31) */
+  if((s.x_mechanic||s.mechanic)==='askEach'&&((s.x_pages&&s.x_pages.length)||(tg.length&&tg.some(function(t){return t.x!==undefined||(t.x_noSpot&&t.x_choices&&t.x_choices.length);})&&media(s).length)))return hotspotAskEach(s,h);
   if((s.x_mechanic||s.mechanic)!=='findAll'||!(tg.length>1&&tg[0].x!==undefined&&media(s).length))return _hotspotBuild(s,h);
   mechTag(h,'findAll');head(s,h);task(s,h);
   var found=0,first=true,wrap=el('<div class="scene-wrap m-findall"></div>'),cnt=el('<div class="findcount" role="status">'+U('found',{a:0,b:tg.length})+'</div>'),fbHost=el('<div class="mfb" role="status"></div>');
