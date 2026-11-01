@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp61crowdsafetymatters" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>SMP 6.1 - Why crowd safety matters: density, danger signs and surge moments</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>SMP 6.1 - Why crowd safety matters: density, danger signs and surge moments</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp61-v01-objectives.ar.vtt"/>
+      <file href="captions/smp61-v01-objectives.en.vtt"/>
+      <file href="captions/smp61-v02-ibrox.ar.vtt"/>
+      <file href="captions/smp61-v02-ibrox.en.vtt"/>
+      <file href="captions/smp61-v03-hillsborough.ar.vtt"/>
+      <file href="captions/smp61-v03-hillsborough.en.vtt"/>
+      <file href="captions/smp61-v04-crowd-rules.ar.vtt"/>
+      <file href="captions/smp61-v04-crowd-rules.en.vtt"/>
+      <file href="captions/smp61-v05-narrow-gate.ar.vtt"/>
+      <file href="captions/smp61-v05-narrow-gate.en.vtt"/>
+      <file href="captions/smp61-v06-shockwave.ar.vtt"/>
+      <file href="captions/smp61-v06-shockwave.en.vtt"/>
+      <file href="captions/smp61-v07-danger-signs.ar.vtt"/>
+      <file href="captions/smp61-v07-danger-signs.en.vtt"/>
+      <file href="captions/smp61-v09-vomitory12.ar.vtt"/>
+      <file href="captions/smp61-v09-vomitory12.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
+      <file href="icons/fluent-3d-books.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-candle.png"/>
+      <file href="icons/fluent-3d-chair.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-chequered-flag.png"/>
+      <file href="icons/fluent-3d-cityscape.png"/>
+      <file href="icons/fluent-3d-cup-with-straw.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-droplet.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-hamburger.png"/>
+      <file href="icons/fluent-3d-locked.png"/>
+      <file href="icons/fluent-3d-metro.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-open-hands.png"/>
+      <file href="icons/fluent-3d-party-popper.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-satellite-antenna.png"/>
+      <file href="icons/fluent-3d-soccer-ball.png"/>
+      <file href="icons/fluent-3d-sports-medal.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-up-arrow.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp61-hero.jpg"/>
+      <file href="images/smp61-s1-terrace.jpg"/>
+      <file href="images/smp61-s10-concourse.jpg"/>
+      <file href="images/smp61-s11-gate-queue.jpg"/>
+      <file href="images/smp61-s12-kiosk.jpg"/>
+      <file href="images/smp61-s13-stair-top.jpg"/>
+      <file href="images/smp61-s14-last-mile.jpg"/>
+      <file href="images/smp61-s15-gate-push.jpg"/>
+      <file href="images/smp61-s16-toilet-corner.jpg"/>
+      <file href="images/smp61-s17-prayer.jpg"/>
+      <file href="images/smp61-s18-gate9.jpg"/>
+      <file href="images/smp61-s19-dp1.jpg"/>
+      <file href="images/smp61-s2-stairs.jpg"/>
+      <file href="images/smp61-s20-dp2.jpg"/>
+      <file href="images/smp61-s21-dp3.jpg"/>
+      <file href="images/smp61-s3-memorial.jpg"/>
+      <file href="images/smp61-s4-memorial-street.jpg"/>
+      <file href="images/smp61-s5-fine.jpg"/>
+      <file href="images/smp61-s6-busy.jpg"/>
+      <file href="images/smp61-s7-getting-full.jpg"/>
+      <file href="images/smp61-s8-at-capacity.jpg"/>
+      <file href="images/smp61-s9-cutaway.jpg"/>
+      <file href="images/smp61-thumb-10.jpg"/>
+      <file href="images/smp61-thumb-3.jpg"/>
+      <file href="images/smp61-thumb-5.jpg"/>
+      <file href="images/smp61-thumb-7.jpg"/>
+      <file href="images/smp61-thumb-8.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp61-v01-objectives.mp4"/>
+      <file href="video/smp61-v02-ibrox.mp4"/>
+      <file href="video/smp61-v03-hillsborough.mp4"/>
+      <file href="video/smp61-v04-crowd-rules.mp4"/>
+      <file href="video/smp61-v05-narrow-gate.mp4"/>
+      <file href="video/smp61-v06-shockwave.mp4"/>
+      <file href="video/smp61-v07-danger-signs.mp4"/>
+      <file href="video/smp61-v09-vomitory12.mp4"/>
+      <file href="video/smp61-v10-dp1.mp4"/>
+      <file href="video/smp61-v12-dp3.mp4"/>
+      <file href="aids/smp61-crowd-safety-matters-job-aids.pdf"/>
+      <file href="aids/smp61-eyes-on-the-crowd.pdf"/>
+    </resource>
+  </resources>
+</manifest>
