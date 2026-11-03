@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp91radioescalationreporting" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Radio, escalation &amp; reporting</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Radio, escalation &amp; reporting</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp91-a01-loop.ar.vtt"/>
+      <file href="captions/smp91-a01-loop.en.vtt"/>
+      <file href="captions/smp91-a02-voc.ar.vtt"/>
+      <file href="captions/smp91-a02-voc.en.vtt"/>
+      <file href="captions/smp91-a03-ladder.ar.vtt"/>
+      <file href="captions/smp91-a03-ladder.en.vtt"/>
+      <file href="captions/smp91-a04-controls.ar.vtt"/>
+      <file href="captions/smp91-a04-controls.en.vtt"/>
+      <file href="captions/smp91-a05-six-steps.ar.vtt"/>
+      <file href="captions/smp91-a05-six-steps.en.vtt"/>
+      <file href="captions/smp91-a07-card.ar.vtt"/>
+      <file href="captions/smp91-a07-card.en.vtt"/>
+      <file href="captions/smp91-a08-hand-signals.ar.vtt"/>
+      <file href="captions/smp91-a08-hand-signals.en.vtt"/>
+      <file href="captions/smp91-a09-chain.ar.vtt"/>
+      <file href="captions/smp91-a09-chain.en.vtt"/>
+      <file href="captions/smp91-v01-hook.ar.vtt"/>
+      <file href="captions/smp91-v01-hook.en.vtt"/>
+      <file href="captions/smp91-v02-this-way.ar.vtt"/>
+      <file href="captions/smp91-v02-this-way.en.vtt"/>
+      <file href="captions/smp91-v06-gate6.ar.vtt"/>
+      <file href="captions/smp91-v06-gate6.en.vtt"/>
+      <file href="captions/smp91-v09-signal-for-help.ar.vtt"/>
+      <file href="captions/smp91-v09-signal-for-help.en.vtt"/>
+      <file href="captions/smp91-v10-emergency.ar.vtt"/>
+      <file href="captions/smp91-v10-emergency.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/fluent-3d-antenna-bars.png"/>
+      <file href="icons/fluent-3d-bullseye.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-calendar.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-counterclockwise-arrows-button.png"/>
+      <file href="icons/fluent-3d-cross-mark.png"/>
+      <file href="icons/fluent-3d-ear.png"/>
+      <file href="icons/fluent-3d-electric-plug.png"/>
+      <file href="icons/fluent-3d-eyes.png"/>
+      <file href="icons/fluent-3d-fire-extinguisher.png"/>
+      <file href="icons/fluent-3d-fountain-pen.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-hourglass-done.png"/>
+      <file href="icons/fluent-3d-identification-card.png"/>
+      <file href="icons/fluent-3d-keycap-10.png"/>
+      <file href="icons/fluent-3d-level-slider.png"/>
+      <file href="icons/fluent-3d-link.png"/>
+      <file href="icons/fluent-3d-locked.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-medical-symbol.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-memo.png"/>
+      <file href="icons/fluent-3d-microphone.png"/>
+      <file href="icons/fluent-3d-package.png"/>
+      <file href="icons/fluent-3d-people-hugging.png"/>
+      <file href="icons/fluent-3d-person-standing.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-police-car-light.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-right-arrow.png"/>
+      <file href="icons/fluent-3d-round-pushpin.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-scissors.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-speaking-head.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-television.png"/>
+      <file href="icons/fluent-3d-thinking-face.png"/>
+      <file href="icons/fluent-3d-timer-clock.png"/>
+      <file href="icons/fluent-3d-unlocked.png"/>
+      <file href="icons/fluent-3d-upwards-button.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="icons/fluent-3d-worried-face.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp91-c1a.jpg"/>
+      <file href="images/smp91-c1b.jpg"/>
+      <file href="images/smp91-c1c.jpg"/>
+      <file href="images/smp91-c2a.jpg"/>
+      <file href="images/smp91-c2c.jpg"/>
+      <file href="images/smp91-c3a.jpg"/>
+      <file href="images/smp91-c3b.jpg"/>
+      <file href="images/smp91-c3c.jpg"/>
+      <file href="images/smp91-c4a.jpg"/>
+      <file href="images/smp91-c4b.jpg"/>
+      <file href="images/smp91-c4c.jpg"/>
+      <file href="images/smp91-g6.jpg"/>
+      <file href="images/smp91-hero.jpg"/>
+      <file href="images/smp91-p1.jpg"/>
+      <file href="images/smp91-p2.jpg"/>
+      <file href="images/smp91-p3.jpg"/>
+      <file href="images/smp91-p4.jpg"/>
+      <file href="images/smp91-s0-poll.jpg"/>
+      <file href="images/smp91-s1-barriers.jpg"/>
+      <file href="images/smp91-s2-one-gate.jpg"/>
+      <file href="images/smp91-s3-controls.jpg"/>
+      <file href="images/smp91-s4-calm-call.jpg"/>
+      <file href="images/smp91-s9-briefing.jpg"/>
+      <file href="images/smp91-th3.jpg"/>
+      <file href="images/smp91-th5.jpg"/>
+      <file href="images/smp91-th6.jpg"/>
+      <file href="images/smp91-th9.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp91-a01-loop.mp4"/>
+      <file href="video/smp91-a02-voc.mp4"/>
+      <file href="video/smp91-a03-ladder.mp4"/>
+      <file href="video/smp91-a04-controls.mp4"/>
+      <file href="video/smp91-a05-six-steps.mp4"/>
+      <file href="video/smp91-a07-card.mp4"/>
+      <file href="video/smp91-a08-hand-signals.mp4"/>
+      <file href="video/smp91-a09-chain.mp4"/>
+      <file href="video/smp91-v01-hook.mp4"/>
+      <file href="video/smp91-v02-this-way.mp4"/>
+      <file href="video/smp91-v06-gate6.mp4"/>
+      <file href="video/smp91-v09-signal-for-help.mp4"/>
+      <file href="video/smp91-v10-emergency.mp4"/>
+      <file href="aids/smp91-radio-escalation-reporting-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
