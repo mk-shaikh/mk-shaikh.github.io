@@ -32,8 +32,10 @@
       <file href="captions/smp111-v05-story-start.en.vtt"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-red-crescent-3d.png"/>
       <file href="icons/custom-walkie-talkie.svg"/>
       <file href="icons/fluent-3d-anatomical-heart.png"/>
+      <file href="icons/fluent-3d-camera.png"/>
       <file href="icons/fluent-3d-door.png"/>
       <file href="icons/fluent-3d-droplet.png"/>
       <file href="icons/fluent-3d-eyes.png"/>
@@ -42,6 +44,7 @@
       <file href="icons/fluent-3d-high-voltage.png"/>
       <file href="icons/fluent-3d-hot-face.png"/>
       <file href="icons/fluent-3d-medical-symbol.png"/>
+      <file href="icons/fluent-3d-non-potable-water.png"/>
       <file href="icons/fluent-3d-open-hands.png"/>
       <file href="icons/fluent-3d-page-facing-up.png"/>
       <file href="icons/fluent-3d-person-walking.png"/>
