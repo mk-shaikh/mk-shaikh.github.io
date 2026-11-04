@@ -63,6 +63,7 @@
       <file href="icons/fluent-3d-link.png"/>
       <file href="icons/fluent-3d-loudspeaker.png"/>
       <file href="icons/fluent-3d-magnifying-glass-tilted-left.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
       <file href="icons/fluent-3d-no-entry.png"/>
       <file href="icons/fluent-3d-open-hands.png"/>
       <file href="icons/fluent-3d-people-hugging.png"/>
@@ -79,6 +80,7 @@
       <file href="images/cast/C-01.jpg"/>
       <file href="images/cast/C-04.jpg"/>
       <file href="images/smp51-c2a.jpg"/>
+      <file href="images/smp51-c2c.jpg"/>
       <file href="images/smp51-d1.jpg"/>
       <file href="images/smp51-d2.jpg"/>
       <file href="images/smp51-hero.jpg"/>
@@ -104,7 +106,6 @@
       <file href="video/smp51-v12-dp1-shout.mp4"/>
       <file href="video/smp51-v13-dp1-poor.mp4"/>
       <file href="video/smp51-v14-dp2-best.mp4"/>
-      <file href="video/smp51-v15-dp2-leave.mp4"/>
       <file href="aids/smp51-moi-civil-defence-briefing-job-aids.pdf"/>
     </resource>
   </resources>
