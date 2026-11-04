@@ -72,6 +72,10 @@
       <file href="captions/smp91-a08-hand-signals.en.vtt"/>
       <file href="captions/smp91-a09-chain.ar.vtt"/>
       <file href="captions/smp91-a09-chain.en.vtt"/>
+      <file href="captions/smp91-v-chain-pictures.ar.vtt"/>
+      <file href="captions/smp91-v-chain-pictures.en.vtt"/>
+      <file href="captions/smp91-v-voc-pictures.ar.vtt"/>
+      <file href="captions/smp91-v-voc-pictures.en.vtt"/>
       <file href="captions/smp91-v01-hook.ar.vtt"/>
       <file href="captions/smp91-v01-hook.en.vtt"/>
       <file href="captions/smp91-v02-this-way.ar.vtt"/>
@@ -179,6 +183,8 @@
       <file href="video/smp91-a07-card.mp4"/>
       <file href="video/smp91-a08-hand-signals.mp4"/>
       <file href="video/smp91-a09-chain.mp4"/>
+      <file href="video/smp91-v-chain-pictures.mp4"/>
+      <file href="video/smp91-v-voc-pictures.mp4"/>
       <file href="video/smp91-v01-hook.mp4"/>
       <file href="video/smp91-v02-this-way.mp4"/>
       <file href="video/smp91-v06-gate6.mp4"/>
