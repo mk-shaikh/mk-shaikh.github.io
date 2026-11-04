@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.smp103missilethreatemergencyresponse" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>Missile threat and emergency response</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>Missile threat and emergency response</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/smp103-v01-hook.en.vtt"/>
+      <file href="captions/smp103-v02-opening.en.vtt"/>
+      <file href="captions/smp103-v03-channels.en.vtt"/>
+      <file href="captions/smp103-v04-voc-flow.en.vtt"/>
+      <file href="captions/smp103-v05-guidance.en.vtt"/>
+      <file href="captions/smp103-v06-shelter-a.en.vtt"/>
+      <file href="captions/smp103-v07-shelter-b.en.vtt"/>
+      <file href="captions/smp103-v08-majed-poor.en.vtt"/>
+      <file href="captions/smp103-v09-noura-good.en.vtt"/>
+      <file href="captions/smp103-v10-story-start.en.vtt"/>
+      <file href="captions/smp103-v15-recap.en.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
+      <file href="icons/fluent-3d-bell.png"/>
+      <file href="icons/fluent-3d-calendar.png"/>
+      <file href="icons/fluent-3d-camera.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-door.png"/>
+      <file href="icons/fluent-3d-handshake.png"/>
+      <file href="icons/fluent-3d-heart-hands.png"/>
+      <file href="icons/fluent-3d-house.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-mobile-phone-with-arrow.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
+      <file href="icons/fluent-3d-office-building.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
+      <file href="icons/fluent-3d-red-question-mark.png"/>
+      <file href="icons/fluent-3d-relieved-face.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-stadium.png"/>
+      <file href="icons/fluent-3d-stop-sign.png"/>
+      <file href="icons/fluent-3d-television.png"/>
+      <file href="icons/fluent-3d-tent.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/smp103-c1a.jpg"/>
+      <file href="images/smp103-c1b.jpg"/>
+      <file href="images/smp103-c1c.jpg"/>
+      <file href="images/smp103-c2a.jpg"/>
+      <file href="images/smp103-c2b.jpg"/>
+      <file href="images/smp103-c2c.jpg"/>
+      <file href="images/smp103-c3b.jpg"/>
+      <file href="images/smp103-c3c.jpg"/>
+      <file href="images/smp103-c4a.jpg"/>
+      <file href="images/smp103-c4b.jpg"/>
+      <file href="images/smp103-c4c.jpg"/>
+      <file href="images/smp103-d1.jpg"/>
+      <file href="images/smp103-d2.jpg"/>
+      <file href="images/smp103-d3.jpg"/>
+      <file href="images/smp103-d4.jpg"/>
+      <file href="images/smp103-hero.jpg"/>
+      <file href="images/smp103-i01.jpg"/>
+      <file href="images/smp103-i02.jpg"/>
+      <file href="images/smp103-i03.jpg"/>
+      <file href="images/smp103-i04.jpg"/>
+      <file href="images/smp103-i05.jpg"/>
+      <file href="images/smp103-i06.jpg"/>
+      <file href="images/smp103-i07.jpg"/>
+      <file href="images/smp103-i08.jpg"/>
+      <file href="images/smp103-i09.jpg"/>
+      <file href="images/smp103-i10.jpg"/>
+      <file href="images/smp103-m1-section.jpg"/>
+      <file href="images/smp103-s0-fans.jpg"/>
+      <file href="images/smp103-s1-phone.jpg"/>
+      <file href="images/smp103-s2-calm.jpg"/>
+      <file href="images/smp103-s3-noura.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/smp103-v01-hook.mp4"/>
+      <file href="video/smp103-v02-opening.mp4"/>
+      <file href="video/smp103-v03-channels.mp4"/>
+      <file href="video/smp103-v04-voc-flow.mp4"/>
+      <file href="video/smp103-v05-guidance.mp4"/>
+      <file href="video/smp103-v06-shelter-a.mp4"/>
+      <file href="video/smp103-v07-shelter-b.mp4"/>
+      <file href="video/smp103-v08-majed-poor.mp4"/>
+      <file href="video/smp103-v09-noura-good.mp4"/>
+      <file href="video/smp103-v10-story-start.mp4"/>
+      <file href="video/smp103-v14-dp3-handover.mp4"/>
+      <file href="video/smp103-v15-recap.mp4"/>
+      <file href="aids/smp103-missile-threat-emergency-response-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
