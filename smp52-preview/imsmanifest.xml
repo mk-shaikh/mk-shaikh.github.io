@@ -12,9 +12,9 @@
   </metadata>
   <organizations default="ORG-1">
     <organization identifier="ORG-1">
-      <title>Fire safety: hazards, raising the alarm &amp; extinguishers</title>
+      <title>Fire safety: hazards and raising the alarm</title>
       <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
-        <title>Fire safety: hazards, raising the alarm &amp; extinguishers</title>
+        <title>Fire safety: hazards and raising the alarm</title>
         <adlcp:masteryscore>70</adlcp:masteryscore>
       </item>
     </organization>
@@ -27,8 +27,6 @@
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
       <file href="brand/jam-training-primary.png"/>
       <file href="brand/jam-training-white.png"/>
-      <file href="captions/smp52-v-blanket.ar.vtt"/>
-      <file href="captions/smp52-v-blanket.en.vtt"/>
       <file href="captions/smp52-v-exits.ar.vtt"/>
       <file href="captions/smp52-v-exits.en.vtt"/>
       <file href="captions/smp52-v-hook.ar.vtt"/>
@@ -62,15 +60,20 @@
       <file href="icons/fluent-3d-gear.png"/>
       <file href="icons/fluent-3d-handshake.png"/>
       <file href="icons/fluent-3d-megaphone.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
       <file href="icons/fluent-3d-next-track-button.png"/>
+      <file href="icons/fluent-3d-no-entry.png"/>
       <file href="icons/fluent-3d-oil-drum.png"/>
       <file href="icons/fluent-3d-package.png"/>
       <file href="icons/fluent-3d-police-car-light.png"/>
+      <file href="icons/fluent-3d-prohibited.png"/>
       <file href="icons/fluent-3d-rescue-workers-helmet.png"/>
       <file href="icons/fluent-3d-round-pushpin.png"/>
       <file href="icons/fluent-3d-shield.png"/>
       <file href="icons/fluent-3d-speech-balloon.png"/>
       <file href="icons/fluent-3d-telephone-receiver.png"/>
+      <file href="icons/fluent-3d-thinking-face.png"/>
+      <file href="icons/fluent-3d-warning.png"/>
       <file href="icons/fluent-3d-wind-face.png"/>
       <file href="icons/fluent-3d-wrench.png"/>
       <file href="images/cast/C-04.jpg"/>
@@ -78,8 +81,6 @@
       <file href="images/smp52-dp1.jpg"/>
       <file href="images/smp52-dp2.jpg"/>
       <file href="images/smp52-dp3.jpg"/>
-      <file href="images/smp52-pass-infographic.jpg"/>
-      <file href="images/smp52-ref-blanket.jpg"/>
       <file href="images/smp52-ref-dp1-calm.jpg"/>
       <file href="images/smp52-ref-dp1-shout.jpg"/>
       <file href="images/smp52-ref-dp2-smothered.jpg"/>
@@ -110,7 +111,6 @@
       <file href="images/smp52-s5-socket.jpg"/>
       <file href="images/smp52-s5-wall.jpg"/>
       <file href="scorm.js"/>
-      <file href="video/smp52-v-blanket.mp4"/>
       <file href="video/smp52-v-dp1-calm.mp4"/>
       <file href="video/smp52-v-dp1-shout.mp4"/>
       <file href="video/smp52-v-dp2-smothered.mp4"/>
