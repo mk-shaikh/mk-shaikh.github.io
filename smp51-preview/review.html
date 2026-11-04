@@ -3162,12 +3162,13 @@ Object.assign(UI,{
    x_numbered (a number on each step, the design's own: never typed in the text); a step's x_pins[{x, y, lx, ly, label}] put live-text labels with arrows on the picture (they stay); x_intro{x_audio[]} (a line before step 1, ▶ only).
    Continue waits for the last step; a step's sound plays when Next reveals it, ▶ replays it, no file = no button. */
 function srAudio(list){return (Array.isArray(list)?list:[]).map(function(x){return audioFile(x&&x.media);}).filter(Boolean);}
-function srPlay(host,au){host.querySelectorAll('audio').forEach(function(x){if(x!==au)try{x.pause();}catch(_){}});try{au.currentTime=0;var p=au.play();if(p&&p.catch)p.catch(function(){});}catch(_){}}
+function srPlay(host,au,onFail){host.querySelectorAll('audio').forEach(function(x){if(x!==au)try{x.pause();}catch(_){}});try{au.currentTime=0;var p=au.play();if(p&&p.catch)p.catch(function(){if(onFail)onFail();});}catch(_){if(onFail)onFail();}}
+/* the voice plays by itself (user, 2026-11-04: 'needs the voice over, not a play button'); the ▶ shows only when the browser blocks sound */
 function srPlayBtn(host,files){if(!files.length)return null;
-  var w=el('<span class="sr-say"></span>'),b=el('<button type="button" class="btn sm ghost play" aria-label="'+U('listen')+'">&#9654; '+U('listen')+'</button>');
-  var aus=files.map(function(f){var a=new Audio(f);a.preload='none';return a;});
+  var w=el('<span class="sr-say"></span>'),b=el('<button type="button" class="btn sm ghost play" hidden aria-label="'+U('listen')+'">&#9654; '+U('listen')+'</button>');
+  var aus=files.map(function(f){var a=new Audio(f);a.preload='auto';return a;});
   aus.forEach(function(a,i){a.addEventListener('error',function(){b.remove();});if(i<aus.length-1)a.addEventListener('ended',function(){srPlay(host,aus[i+1]);});});
-  b.addEventListener('click',function(){srPlay(host,aus[0]);});w.appendChild(b);w._play=function(){srPlay(host,aus[0]);};
+  b.addEventListener('click',function(){b.hidden=true;srPlay(host,aus[0]);});w.appendChild(b);w._play=function(){srPlay(host,aus[0],function(){b.hidden=false;});};
   aus.forEach(function(a){w.appendChild(a);});return w;}
 Object.assign(BUILD,{
   stepReveal:function(s,h){
@@ -3190,6 +3191,7 @@ Object.assign(BUILD,{
     var nav=el('<div class="sr-nav"><span class="sr-count"></span><button type="button" class="btn blue sr-next">'+U('next')+' &#8250;</button></div>');h.appendChild(nav);
     var nb=nav.querySelector('.sr-next'),cnt=nav.querySelector('.sr-count');
     var btn=cont(s,h);btn.dataset.label=btn.textContent;gate(btn,0,n,U('opened'));
+    if(intro)setTimeout(function(){if(h.isConnected)intro._play();},350);   /* the opening line plays as the page opens */
     function show(i){var it=items[i],st_=steps[i];
       items.forEach(function(x,k){x.classList.toggle('on',k===i);});it.hidden=false;it.classList.add('seen');
       if(pic&&st_.media){var f=sc2_assetFile(st_.media);img.innerHTML='';img.appendChild(imgOrPh(f,assetAlt(f)||strip(st_.title||st_.text||''),'simg'));}
@@ -3765,7 +3767,9 @@ function adaptSchema2(S){
         break;
       case 'consequence':
         if(!s.headline&&s.outcome)s.headline=s.outcome;
-        if(!s.lines&&s.why)s.lines=[s.why];
+        /* 'why' the same words as 'outcome' (the heading) is not shown twice (SMP 5.1 QA, 2026-11-04) */
+        if(!s.lines&&s.why){var _sw=function(v){return v&&typeof v==='object'?String(v.en||'').trim():String(v||'').trim();};
+          if(!(s.headline&&_sw(s.why)&&_sw(s.why)===_sw(s.headline)))s.lines=[s.why];}
         if(!s.tone)s.tone='mixed';
         if(s.next&&!s.x_next)s.x_next=s.next;
         break;
