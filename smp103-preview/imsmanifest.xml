@@ -22,6 +22,7 @@
   <resources>
     <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
+      <file href="_replaced-2026-11-04/smp103-d3.jpg"/>
       <file href="brand/afc27-start-picture.jpg"/>
       <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
       <file href="brand/fonts/SourceSans3[wght].ttf"/>
