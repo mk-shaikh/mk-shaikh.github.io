@@ -964,7 +964,7 @@
   .gbubble p{margin:0 0 6px} .gbubble p:last-child{margin:0}
   .quote{margin:4px 0 16px;padding:18px 20px;background:var(--navy);color:#fff;border-radius:16px}
   .quote blockquote{margin:0;font-family:var(--font-display);font-size:20px;line-height:1.3}
-  .quote figcaption{margin-top:10px;font-size:12px;color:var(--orange);letter-spacing:.08em;text-transform:none}
+  .quote figcaption{margin-top:10px;font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.08em;text-transform:none}
   .istrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 14px}
   .iitem{font:inherit;background:#fff;border:1.5px solid var(--line-2);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:var(--ink)}
   .iitem .ico{width:44px;height:44px;display:inline-flex} .iitem b{font-size:12.5px;color:var(--navy)} .iitem span{display:none;font-size:12px;color:var(--muted)}
@@ -1258,7 +1258,7 @@ details.transcript p{margin:6px 0;line-height:1.55}
 .qs-sum{display:grid;gap:6px;margin-top:10px}.qs-sum div{display:flex;gap:10px;border-bottom:1px solid var(--line);padding:6px 0}
 .es-rnd{font-weight:700;color:var(--orange);margin-bottom:6px}
 .es-view{border:1px solid var(--line);border-radius:12px;overflow:hidden}.es-view svg{display:block;width:100%;height:auto}
-.es-ground{fill:#d8d2c2}.es-head{fill:var(--navy);transition:fill .4s}.es-head.lit{fill:#f5b400}
+.es-ground{fill:#d8d2c2}.es-body{fill:#8c7f68;opacity:.55;stroke:#5f5546;stroke-width:1.5}.es-head{fill:var(--navy);transition:fill .4s}.es-head.lit{fill:#f5b400}
 .es-sq{fill:rgba(245,180,0,.12);stroke:#f5b400;stroke-width:4}.es-sqt{font:700 14px var(--font);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:4px}
 .es-est{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0}
 .es-val{font-family:var(--font-display);font-size:40px;color:var(--navy);line-height:1}.es-val small{font-size:16px;color:var(--muted);font-family:var(--font)}
@@ -1474,6 +1474,90 @@ img.simg.banner{width:100%;height:clamp(120px,22vw,190px);object-fit:cover;objec
   .app ol.ladder.down li+li::after{display:none}
   .app ol.ladder.down li+li::before{content:"";position:absolute;inset-inline-start:34px;top:-20px;width:2px;height:18px;background:var(--navy)}
   .app ol.ladder li .rung.start{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+  /* ---- stories (2026-11-06): round story covers, a full-screen viewer with a segmented progress bar; carousel = the same viewer inline ---- */
+  .st-rings{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:thin}
+  .st-ring{flex:none;width:88px;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;font:inherit;color:var(--ink);scroll-snap-align:start}
+  .st-cover{width:76px;height:76px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,var(--orange),#f5b400,var(--sky),var(--orange));position:relative;display:block;transition:transform .2s}
+  .st-ring:hover .st-cover{transform:scale(1.05)}
+  .st-cover img,.st-cover .ico,.st-cover .st-n{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#fff;display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:22px}
+  .st-cover .ico svg,.st-cover .ico img{width:60%;height:60%}
+  .st-cover img+.ico{display:none}
+  .st-ring.seen .st-cover{background:var(--teal)}
+  .st-ring.seen .st-cover::after{content:'\2713';position:absolute;right:-2px;bottom:-2px;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;display:grid;place-items:center;border:2px solid #fff;font-size:13px}
+  .st-ring:focus-visible{outline:none}.st-ring:focus-visible .st-cover{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--sky)}
+  .st-title{font-size:13px;font-weight:700;text-align:center;line-height:1.25}
+  .st-hint{color:var(--muted);font-size:14px;margin:0 0 12px}
+  .st-view{position:fixed;inset:0;z-index:150;background:rgba(8,10,18,.94);display:flex;align-items:center;justify-content:center;padding:0;outline:none}
+  body.st-open{overflow:hidden}
+  .st-card{position:relative;width:100%;height:100%;max-width:440px;background:#000;display:flex;flex-direction:column;color:#fff;font-family:var(--font)}
+  @media (min-width:640px){.st-view{padding:20px}.st-card{height:min(100%,840px);border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}}
+  .st-prog{display:flex;gap:4px;padding:10px 12px 0}
+  .st-seg{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.32);overflow:hidden}
+  .st-seg i{display:block;height:100%;width:0;background:#fff;border-radius:2px;transition:width .25s linear}
+  .st-seg.done i{width:100%}
+  .st-head{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:16px;line-height:1.3}
+  .st-head .ico{width:30px;height:30px;flex:none}
+  .st-head .st-count{margin-inline-start:auto;color:rgba(255,255,255,.7);font-weight:700;font-size:14px}
+  .st-btn{border:0;border-radius:999px;padding:11px 18px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;background:rgba(255,255,255,.14);color:#fff;transition:background .2s,opacity .2s;min-height:44px}
+  .st-btn:hover{background:rgba(255,255,255,.24)}
+  .st-btn.primary{background:#fff;color:var(--navy)}
+  .st-btn.primary:hover{background:#f1f1f1}
+  .st-btn:disabled{opacity:.4;cursor:default}
+  .st-btn:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+  .st-btn.st-close{padding:0;width:40px;height:40px;min-height:40px;display:grid;place-items:center;font-size:18px}
+  .st-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000;cursor:pointer;min-height:0}
+  .st-stage .imgwrap,.st-stage img.st-img,.st-stage video{width:100%;height:100%;object-fit:cover;display:block;margin:0}
+  .st-stage .imgwrap{display:block}
+  .st-stage .mediaph{margin:16px;min-height:120px}
+  .st-blank{display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(160deg,var(--navy),var(--blue))}
+  .st-blank .ico{width:120px;height:120px}
+  .st-play{position:absolute;inset:auto;width:76px;height:76px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--navy);font-size:30px;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4);padding-inline-start:6px}
+  .st-cap{margin:0;padding:14px 16px 6px;font-size:17px;line-height:1.45;color:#fff;min-height:3em}
+  .st-nav{display:flex;gap:10px;padding:8px 14px 16px;align-items:center;justify-content:space-between}
+  .st-nav .st-btn[hidden]{display:none}
+  .st-inline{position:static;inset:auto;z-index:auto;background:none;padding:0;display:block;margin:0 0 14px}
+  .st-inline .st-card{height:auto;max-width:none;border-radius:18px;overflow:hidden;background:#0d1220;box-shadow:var(--shadow)}
+  .st-inline .st-stage{aspect-ratio:16/9;flex:none;max-height:48vh;cursor:pointer}
+  @media (prefers-reduced-motion:reduce){.st-seg i,.st-cover{transition:none}}
+  .srv .sr-item[hidden]{display:none}   /* a step not yet revealed stays hidden (2026-11-06: display:flex overrode the hidden attribute) */
+  /* ---- required teaching voice (2026-11-06) ---- */
+  .hear{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:8px 0 4px;padding:8px 12px;border-radius:12px;background:var(--sky-tint);color:var(--navy);font-weight:700;font-size:14px}
+  .hear[hidden]{display:none}
+  .hear audio{display:none}
+  .hear-wave{display:inline-flex;align-items:flex-end;gap:3px;height:18px}
+  .hear-wave i{display:block;width:4px;height:6px;border-radius:2px;background:var(--navy);opacity:.45}
+  .hear.playing .hear-wave i{opacity:1;animation:hearw .9s ease-in-out infinite}
+  .hear.playing .hear-wave i:nth-child(2){animation-delay:.15s}.hear.playing .hear-wave i:nth-child(3){animation-delay:.3s}.hear.playing .hear-wave i:nth-child(4){animation-delay:.45s}
+  @keyframes hearw{0%,100%{height:5px}50%{height:18px}}
+  .hear.heard{background:var(--surface-2);color:var(--muted)}
+  .hear.heard .hear-wave i{background:var(--teal)}
+  .hear-play{min-height:44px;padding:10px 18px}
+  .hear-play[hidden],.hear-again[hidden]{display:none}
+  .hear-again{margin-inline-start:auto;background:none;border:0;color:var(--blue);font:inherit;font-weight:700;cursor:pointer;padding:6px 4px;min-height:36px}
+  .hear-again:hover{text-decoration:underline}
+  .waitvoice{opacity:.5}
+  @media (prefers-reduced-motion:reduce){.hear.playing .hear-wave i{animation:none;height:14px}}
+
+  /* ---- plan explorer on a phone (2026-11-06): the plan fills the width with big numbers; a spot's card is a sheet from the bottom ---- */
+  .mx-close{display:none}
+  @media (max-width:639px){
+    .mx-map{margin:0 calc(-1*var(--pad));border-radius:0;border-left:0;border-right:0}
+    .mx-hs .mx-dot,.mx-hs .mx-pulse{r:26px}
+    .mx-hs text{font-size:26px}
+    .mx-detail{display:none;position:fixed;left:0;right:0;bottom:0;z-index:160;margin:0;border:0;border-radius:20px 20px 0 0;background:var(--surface);
+      box-shadow:0 -12px 40px rgba(var(--navy-rgb),.28);padding:14px 16px calc(18px + env(safe-area-inset-bottom));max-height:72vh;overflow-y:auto;animation:mxsheet .25s ease-out}
+    .mx-detail.open{display:block}
+    .mx-detail::before{content:'';display:block;width:44px;height:5px;border-radius:3px;background:var(--line-2);margin:0 auto 10px}
+    .mx-close{display:flex;align-items:center;gap:6px;margin:0 0 10px auto;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:44px;font:inherit;font-weight:700;color:var(--navy);cursor:pointer}
+    .mx-detail .mx-pic{max-height:30vh;margin-bottom:10px}
+    .mx-row .ico{width:44px;height:44px}
+    .mx-row b{font-size:18px}
+    .mx-prog{margin-top:12px}
+  }
+  @keyframes mxsheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion:reduce){.mx-detail{animation:none}}
+  .mx-list ol[hidden]{display:none}   /* the list stays folded until asked (2026-11-06: display:grid overrode hidden) */
+  @media (max-width:639px){.st-rings{flex-wrap:wrap;justify-content:center;overflow-x:visible}}   /* every story circle visible on a phone (2026-11-06) */
 
 /* ============ LAYOUT "corporate" — media-first: a solid dark bar, a white page, square-cornered controls, hairline rules.
    Colours come only from the theme variables (the client's palette): --navy = the bar, --orange = the action colour,
@@ -1880,6 +1964,10 @@ textarea.rv-in{resize:vertical;min-height:84px}
 @media print{.rv-tab,.rv-panel,.rv-tip{display:none!important}}
 
 .rv-skip{margin:14px 0 4px;text-align:center}.rv-skip .btn{font-size:.85em;opacity:.85}
+.rv-next{position:fixed;z-index:150;left:178px;bottom:16px;display:flex;align-items:center;gap:6px;font:800 16px/1.2 system-ui,"Segoe UI",Arial,sans-serif;background:#fff;color:#2b2200;border:2px solid #b38f00;border-radius:28px;min-height:52px;padding:10px 18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.rv-next:hover{background:#fff7d1}.rv-next:focus-visible{outline:3px solid #b38f00;outline-offset:2px}
+/* review pages: room under each screen so the floating Comment / Next screen buttons never hide the course's own buttons */
+.screen{padding-bottom:84px}
 
 </style>
 <style>
@@ -2709,7 +2797,7 @@ var BUILD={
   teach:function(s,h){
     head(s,h);
     media(s).forEach(function(f){h.appendChild(imgOrPh(f,strip(s.heading),s.x_character?'simg guideimg':(s.x_picture==='banner'?'simg banner':'simg')));});   /* x_picture "banner": a short, wide strip of the photo (user, 2026-10-14) */
-    sit(s,h);   /* the lead line was never shown on a teach screen - client text lost (SMP 5.1 learner QA, 2026-11-04) */
+    sit(s,h);   /* the lead line was never shown on a teach screen - client text lost (one lesson learner QA, 2026-11-04) */
     if(s.lines&&s.lines.length){var bq='<div class="bq">';s.lines.forEach(function(l){bq+='<p>'+T(l)+'</p>';});h.appendChild(el(bq+'</div>'));}
     if(s.callout)h.appendChild(el('<div class="callout"><b>'+T(s.callout)+'</b></div>'));
     if(s.x_placeholder)h.appendChild(el('<div class="mediaph missing"><span class="mpi">✎</span><b>'+T(s.x_placeholderNote)+'</b><span class="mpf">'+U('clientText')+'</span></div>'));
@@ -2746,29 +2834,32 @@ var BUILD={
     var i=0,a=actions(h),cards=s.cards;
     onSwipe(box,function(dir){if(dir==='next'&&i<cards.length-1){i++;show();}else if(dir==='prev'&&i>0){i--;show();}});
     function dots(){var d='';for(var k=0;k<cards.length;k++)d+='<i class="'+(k<=i?'on':'')+'"></i>';return d;}
-    var seenAll=false,flip=(s.x_mechanic||s.mechanic)==='flip',read={};   /* flip: tap the card to read it; every card must be read (user, 2026-10-12) */
+    var seenAll=false,flip=(s.x_mechanic||s.mechanic)==='flip',read={},heard={};   /* flip: tap the card to read it; every card must be read (user, 2026-10-12) */
     function show(){
       box.querySelectorAll('audio,video').forEach(function(x){try{x.pause();}catch(_){}});   /* E1: a sound stops when the card changes */
       var c=cards[i],cvid=c.media&&/\.mp4$/i.test(c.media),ctx=T(c.text||(c.lines||[]).map(T).join(' '));   /* a card's media may be a video (2026-11-01): played once with sound, then looped without */
       /* one card at a time, with a previous / next arrow on either side (user, 2026-10-12); arrows mirror in right-to-left */
       box.innerHTML='<div class="fcrow"><button type="button" class="fcarrow prev" aria-label="'+U('back')+'"'+(i>0?'':' disabled')+'><span aria-hidden="true">&#8249;</span></button>'+
         '<div class="flash'+(flip?' flipcard'+(read[i]?' open':''):'')+'"'+(flip?' role="button" tabindex="0" aria-expanded="'+(read[i]?'true':'false')+'"':'')+'>'+(c.x_flags&&c.x_flags.length?flagRow(c.x_flags):cvid?'<div class="fcvid"></div>':c.media?'<img src="images/'+c.media+'" alt="'+strip(c.title)+'">':c.icon?'<div class="flashico">'+icon(c.icon)+'</div>':'')+
-        '<div class="fcbody"><div class="fcn">'+U('of',{a:i+1,b:cards.length})+'</div>'+(c.title?'<b>'+T(c.title)+'</b>':'')+(flip?'<span class="fchint">'+U('tapToRead')+'</span>':'')+(ctx||!cvid?'<p>'+ctx+'</p>':'')+cardAudio(c)+'</div></div>'+
+        '<div class="fcbody"><div class="fcn">'+U('of',{a:i+1,b:cards.length})+'</div>'+(c.title?'<b>'+T(c.title)+'</b>':'')+(flip?'<span class="fchint">'+U('tapToRead')+'</span>':'')+(ctx||!cvid?'<p>'+ctx+'</p>':'')+'<span class="fchear"></span></div></div>'+
         '<button type="button" class="fcarrow next" aria-label="'+U('next')+'"'+(i<cards.length-1?'':' disabled')+'><span aria-hidden="true">&#8250;</span></button></div>'+
         '<div class="progressdots fdots" aria-hidden="true">'+dots()+'</div>';
       if(cvid)vidSlot(box.querySelector('.fcvid'),c.media.replace(/\.mp4$/i,''),{compact:true,loopAfter:true,placeholder:UI.videoSoon});
       box.querySelector('.fcarrow.prev').addEventListener('click',function(){if(i>0){i--;show();}});
       box.querySelector('.fcarrow.next').addEventListener('click',function(){if(i<cards.length-1){i++;show();svin(box);}});
-      if(flip){var fcd=box.querySelector('.flipcard'),openIt=function(){read[i]=1;fcd.classList.add('open');fcd.setAttribute('aria-expanded','true');refresh();};
+      /* a card's voice is required (user, 2026-11-06): it plays when the card opens; the card counts as read once it has played */
+      var cf=srAudio(c.x_audio),ci=i,hw=cf.length?hearAll(cf,function(){heard[ci]=1;if(flip)read[ci]=1;if(ci===i){box.querySelector('.fcarrow.next').disabled=i>=cards.length-1;refresh();}}):null;
+      if(hw){box.querySelector('.fchear').appendChild(hw);if(!heard[i]){box.querySelector('.fcarrow.next').disabled=true;if(!flip||read[i])hw._start();}else{hw.querySelector('.hear-again').hidden=false;hw.classList.add('heard');}}
+      if(flip){var fcd=box.querySelector('.flipcard'),openIt=function(){fcd.classList.add('open');fcd.setAttribute('aria-expanded','true');if(hw&&!heard[i]){hw._start();return;}read[i]=1;refresh();};
         fcd.addEventListener('click',openIt);fcd.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openIt();}});}
-      wireCardAudio(box);
-      if(i===cards.length-1)seenAll=true;
+      if(i===cards.length-1&&(!hw||heard[i]))seenAll=true;
       refresh();
     }
     function refresh(){var n=Object.keys(read).length;[].slice.call(a.children).forEach(function(x){if(!x.classList.contains('cl-back'))x.remove();});   /* keep the layout's Back button */
       if(flip){var need=COURSE.reviewFree?0:Math.min(s.x_minRead===0?0:(s.x_minRead||cards.length),cards.length);   /* x_minRead 0: browsing is optional, Continue shows at once (user, 2026-10-14) */if(n>=need){cont(s,h);}else{var g=contBtn(need<cards.length?U('openedMin',{a:n,b:cards.length,k:need}):(n?U('readN',{a:n,b:cards.length}):U('readAll',{n:cards.length})),function(){});g.disabled=true;a.appendChild(g);}return;}
+      if(i===cards.length-1&&heard[i])seenAll=true;
       if(seenAll)cont(s,h);
-      else a.appendChild(contBtn(U('next'),function(){i++;show();svin(box);}));
+      else{var nx=contBtn(U('next'),function(){i++;show();svin(box);});var cw=cards[i]&&srAudio(cards[i].x_audio).length&&!heard[i];if(cw){nx.disabled=true;nx.innerHTML=U('listenFirst');}a.appendChild(nx);}
     }
     show();
   },
@@ -2868,8 +2959,9 @@ function reviewSkip(){
   if(!COURSE.reviewFree||cur>=S.length-1)return;
   var sc=g('stage').querySelector('.screen');if(!sc||sc.querySelector('.rv-skip'))return;
   var w=el('<div class="rv-skip"></div>');
-  w.appendChild(contBtn('Next screen (review) &rsaquo;',function(){render(cur+1);},'ghost'));sc.appendChild(w);
+  var nb=el('<button type="button" class="rv-next">'+U('rvNext')+' &rsaquo;</button>');nb.addEventListener('click',function(){render(cur+1);});w.appendChild(nb);sc.appendChild(w);
 }
+Object.assign(UI,{rvNext:{en:'Next screen'}});
 
 /* ============ SCRIPT TYPES (part 2) ============
    Orientation / gamification / diagnostic screen types (m00 and later). Loaded after script-runtime.js.
@@ -3175,7 +3267,7 @@ Object.assign(BUILD,{
   stepReveal:function(s,h){
     head(s,h);sit(s,h);task(s,h);
     var steps=s.steps||[],n=steps.length,lay=s.x_layout||'list',shown=0;
-    var intro=srPlayBtn(h,srAudio(s.x_intro&&s.x_intro.x_audio));if(intro){var ld=h.querySelector('.lead')||h.querySelector('h2');ld.parentNode.insertBefore(intro,ld.nextSibling);}
+    var introF=srAudio(s.x_intro&&s.x_intro.x_audio),intro=introF.length?hearAll(introF,function(){if(shown===0)nb.disabled=false;}):null;if(intro){var ld=h.querySelector('.lead')||h.querySelector('h2');ld.parentNode.insertBefore(intro,ld.nextSibling);}
     var wrap=el('<div class="srv sr-'+lay+'"></div>'),live=el('<p class="sr-only" role="status" aria-live="polite"></p>');
     var pic=null,img=null,pins=null;if(lay==='picture'){pic=el('<div class="sr-pic"><div class="sr-img"></div><svg class="sr-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div class="sr-pins"></div></div>');wrap.appendChild(pic);img=pic.querySelector('.sr-img');pins=pic.querySelector('.sr-pins');}
     if(lay==='card')wrap.appendChild(el('<div class="sr-cardh">'+icon('memo')+'<b>'+T(s.x_cardTitle||s.heading)+'</b></div>'));
@@ -3186,13 +3278,15 @@ Object.assign(BUILD,{
       if(lay==='card')body='<b>'+T(st_.title)+'</b><span class="sr-fill">'+(st_.text?T(st_.text):'<i></i><i></i>')+'</span>';
       var it=el((lay==='row'?'<div':'<li')+' class="sr-item">'+num+(st_.icon&&lay!=='card'?icon(st_.icon):'')+'<span class="sr-body">'+body+'</span>'+(lay==='row'?'</div>':'</li>'));
       if(lay!=='row'&&lay!=='card')it.hidden=true;
-      var p=srPlayBtn(h,srAudio(st_.x_audio));if(p)it.querySelector('.sr-body').appendChild(p);it._say=p;
+      var sf=srAudio(st_.x_audio),p=sf.length?hearAll(sf,function(){stepHeard(i);}):null;if(p)it.querySelector('.sr-body').appendChild(p);it._say=p;
       list.appendChild(it);return it;});
     h.appendChild(wrap);h.appendChild(live);
     var nav=el('<div class="sr-nav"><span class="sr-count"></span><button type="button" class="btn blue sr-next">'+U('next')+' &#8250;</button></div>');h.appendChild(nav);
     var nb=nav.querySelector('.sr-next'),cnt=nav.querySelector('.sr-count');
     var btn=cont(s,h);btn.dataset.label=btn.textContent;gate(btn,0,n,U('opened'));
-    if(intro)setTimeout(function(){if(h.isConnected)intro._play();},350);   /* the opening line plays as the page opens */
+    /* the voice is required (user, 2026-11-06): Next waits until the step's line (or the opening line) has played to the end */
+    function stepHeard(i){if(i!==shown-1)return;if(i>=n-1)gate(btn,n,n,U('opened'));else{nb.disabled=false;nb.focus();}}
+    if(intro){nb.disabled=true;setTimeout(function(){if(h.isConnected)intro._start();},350);}   /* the opening line plays as the page opens */
     function show(i){var it=items[i],st_=steps[i];
       items.forEach(function(x,k){x.classList.toggle('on',k===i);});it.hidden=false;it.classList.add('seen');
       if(pic&&st_.media){var f=sc2_assetFile(st_.media);img.innerHTML='';img.appendChild(imgOrPh(f,assetAlt(f)||strip(st_.title||st_.text||''),'simg'));}
@@ -3202,8 +3296,9 @@ Object.assign(BUILD,{
         pins.appendChild(el('<span class="sr-dot" style="left:'+q.x+'%;top:'+q.y+'%"></span>'));
         pins.appendChild(el('<span class="sr-lab" style="left:'+lx+'%;top:'+ly+'%">'+T(q.label||st_.title)+'</span>'));});
       live.textContent=(s.x_numbered?(i+1)+'. ':'')+strip(st_.title||'')+' '+strip(st_.text||'');
-      cnt.textContent=(i+1)+' / '+n;if(it._say)it._say._play();
-      if(i>=n-1){nb.hidden=true;gate(btn,n,n,U('opened'));}else nb.focus();}
+      cnt.textContent=(i+1)+' / '+n;var wait=!!(it._say&&!it._say._heard);
+      if(i>=n-1){nb.hidden=true;if(!wait)gate(btn,n,n,U('opened'));}else{nb.disabled=wait;if(!wait)nb.focus();}
+      if(it._say&&!it._say._heard)it._say._start();}
     nb.addEventListener('click',function(){if(shown<n){show(shown);shown++;}});
     cnt.textContent='0 / '+n;
     if(pic){var f0=(steps[0]&&steps[0].media)||media(s)[0];if(f0){var ff=sc2_assetFile(f0);img.appendChild(imgOrPh(ff,assetAlt(ff),'simg'));}}
@@ -3686,8 +3781,9 @@ Object.assign(BUILD,{
     function hush(){stage.querySelectorAll('audio').forEach(function(x){try{x.pause();}catch(_){}});}
     function show(){
       var m=STEPS[mi];hush();
-      stage.innerHTML='<div class="moment"><p class="mscene">'+T(m.scene)+'</p>'+cardAudio(m)+'<p class="q">'+T(m.question)+'</p><div class="mopts"></div><div class="mfb"></div></div>';
-      wireCardAudio(stage);
+      stage.innerHTML='<div class="moment"><p class="mscene">'+T(m.scene)+'</p><span class="mhear"></span><p class="q">'+T(m.question)+'</p><div class="mopts"></div><div class="mfb"></div></div>';
+      var wf=srAudio(m.x_audio),wh=wf.length?hearAll(wf,function(){[].forEach.call(stage.querySelectorAll('.mopts .cchoice'),function(x){if(!x.dataset.locked)x.disabled=false;});stage.querySelector('.mopts').classList.remove('waitvoice');}):null;   /* the step's voice is required (2026-11-06) */
+      if(wh)stage.querySelector('.mhear').appendChild(wh);
       if(m.media)stage.querySelector('.moment').insertBefore(imgOrPh(sc2_assetFile(m.media,null),strip(m.stepName)),stage.querySelector('.mscene'));
       var mo=stage.querySelector('.mopts');
       (m.options||[]).forEach(function(o){
@@ -3699,8 +3795,10 @@ Object.assign(BUILD,{
             fbx.appendChild(contBtn(mi<STEPS.length-1?U('keepGoing'):U('recap'),function(){mi++;if(mi<STEPS.length)show();else finish();}));svin(fbx);}
           else{first=false;fbx.appendChild(fb('bad',U('notThis'),T(o.feedback)||T(m.hint)||U('pickAgain')));svin(fbx);}
         });
+        if(wh){b.disabled=true;mo.classList.add('waitvoice');}
         mo.appendChild(b);
       });
+      if(wh)wh._start();
       svin(stage);
     }
     function finish(){
@@ -3768,7 +3866,7 @@ function adaptSchema2(S){
         break;
       case 'consequence':
         if(!s.headline&&s.outcome)s.headline=s.outcome;
-        /* 'why' the same words as 'outcome' (the heading) is not shown twice (SMP 5.1 QA, 2026-11-04) */
+        /* 'why' the same words as 'outcome' (the heading) is not shown twice (learner QA, 2026-11-04) */
         if(!s.lines&&s.why){var _sw=function(v){return v&&typeof v==='object'?String(v.en||'').trim():String(v||'').trim();};
           if(!(s.headline&&_sw(s.why)&&_sw(s.why)===_sw(s.headline)))s.lines=[s.why];}
         if(!s.tone)s.tone='mixed';
@@ -4365,7 +4463,7 @@ var _hotspotBuild=BUILD.hotspot;
 BUILD.hotspot=function(s,h){
   var tg=(s.targets||[]).filter(function(t){return t.correct!==false;});
   /* askEach also when the cards are choices-only (x_noSpot + x_choices, each with its own picture): they fell through to an empty
-     "coming soon" box (SMP 5.2 'Pick the right extinguisher', 2026-10-31) */
+     "coming soon" box (one lesson 'Pick the right extinguisher', 2026-10-31) */
   if((s.x_mechanic||s.mechanic)==='askEach'&&((s.x_pages&&s.x_pages.length)||(tg.length&&tg.some(function(t){return t.x!==undefined||(t.x_noSpot&&t.x_choices&&t.x_choices.length);})&&media(s).length)))return hotspotAskEach(s,h);
   if((s.x_mechanic||s.mechanic)!=='findAll'||!(tg.length>1&&tg[0].x!==undefined&&media(s).length))return _hotspotBuild(s,h);
   mechTag(h,'findAll');head(s,h);task(s,h);
@@ -4563,6 +4661,40 @@ BUILD.moduleComplete=function(s,h){
 
 Object.assign(UI,{transcript:{en:'Show transcript'},listen:{en:'Listen'},audioMissing:{en:'Recording not available'}});
 
+/* ---- teaching audio is not optional (user, 2026-11-06: 'the audio should not be optional if it is teaching something') ----
+   hearAll(files, done): the voice plays by itself; if the browser blocks sound, one big 'Play the voice' button shows; done() runs
+   once the last line has played to the end. A file that cannot be played never blocks (done() runs). A wave shows while it plays;
+   'Hear it again' replays. The audio elements live in the screen, so leaving the screen stops them. Review builds
+   (COURSE.reviewFree) never wait. */
+var HEAR_NOW=null;
+function hearAll(files,done){
+  var w=el('<div class="hear" role="group"><span class="hear-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>'+
+    '<span class="hear-lab">'+U('voicePlaying')+'</span>'+
+    '<button type="button" class="btn hear-play" hidden>&#9654; '+U('playVoice')+'</button>'+
+    '<button type="button" class="hear-again" hidden>&#8635; '+U('hearAgain')+'</button></div>');
+  var pb=w.querySelector('.hear-play'),ag=w.querySelector('.hear-again'),lab=w.querySelector('.hear-lab'),fin=false,called=false;
+  function fire(){if(called)return;called=true;if(done)done();}
+  var aus=files.map(function(f){var a=document.createElement('audio');a.preload='auto';a.src=f;w.appendChild(a);return a;});
+  function end(){if(fin)return;fin=true;w._heard=true;w.classList.remove('playing');w.classList.add('heard');pb.hidden=true;ag.hidden=false;lab.textContent=U('voiceDone');fire();}
+  function play(k){if(!w.isConnected&&k>0)return;if(HEAR_NOW&&HEAR_NOW!==aus)HEAR_NOW.forEach(function(x){try{x.pause();}catch(_){}});HEAR_NOW=aus;
+    aus.forEach(function(x,j){if(j!==k)try{x.pause();}catch(_){}});
+    var a=aus[k];try{a.currentTime=0;}catch(_){}var p=a.play();
+    if(p&&p.catch)p.catch(function(){if(!fin){pb.hidden=false;lab.textContent=U('tapToHear');}});}
+  aus.forEach(function(a,k){
+    a.addEventListener('playing',function(){w.classList.add('playing');pb.hidden=true;if(!fin)lab.textContent=U('voicePlaying');});
+    a.addEventListener('pause',function(){w.classList.remove('playing');});
+    a.addEventListener('ended',function(){w.classList.remove('playing');if(k<aus.length-1)play(k+1);else end();});
+    a.addEventListener('error',function(){if(k<aus.length-1)play(k+1);else end();});});
+  pb.addEventListener('click',function(e){e.stopPropagation();play(0);});
+  ag.addEventListener('click',function(e){e.stopPropagation();play(0);});
+  w._start=function(){if(!aus.length){end();return;}play(0);if(COURSE.reviewFree)fire();};
+  w._heard=false;
+  if(!aus.length)w.hidden=true;
+  return w;
+}
+Object.assign(UI,{playVoice:{en:'Play the voice'},hearAgain:{en:'Say again'},sayAgain:{en:'Say again'},voicePlaying:{en:'Listen…'},voiceDone:{en:'Listened'},
+  tapToHear:{en:'Tap to hear this part. You can go on after it.'},listenFirst:{en:'Listen first'}});
+
 /* ============ SCRIPT TYPES (part 6) — practice interactions approved from the interactivity lab (user, 2026-10-14) ============
    Four data-driven types (fields may come plain or x_-prefixed, read with X()):
      mapExplore   points[]{x, y (% of the plan), title, text, icon, media (a picture shown in the pop-up)}, plan "stadium" (built-in schematic) or media[0] (a plan picture),
@@ -4608,7 +4740,12 @@ Object.assign(BUILD,{
     var btn=cont(s,h);btn.disabled=!COURSE.reviewFree;
     function needTxt(){prog.querySelector('.mx-need').innerHTML=n>=need?(n===P.length?U('allOpened'):U('canContinue')):U('openMore',{n:need-n});}needTxt();
     function open(i){var p=P[i];[].forEach.call(wrap.querySelectorAll('.mx-hs'),function(g){g.classList.toggle('on',+g.dataset.i===i);});
-      det.innerHTML=(p.media?'<img class="mx-pic" src="images/'+sc2_assetFile(p.media)+'" alt="'+strip(p.title).replace(/"/g,'&quot;')+'" onerror="this.remove()">':'')+'<div class="mx-row">'+icon(p.icon)+'<div><b><span class="mx-num">'+(i+1)+'</span>'+T(p.title)+'</b>'+T(p.text)+'</div></div>';
+      det.innerHTML='<button type="button" class="mx-close" aria-label="'+U('close')+'">&#10005; '+U('close')+'</button>'+(p.media?'<img class="mx-pic" src="images/'+sc2_assetFile(p.media)+'" alt="'+strip(p.title).replace(/"/g,'&quot;')+'" onerror="this.remove()">':'')+'<div class="mx-row">'+icon(p.icon)+'<div><b><span class="mx-num">'+(i+1)+'</span>'+T(p.title)+'</b>'+T(p.text)+'</div></div>';
+      /* phone (user, 2026-11-06: 'mobile screen is not big enough'): the card opens as a sheet from the bottom over the plan; Close or Escape returns to the number */
+      det.classList.add('open');det.setAttribute('role','dialog');det.setAttribute('aria-label',strip(p.title));
+      var cb=det.querySelector('.mx-close'),back=function(){det.classList.remove('open');var g=wrap.querySelector('.mx-hs[data-i="'+i+'"]');if(g&&g.focus)g.focus();};
+      cb.addEventListener('click',back);det.onkeydown=function(e){if(e.key==='Escape'){e.preventDefault();back();}};
+      if(window.matchMedia&&matchMedia('(max-width:639px)').matches)cb.focus();
       if(!seen[i]){seen[i]=1;n++;wrap.querySelector('.mx-hs[data-i="'+i+'"]').classList.add('seen');lst.querySelector('button[data-i="'+i+'"]').classList.add('seen');
         prog.querySelector('.mx-n').textContent=n;needTxt();if(n>=need&&btn.disabled){btn.disabled=false;prTake(s,h);}}}
     [].forEach.call(wrap.querySelectorAll('.mx-hs'),function(g){g.addEventListener('click',function(){open(+g.dataset.i);});
@@ -4717,13 +4854,16 @@ Object.assign(BUILD,{
     head(s,h);sit(s,h);task(s,h);
     var R=X(s,'rounds')||[],B=X(s,'bands')||[],D=X(s,'decisions')||[],max=X(s,'max')||8,closed=false,tol=X(s,'tolerance')===undefined?1:X(s,'tolerance'),ri=0,score=0;
     var body=el('<div></div>');h.appendChild(body);var fh=el('<div></div>');h.appendChild(fh);var rnd=prSeed(s.id);
-    function scene(r){var W=600,H=300,S=110,sx=245,sy=95,hs=[],dens=r.count/(S*S),tries=0,inside=0,min=Math.max(16,Math.min(44,Math.sqrt(1/Math.max(dens,1e-4))*0.72));
+    /* people are drawn with their shoulders (2026-11-06, reviewer: 'if this is capacity it needs to show there is no more room'): the square is 1 m, a person about 0.45 m
+       across, so 5 in a square touch and fill it, 2 leave clear gaps; the head stays on top */
+    function scene(r){var W=600,H=300,S=110,sx=245,sy=95,hs=[],dens=r.count/(S*S),tries=0,inside=0,BR=Math.round(S*0.22),min=Math.max(18,Math.sqrt(1/Math.max(dens,1e-4))*0.8);
       function free(x,y){return hs.every(function(q){return (q.x-x)*(q.x-x)+(q.y-y)*(q.y-y)>min*min;});}
       while(inside<r.count&&tries<4000){tries++;var x=sx+12+rnd()*(S-24),y=sy+12+rnd()*(S-24);if(free(x,y)){hs.push({x:x,y:y,i:1});inside++;}}
       var want=Math.round(dens*W*H*0.9);tries=0;
       while(hs.length<want&&tries<20000){tries++;var x2=10+rnd()*(W-20),y2=10+rnd()*(H-20);if(x2>sx-8&&x2<sx+S+8&&y2>sy-8&&y2<sy+S+8)continue;if(free(x2,y2))hs.push({x:x2,y:y2});}
       return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+U('crowdLabel')+'"><rect width="'+W+'" height="'+H+'" class="es-ground"/>'+
-        hs.map(function(q){return '<circle cx="'+q.x+'" cy="'+(q.y+3)+'" r="12" fill="#000" opacity=".12"/><circle class="es-head'+(q.i?' in':'')+'" cx="'+q.x+'" cy="'+q.y+'" r="10"/>';}).join('')+
+        hs.map(function(q){return '<circle class="es-body" cx="'+q.x+'" cy="'+(q.y+2)+'" r="'+BR+'"/>';}).join('')+
+        hs.map(function(q){return '<circle class="es-head'+(q.i?' in':'')+'" cx="'+q.x+'" cy="'+q.y+'" r="10"/>';}).join('')+
         '<rect x="'+sx+'" y="'+sy+'" width="'+S+'" height="'+S+'" class="es-sq"/><text x="'+(sx+S/2)+'" y="'+(sy-8)+'" text-anchor="middle" class="es-sqt">'+(strip(X(s,'area'))||'')+'</text></svg>';}
     function show(){var r=R[ri],v=Math.round(max/2);body.innerHTML='';
       body.appendChild(el('<div class="es-rnd">'+U('viewOf',{a:ri+1,b:R.length})+'</div>'));
@@ -4780,7 +4920,11 @@ Object.assign(BUILD,{
       var p=el('<div class="lc-play"><button type="button" class="btn lc-btn"'+(src?'':' disabled')+'>&#9654; '+U('playPhrase')+'</button>'+(src?'<audio preload="auto" src="'+src+'"></audio>':'')+'</div>');
       body.appendChild(p);var pb=p.querySelector('button'),au=p.querySelector('audio');
       if(au){au.addEventListener('error',function(){pb.disabled=true;pb.textContent=U('audioMissing');});
-        pb.addEventListener('click',function(){try{au.currentTime=0;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){});}catch(_){}});}
+        pb.addEventListener('click',function(){try{au.currentTime=0;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){});}catch(_){}});
+        var openOps=function(){[].forEach.call(body.querySelectorAll('.lc-ops button'),function(x){if(!x.classList.contains('no')&&!x.classList.contains('yes'))x.disabled=false;});var lb=body.querySelector('.lc-ops');if(lb)lb.classList.remove('waitvoice');};
+        au.addEventListener('ended',openOps);au.addEventListener('error',openOps);if(COURSE.reviewFree)setTimeout(openOps,0);
+        /* the phrase plays by itself (user, 2026-11-06: 'it should auto play with a say again button'); the button replays it */
+        pb.innerHTML='&#8635; '+U('sayAgain');setTimeout(function(){if(!body.isConnected)return;try{var pr=au.play();if(pr&&pr.catch)pr.catch(function(){pb.innerHTML='&#9654; '+U('playVoice');});}catch(_){}},300);}
       if(r.words)body.appendChild(el('<details class="lc-words"><summary>'+U('showWords')+'</summary><p dir="auto">'+T(r.words)+'</p></details>'));
       body.appendChild(el('<p class="q">'+U('whatMeans')+'</p>'));
       var ops=(r.options||[]).slice();for(var i=ops.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=ops[i];ops[i]=ops[j];ops[j]=t;}
@@ -4793,6 +4937,7 @@ Object.assign(BUILD,{
           host.innerHTML='';host.appendChild(fb('good',U('rightCall'),T(r.feedback)||''));
           var nx=el('<div class="actions"></div>');nx.appendChild(contBtn(ri<R.length-1?U('nextPhrase'):U('finish'),function(){try{if(au)au.pause();}catch(_){}ri++;if(ri<R.length)show();else end();}));
           host.appendChild(nx);svin(host);});
+        if(au&&!COURSE.reviewFree){b.disabled=true;box.classList.add('waitvoice');}
         box.appendChild(b);});
     }
     function end(){body.innerHTML='';var all=first===R.length;
@@ -4922,6 +5067,98 @@ Object.assign(UI,{
   allocPlaceHint:{en:'Tap to place here.'},allocCheck:{en:'Check'},allocYes:{en:'Suitable'},allocNo:{en:'Not suitable'},
   allocSome:{en:'{n} not right yet. Try those roles again.'},allocAll:{en:'Every role is right'},allocNoneLeft:{en:'Everyone is placed.'}
 });
+
+/* ---- stories (user, 2026-11-06: 'like a Facebook short, Instagram reel or Snapchat story'): social-style stories built for training.
+   A row of round story covers; tap one to open a full-screen sequence of pictures or short clips, each with its caption line and
+   its own recorded voice; a segmented progress bar on top; the next slide opens when the voice or clip ends (or on Next).
+   Training rules kept: Back, Next and Close are always visible buttons (Escape closes too); a slide with a voice or a clip unlocks
+   Next only once it has played (watch before going past); reduced motion, a missing file or a blocked browser never block; every
+   caption is on screen (the transcript); Continue waits for the stories (x_minOpen, default all); no timer.
+   x_layout "rings" (default: the covers + the viewer) | "carousel" (one story inline: a picture carousel with the voice).
+   x_stories[]{title, icon, cover (image asset id), slides[]{media (image or video asset id), text, x_audio[{media}]}}
+   x_auto (default true: a finished slide moves on by itself after a short pause; the last slide waits for Finish), x_takeaway. */
+function stMedia(sl){var id=sl&&sl.media;if(!id)return null;var a=(COURSE.assets||{})[id]||{};var f=sc2_assetFile(id);
+  return {file:f,video:a.kind==='video'||/\.mp4$/i.test(f),alt:assetAlt(f)||strip(sl.text||'')};}
+function stVideo(file){var v=document.createElement('video');v.setAttribute('playsinline','');v.preload='auto';v.muted=false;
+  var name=file.replace(/\.mp4$/i,''),langs=(COURSE.langs&&COURSE.langs.length>1)?[LANG].concat(COURSE.langs.filter(function(l){return l!==LANG;})):[LANG];
+  langs.forEach(function(lg,ix){var tr=document.createElement('track');tr.kind='captions';tr.srclang=lg;tr.label=(COURSE.langLabels&&COURSE.langLabels[lg])||lg.toUpperCase();
+    tr.src='captions/'+name+(COURSE.langs&&COURSE.langs.length>1?'.'+lg:'')+'.vtt';if(ix===0)tr.default=true;v.appendChild(tr);});
+  if((COURSE.silentVideos||[]).indexOf(name)>=0)v.muted=true;
+  v.src='video/'+name+'.mp4';return v;}
+Object.assign(BUILD,{
+  stories:function(s,h){
+    head(s,h);sit(s,h);task(s,h);
+    var ST=X(s,'stories')||[],lay=s.x_layout||'rings',auto=s.x_auto!==false,
+        reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,
+        need=Math.max(1,Math.min(ST.length,X(s,'minOpen')||ST.length)),done={},rings=null,inlineHost=null;
+    var live=el('<p class="sr-only" role="status" aria-live="polite"></p>');
+    var btn=cont(s,h);btn.dataset.label=btn.textContent;gate(btn,0,need,U('opened'));
+    function finish(i){if(done[i])return;done[i]=true;var n=Object.keys(done).length;gate(btn,n,need,U('opened'));
+      if(rings){var r=rings.children[i];r.classList.add('seen');r.setAttribute('aria-pressed','true');}
+      live.textContent=U('storyDone',{t:strip(ST[i].title||'')});if(n>=need)svin(btn);}
+    /* the viewer: one story, slide by slide */
+    function open(i,host,inline){
+      var st_=ST[i],slides=st_.slides||[],n=slides.length,k=-1,unlocked={},timer=null,cur=null;
+      var view=el('<div class="st-view'+(inline?' st-inline':'')+'" role="'+(inline?'group':'dialog')+'" aria-modal="'+(inline?'false':'true')+'" aria-label="'+strip(st_.title||'').replace(/"/g,'&quot;')+'" tabindex="-1">'+
+        '<div class="st-card"><div class="st-prog" aria-hidden="true"></div>'+
+        '<div class="st-head">'+(st_.icon?icon(st_.icon):'')+'<b>'+T(st_.title||'')+'</b><span class="st-count"></span>'+(inline?'':'<button type="button" class="st-btn st-close" aria-label="'+U('close')+'">&#10005;</button>')+'</div>'+
+        '<div class="st-stage"></div><p class="st-cap" dir="auto"></p>'+
+        '<div class="st-nav"><button type="button" class="st-btn st-back">&#8249; '+U('back')+'</button><button type="button" class="st-btn st-next primary">'+U('next')+' &#8250;</button></div></div></div>');
+      var prog=view.querySelector('.st-prog'),stage=view.querySelector('.st-stage'),cap=view.querySelector('.st-cap'),cnt=view.querySelector('.st-count'),
+          bb=view.querySelector('.st-back'),nb=view.querySelector('.st-next'),cb=view.querySelector('.st-close');
+      var segs=slides.map(function(){var sg=el('<span class="st-seg"><i></i></span>');prog.appendChild(sg);return sg;});
+      function stop(){if(timer){clearTimeout(timer);timer=null;}if(cur){try{cur.pause();}catch(_){}cur=null;}}
+      function close(){stop();if(inline)return;view.remove();document.body.classList.remove('st-open');if(host&&host.focus)host.focus();}
+      var readMs=0;   /* a picture slide with no voice stays up long enough to read its line (about 3 words a second, at least 4 s) */
+      function unlock(){if(unlocked[k])return;unlocked[k]=true;nb.disabled=false;segs[k].classList.add('done');segs[k].querySelector('i').style.width='100%';
+        if(k>=n-1){finish(i);nb.innerHTML=U('finish');if(inline){nb.hidden=true;bb.hidden=true;}return;}
+        if(auto&&!reduced)timer=setTimeout(function(){if(view.isConnected&&k<n-1)show(k+1);},readMs||1200);}
+      function prog_(t,d){if(d>0&&!unlocked[k])segs[k].querySelector('i').style.width=Math.min(100,t/d*100)+'%';}
+      function show(j){stop();k=j;var sl=slides[k],m=stMedia(sl);stage.innerHTML='';
+        segs.forEach(function(sg,x){sg.classList.toggle('done',x<k||!!unlocked[x]);sg.classList.toggle('on',x===k);if(x>k&&!unlocked[x])sg.querySelector('i').style.width='0';});
+        cap.innerHTML=T(sl.text||'');cnt.textContent=(k+1)+' / '+n;bb.disabled=k===0;nb.disabled=!unlocked[k];nb.innerHTML=k>=n-1?U('finish'):U('next')+' &#8250;';
+        live.textContent=(k+1)+' / '+n+'. '+strip(sl.text||'');
+        var timed=false;
+        if(m&&m.video){var v=stVideo(m.file);if(reduced)v.controls=true;stage.appendChild(v);cur=v;timed=true;
+          v.addEventListener('timeupdate',function(){prog_(v.currentTime,v.duration);});
+          v.addEventListener('ended',function(){unlock();});
+          v.addEventListener('error',function(){stage.innerHTML='';stage.appendChild(el('<div class="mediaph missing"><span class="mpi">&#9654;</span><b>'+U('videoSoon')+'</b>'+phPath('video/'+m.file)+'</div>'));unlock();});
+          var pv=v.play();if(pv&&pv.catch)pv.catch(function(){var ov=el('<button type="button" class="st-play" aria-label="'+U('play')+'">&#9654;</button>');
+            ov.addEventListener('click',function(e){e.stopPropagation();ov.remove();v.play().catch(function(){v.muted=true;v.play().catch(function(){unlock();});});});stage.appendChild(ov);});}
+        else{if(m)stage.appendChild(imgOrPh(m.file,m.alt,'st-img'));else stage.appendChild(el('<div class="st-blank">'+(st_.icon?icon(st_.icon):'')+'</div>'));
+          var files=srAudio(sl.x_audio);
+          if(files.length){timed=true;var aus=files.map(function(f){var a=new Audio(f);a.preload='auto';return a;});
+            aus.forEach(function(a,x){a.addEventListener('error',function(){unlock();});a.addEventListener('timeupdate',function(){prog_(a.currentTime,a.duration);});
+              a.addEventListener('ended',function(){if(x<aus.length-1){cur=aus[x+1];var p=cur.play();if(p&&p.catch)p.catch(function(){unlock();});}else unlock();});});
+            cur=aus[0];var pa=cur.play();if(pa&&pa.catch)pa.catch(function(){var pb=el('<button type="button" class="st-play" aria-label="'+U('listen')+'">&#9654;</button>');
+              pb.addEventListener('click',function(e){e.stopPropagation();pb.remove();cur=aus[0];cur.play().catch(function(){unlock();});});stage.appendChild(pb);});}}
+        readMs=timed?0:Math.max(4000,strip(sl.text||'').split(/\s+/).length*350);
+        if(!timed||reduced)unlock();
+        if(!inline)nb.focus();}
+      stage.addEventListener('click',function(e){var r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;if(document.documentElement.dir==='rtl')x=1-x;
+        if(x<0.34){if(k>0)show(k-1);}else if(!nb.disabled){if(k<n-1)show(k+1);else if(!inline)close();}});
+      bb.addEventListener('click',function(){if(k>0)show(k-1);});
+      nb.addEventListener('click',function(){if(k<n-1)show(k+1);else if(!inline)close();});
+      if(cb)cb.addEventListener('click',close);
+      view.addEventListener('keydown',function(e){if(e.key==='Escape'&&!inline){e.preventDefault();close();}
+        else if(e.key==='ArrowRight'&&!nb.disabled&&k<n-1)show(k+1);else if(e.key==='ArrowLeft'&&k>0)show(k-1);});
+      if(inline){host.appendChild(view);}else{document.body.appendChild(view);document.body.classList.add('st-open');view.focus();
+        /* the viewer closes by itself when its screen goes (a language switch or a jump re-renders the page; 2026-11-06) */
+        var watch=setInterval(function(){if(!view.isConnected){clearInterval(watch);return;}if(!h.isConnected){clearInterval(watch);close();}},400);}
+      show(0);return view;}
+    if(lay==='carousel'){inlineHost=el('<div class="st-carousel"></div>');h.insertBefore(inlineHost,h.querySelector('.actions'));if(ST[0])open(0,inlineHost,true);}
+    else{rings=el('<div class="st-rings"></div>');
+      ST.forEach(function(st_,i){var cov=st_.cover?'<img src="images/'+sc2_assetFile(st_.cover)+'" alt="">'+(st_.icon?icon(st_.icon):''):(st_.icon?icon(st_.icon):'<span class="st-n">'+(i+1)+'</span>');
+        var b=el('<button type="button" class="st-ring" aria-pressed="false"><span class="st-cover">'+cov+'</span><span class="st-title">'+T(st_.title||'')+'</span></button>');
+        var im=b.querySelector('img');if(im)im.addEventListener('error',function(){im.remove();});
+        b.addEventListener('click',function(){open(i,b,false);});rings.appendChild(b);});
+      h.insertBefore(rings,h.querySelector('.actions'));
+      h.insertBefore(el('<p class="st-hint">'+U('tapStory',{n:need})+'</p>'),h.querySelector('.actions'));}
+    h.insertBefore(live,h.querySelector('.actions'));
+    var tk=X(s,'takeaway');if(tk)h.insertBefore(el('<div class="vtake"><b>'+U('learningPoint')+'</b><p>'+T(tk)+'</p></div>'),h.querySelector('.actions'));
+  }
+});
+Object.assign(UI,{tapStory:{en:'Tap a story to open it. Finish {n} to continue.'},storyDone:{en:'Story finished: {t}'}});
 
 /* script.json refs */
 // scr('0.1')
