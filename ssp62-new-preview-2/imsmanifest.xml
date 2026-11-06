@@ -22,11 +22,11 @@
   <resources>
     <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
+      <file href="brand/afc-logo-master-800.png"/>
       <file href="brand/afc27-start-picture.jpg"/>
-      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
-      <file href="brand/fonts/SourceSans3[wght].ttf"/>
-      <file href="brand/jam-training-primary.png"/>
-      <file href="brand/jam-training-white.png"/>
+      <file href="brand/fonts/Ubuntu-Light.ttf"/>
+      <file href="brand/fonts/Ubuntu-Medium.ttf"/>
+      <file href="brand/fonts/Ubuntu-Regular.ttf"/>
       <file href="fonts/CREDITS.txt"/>
       <file href="fonts/TwemojiCountryFlags.woff2"/>
       <file href="icons/custom-walkie-talkie.svg"/>
