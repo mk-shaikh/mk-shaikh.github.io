@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.course.demoallactivities" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>DEMO - every activity type (demo words, computer voice)</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>DEMO - every activity type (demo words, computer voice)</title>
+        <adlcp:masteryscore>70</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="audio/demo-au-car-1.m4a"/>
+      <file href="audio/demo-au-car-2.m4a"/>
+      <file href="audio/demo-au-car-3.m4a"/>
+      <file href="audio/demo-au-car-4.m4a"/>
+      <file href="audio/demo-au-fc-1.m4a"/>
+      <file href="audio/demo-au-fc-2.m4a"/>
+      <file href="audio/demo-au-fc-3.m4a"/>
+      <file href="audio/demo-au-intro.m4a"/>
+      <file href="audio/demo-au-lc-1.m4a"/>
+      <file href="audio/demo-au-lc-2.m4a"/>
+      <file href="audio/demo-au-lc-3.m4a"/>
+      <file href="audio/demo-au-sr-1.m4a"/>
+      <file href="audio/demo-au-sr-2.m4a"/>
+      <file href="audio/demo-au-sr-3.m4a"/>
+      <file href="audio/demo-au-sr-4.m4a"/>
+      <file href="audio/demo-au-st1-1.m4a"/>
+      <file href="audio/demo-au-st1-2.m4a"/>
+      <file href="audio/demo-au-st1-3.m4a"/>
+      <file href="audio/demo-au-st2-1.m4a"/>
+      <file href="audio/demo-au-st2-2.m4a"/>
+      <file href="audio/demo-au-st2-3.m4a"/>
+      <file href="audio/demo-au-st3-1.m4a"/>
+      <file href="audio/demo-au-st3-2.m4a"/>
+      <file href="audio/demo-au-st3-3.m4a"/>
+      <file href="brand/afc27-start-picture.jpg"/>
+      <file href="brand/fonts/ArchivoNarrow[wght].ttf"/>
+      <file href="brand/fonts/SourceSans3[wght].ttf"/>
+      <file href="brand/jam-training-primary.png"/>
+      <file href="brand/jam-training-white.png"/>
+      <file href="captions/demo-talk-certified.vtt"/>
+      <file href="captions/demo-talk-phone-away.vtt"/>
+      <file href="captions/demo-talk-shift-start.vtt"/>
+      <file href="captions/demo-talk-welcome.vtt"/>
+      <file href="fonts/CREDITS.txt"/>
+      <file href="fonts/TwemojiCountryFlags.woff2"/>
+      <file href="icons/custom-walkie-talkie.svg"/>
+      <file href="icons/fluent-3d-admission-tickets.png"/>
+      <file href="icons/fluent-3d-baby.png"/>
+      <file href="icons/fluent-3d-backhand-index-pointing-right.png"/>
+      <file href="icons/fluent-3d-bell.png"/>
+      <file href="icons/fluent-3d-busts-in-silhouette.png"/>
+      <file href="icons/fluent-3d-check-mark-button.png"/>
+      <file href="icons/fluent-3d-eye.png"/>
+      <file href="icons/fluent-3d-handbag.png"/>
+      <file href="icons/fluent-3d-information.png"/>
+      <file href="icons/fluent-3d-loudspeaker.png"/>
+      <file href="icons/fluent-3d-mobile-phone.png"/>
+      <file href="icons/fluent-3d-open-book.png"/>
+      <file href="icons/fluent-3d-person-in-manual-wheelchair.png"/>
+      <file href="icons/fluent-3d-person-walking.png"/>
+      <file href="icons/fluent-3d-person-with-white-cane.png"/>
+      <file href="icons/fluent-3d-raised-hand.png"/>
+      <file href="icons/fluent-3d-relieved-face.png"/>
+      <file href="icons/fluent-3d-safety-vest.png"/>
+      <file href="icons/fluent-3d-shield.png"/>
+      <file href="icons/fluent-3d-sparkles.png"/>
+      <file href="icons/fluent-3d-speech-balloon.png"/>
+      <file href="icons/fluent-3d-trophy.png"/>
+      <file href="icons/fluent-3d-waving-hand.png"/>
+      <file href="images/cast/C-01.jpg"/>
+      <file href="images/cast/C-04.jpg"/>
+      <file href="images/cast/C-05.jpg"/>
+      <file href="images/cast/C-06.jpg"/>
+      <file href="images/demo-bag.jpg"/>
+      <file href="images/demo-c1a.jpg"/>
+      <file href="images/demo-c1b.jpg"/>
+      <file href="images/demo-c1c.jpg"/>
+      <file href="images/demo-c3a.jpg"/>
+      <file href="images/demo-c3b.jpg"/>
+      <file href="images/demo-d1.jpg"/>
+      <file href="images/demo-d2.jpg"/>
+      <file href="images/demo-d3.jpg"/>
+      <file href="images/demo-fans.jpg"/>
+      <file href="images/demo-half-time.jpg"/>
+      <file href="images/demo-hero.jpg"/>
+      <file href="images/demo-hero2.jpg"/>
+      <file href="images/demo-i01.jpg"/>
+      <file href="images/demo-i02.jpg"/>
+      <file href="images/demo-i04.jpg"/>
+      <file href="images/demo-i05.jpg"/>
+      <file href="images/demo-i06.jpg"/>
+      <file href="images/demo-i07.jpg"/>
+      <file href="images/demo-i08.jpg"/>
+      <file href="images/demo-i09.jpg"/>
+      <file href="images/demo-i10.jpg"/>
+      <file href="images/demo-info-point.jpg"/>
+      <file href="images/demo-ris.jpg"/>
+      <file href="images/demo-section.jpg"/>
+      <file href="images/demo-show-way.jpg"/>
+      <file href="images/demo-stairs.jpg"/>
+      <file href="images/demo-talk-cover.jpg"/>
+      <file href="images/demo-wristband.jpg"/>
+      <file href="scorm.js"/>
+      <file href="video/demo-talk-certified.mp4"/>
+      <file href="video/demo-talk-phone-away.mp4"/>
+      <file href="video/demo-talk-shift-start.mp4"/>
+      <file href="video/demo-talk-welcome.mp4"/>
+      <file href="aids/_demo-all-activities-job-aids.pdf"/>
+    </resource>
+  </resources>
+</manifest>
