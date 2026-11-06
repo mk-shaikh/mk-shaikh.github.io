@@ -1258,7 +1258,7 @@ details.transcript p{margin:6px 0;line-height:1.55}
 .qs-sum{display:grid;gap:6px;margin-top:10px}.qs-sum div{display:flex;gap:10px;border-bottom:1px solid var(--line);padding:6px 0}
 .es-rnd{font-weight:700;color:var(--orange);margin-bottom:6px}
 .es-view{border:1px solid var(--line);border-radius:12px;overflow:hidden}.es-view svg{display:block;width:100%;height:auto}
-.es-ground{fill:#d8d2c2}.es-head{fill:var(--navy);transition:fill .4s}.es-head.lit{fill:#f5b400}
+.es-ground{fill:#d8d2c2}.es-body{fill:#8c7f68;opacity:.55;stroke:#5f5546;stroke-width:1.5}.es-head{fill:var(--navy);transition:fill .4s}.es-head.lit{fill:#f5b400}
 .es-sq{fill:rgba(245,180,0,.12);stroke:#f5b400;stroke-width:4}.es-sqt{font:700 14px var(--font);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:4px}
 .es-est{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0}
 .es-val{font-family:var(--font-display);font-size:40px;color:var(--navy);line-height:1}.es-val small{font-size:16px;color:var(--muted);font-family:var(--font)}
@@ -4854,13 +4854,16 @@ Object.assign(BUILD,{
     head(s,h);sit(s,h);task(s,h);
     var R=X(s,'rounds')||[],B=X(s,'bands')||[],D=X(s,'decisions')||[],max=X(s,'max')||8,closed=false,tol=X(s,'tolerance')===undefined?1:X(s,'tolerance'),ri=0,score=0;
     var body=el('<div></div>');h.appendChild(body);var fh=el('<div></div>');h.appendChild(fh);var rnd=prSeed(s.id);
-    function scene(r){var W=600,H=300,S=110,sx=245,sy=95,hs=[],dens=r.count/(S*S),tries=0,inside=0,min=Math.max(16,Math.min(44,Math.sqrt(1/Math.max(dens,1e-4))*0.72));
+    /* people are drawn with their shoulders (2026-11-06, reviewer: 'if this is capacity it needs to show there is no more room'): the square is 1 m, a person about 0.45 m
+       across, so 5 in a square touch and fill it, 2 leave clear gaps; the head stays on top */
+    function scene(r){var W=600,H=300,S=110,sx=245,sy=95,hs=[],dens=r.count/(S*S),tries=0,inside=0,BR=Math.round(S*0.22),min=Math.max(18,Math.sqrt(1/Math.max(dens,1e-4))*0.8);
       function free(x,y){return hs.every(function(q){return (q.x-x)*(q.x-x)+(q.y-y)*(q.y-y)>min*min;});}
       while(inside<r.count&&tries<4000){tries++;var x=sx+12+rnd()*(S-24),y=sy+12+rnd()*(S-24);if(free(x,y)){hs.push({x:x,y:y,i:1});inside++;}}
       var want=Math.round(dens*W*H*0.9);tries=0;
       while(hs.length<want&&tries<20000){tries++;var x2=10+rnd()*(W-20),y2=10+rnd()*(H-20);if(x2>sx-8&&x2<sx+S+8&&y2>sy-8&&y2<sy+S+8)continue;if(free(x2,y2))hs.push({x:x2,y:y2});}
       return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+U('crowdLabel')+'"><rect width="'+W+'" height="'+H+'" class="es-ground"/>'+
-        hs.map(function(q){return '<circle cx="'+q.x+'" cy="'+(q.y+3)+'" r="12" fill="#000" opacity=".12"/><circle class="es-head'+(q.i?' in':'')+'" cx="'+q.x+'" cy="'+q.y+'" r="10"/>';}).join('')+
+        hs.map(function(q){return '<circle class="es-body" cx="'+q.x+'" cy="'+(q.y+2)+'" r="'+BR+'"/>';}).join('')+
+        hs.map(function(q){return '<circle class="es-head'+(q.i?' in':'')+'" cx="'+q.x+'" cy="'+q.y+'" r="10"/>';}).join('')+
         '<rect x="'+sx+'" y="'+sy+'" width="'+S+'" height="'+S+'" class="es-sq"/><text x="'+(sx+S/2)+'" y="'+(sy-8)+'" text-anchor="middle" class="es-sqt">'+(strip(X(s,'area'))||'')+'</text></svg>';}
     function show(){var r=R[ri],v=Math.round(max/2);body.innerHTML='';
       body.appendChild(el('<div class="es-rnd">'+U('viewOf',{a:ri+1,b:R.length})+'</div>'));
